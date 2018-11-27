@@ -53,9 +53,9 @@ public:
         UNCOMPRESS,
 
         CURL_UNINIT,
-        
+
         CURL_MULTI_ERROR,
-        
+
         CURL_EASY_ERROR,
 
         INVALID_URL,
@@ -89,18 +89,19 @@ public:
         std::string srcUrl;
         std::string storagePath;
         std::string customId;
+        float       size;
         bool resumeDownload;
     };
-    
+
     struct StreamData
     {
         long offset;
         long total;
         unsigned char *buffer;
     };
-    
+
     typedef std::unordered_map<std::string, DownloadUnit> DownloadUnits;
-    
+
     typedef std::function<void(const Downloader::Error &)> ErrorCallback;
     typedef std::function<void(double, double, const std::string &, const std::string &)> ProgressCallback;
     typedef std::function<void(const std::string &, const std::string &, const std::string &)> SuccessCallback;
@@ -108,11 +109,11 @@ public:
     int getConnectionTimeout();
 
     void setConnectionTimeout(int timeout);
-    
+
     void setErrorCallback(const ErrorCallback &callback) { _onError = callback; };
-    
+
     void setProgressCallback(const ProgressCallback &callback) { _onProgress = callback; };
-    
+
     void setSuccessCallback(const SuccessCallback &callback) { _onSuccess = callback; };
 
     ErrorCallback getErrorCallback() const { return _onError; };
@@ -120,19 +121,19 @@ public:
     ProgressCallback getProgressCallback() const { return _onProgress; };
 
     SuccessCallback getSuccessCallback() const { return _onSuccess; };
-    
+
     long getContentSize(const std::string &srcUrl) const;
-    
+
     void downloadToBufferAsync(const std::string &srcUrl, unsigned char *buffer, const long &size, const std::string &customId = "");
-    
+
     void downloadToBufferSync(const std::string &srcUrl, unsigned char *buffer, const long &size, const std::string &customId = "");
 
     void downloadAsync(const std::string &srcUrl, const std::string &storagePath, const std::string &customId = "");
 
     void downloadSync(const std::string &srcUrl, const std::string &storagePath, const std::string &customId = "");
-    
+
     void batchDownloadAsync(const DownloadUnits &units, const std::string &batchId = "");
-    
+
     void batchDownloadSync(const DownloadUnits &units, const std::string &batchId = "");
 
     /**
@@ -143,7 +144,7 @@ public:
     ~Downloader();
 
 protected:
-    
+
     struct FileDescriptor
     {
         FILE *fp;
@@ -151,19 +152,19 @@ protected:
     };
 
     void prepareDownload(const std::string &srcUrl, const std::string &storagePath, const std::string &customId, bool resumeDownload, FileDescriptor *fDesc, ProgressData *pData);
-    
+
     bool prepareHeader(void *curl, const std::string &srcUrl) const;
-    
+
     void downloadToBuffer(const std::string &srcUrl, const std::string &customId, const StreamData &buffer, const ProgressData &data);
 
     void download(const std::string &srcUrl, const std::string &customId, const FileDescriptor &fDesc, const ProgressData &data);
-    
+
     void groupBatchDownload(const DownloadUnits &units);
 
     void notifyError(ErrorCode code, const std::string &msg = "", const std::string &customId = "", int curle_code = 0, int curlm_code = 0);
-    
+
     void notifyError(const std::string &msg, int curlm_code, const std::string &customId = "");
-    
+
     void notifyError(const std::string &msg, const std::string &customId, int curle_code);
 
 private:
@@ -177,16 +178,18 @@ private:
     SuccessCallback _onSuccess;
 
     std::string getFileNameFromUrl(const std::string &srcUrl);
-    
+
     void clearBatchDownloadData();
-    
+
     std::vector<FileDescriptor *> _files;
-    
+
     std::vector<ProgressData *> _progDatas;
-    
+
     FileUtils *_fileUtils;
-    
+
     bool _supportResuming;
+
+    bool _isCanceled;
 };
 
 int downloadProgressFunc(Downloader::ProgressData *ptr, double totalToDownload, double nowDownloaded, double totalToUpLoad, double nowUpLoaded);

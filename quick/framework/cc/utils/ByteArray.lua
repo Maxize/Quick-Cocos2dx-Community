@@ -25,7 +25,7 @@ require("pack")
 -- @param __separator default is " ".
 -- @return string, number
 function ByteArray.toString(self, __radix, __separator)
-	__radix = __radix or 16 
+	__radix = __radix or 16
 	__radix = ByteArray.radix[__radix] or "%02X"
 	__separator = __separator or " "
 	local __fmt = __radix..__separator
@@ -79,7 +79,9 @@ function ByteArray:getBytes(__offset, __length)
 	__offset = __offset or 1
 	__length = __length or #self._buf
 	--printf("getBytes,offset:%u, length:%u", __offset, __length)
-	return table.concat(self._buf, "", __offset, __length)
+	if self._buf then
+		return table.concat(self._buf, "", __offset, __length)
+	end
 end
 
 --- Get pack style string by lpack.
@@ -126,7 +128,7 @@ function ByteArray:readBool()
 end
 
 function ByteArray:writeBool(__bool)
-	if __bool then 
+	if __bool then
 		self:writeByte(1)
 	else
 		self:writeByte(0)

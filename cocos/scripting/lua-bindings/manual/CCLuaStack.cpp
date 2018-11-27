@@ -914,6 +914,9 @@ int LuaStack::luaLoadBuffer(lua_State *L, const char *chunk, int chunkSize, cons
             default:
                 CCLOG("[LUA ERROR] load \"%s\", error: unknown.", chunkName);
         }
+        const char* error = lua_tostring(L, -1);
+        CCLOG("[LUA ERROR] error result: %s",error);
+        lua_pop(L, 1);
     }
 #endif
     return r;

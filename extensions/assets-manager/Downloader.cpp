@@ -1,18 +1,18 @@
 /****************************************************************************
  Copyright (c) 2013 cocos2d-x.org
- 
+
  http://www.cocos2d-x.org
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -68,50 +68,35 @@ int batchDownloadProgressFunc(Downloader::ProgressData *ptr, double totalToDownl
     {
         ptr->totalToDownload = totalToDownload;
     }
-    
+
     if (ptr->downloaded != nowDownloaded)
     {
         ptr->downloaded = nowDownloaded;
-        
+
         Downloader::ProgressData data = *ptr;
-        
-        if (nowDownloaded == totalToDownload)
-        {
-            Director::getInstance()->getScheduler()->performFunctionInCocosThread([=]{
-                if (!data.downloader.expired())
+
+        Director::getInstance()->getScheduler()->performFunctionInCocosThread([=]{
+            if (!data.downloader.expired())
+            {
+                std::shared_ptr<Downloader> downloader = data.downloader.lock();
+
+                auto progressCB = downloader->getProgressCallback();
+                if (progressCB != nullptr)
                 {
-                    std::shared_ptr<Downloader> downloader = data.downloader.lock();
-                
-                    auto progressCB = downloader->getProgressCallback();
-                    if (progressCB != nullptr)
-                    {
-                        progressCB(totalToDownload, nowDownloaded, data.url, data.customId);
-                    }
+                    progressCB(totalToDownload, nowDownloaded, data.url, data.customId);
+                }
+                if (nowDownloaded == totalToDownload)
+                {
                     auto successCB = downloader->getSuccessCallback();
                     if (successCB != nullptr)
                     {
                         successCB(data.url, data.path + data.name, data.customId);
                     }
                 }
-            });
-        }
-        else
-        {
-            Director::getInstance()->getScheduler()->performFunctionInCocosThread([=]{
-                if (!data.downloader.expired())
-                {
-                    std::shared_ptr<Downloader> downloader = data.downloader.lock();
-                
-                    auto callback = downloader->getProgressCallback();
-                    if (callback != nullptr)
-                    {
-                        callback(totalToDownload, nowDownloaded, data.url, data.customId);
-                    }
-                }
-            });
-        }
+            }
+        });
     }
-    
+
     return 0;
 }
 
@@ -122,17 +107,17 @@ int downloadProgressFunc(Downloader::ProgressData *ptr, double totalToDownload, 
     {
         ptr->totalToDownload = totalToDownload;
     }
-    
+
     if (ptr->downloaded != nowDownloaded)
     {
         ptr->downloaded = nowDownloaded;
         Downloader::ProgressData data = *ptr;
-        
+
         Director::getInstance()->getScheduler()->performFunctionInCocosThread([=]{
             if (!data.downloader.expired())
             {
                 std::shared_ptr<Downloader> downloader = data.downloader.lock();
-                
+
                 auto callback = downloader->getProgressCallback();
                 if (callback != nullptr)
                 {
@@ -141,7 +126,7 @@ int downloadProgressFunc(Downloader::ProgressData *ptr, double totalToDownload, 
             }
         });
     }
-    
+
     return 0;
 }
 
@@ -151,6 +136,7 @@ Downloader::Downloader()
 , _onProgress(nullptr)
 , _onSuccess(nullptr)
 , _supportResuming(false)
+, _isCanceled(false)
 {
     _fileUtils = FileUtils::getInstance();
 }
@@ -217,7 +203,7 @@ void Downloader::clearBatchDownloadData()
         delete _progDatas.back();
         _progDatas.pop_back();
     }
-    
+
     while (_files.size() != 0) {
         delete _files.back();
         _files.pop_back();
@@ -232,13 +218,13 @@ void Downloader::prepareDownload(const std::string &srcUrl, const std::string &s
     pData->downloader = downloader;
     pData->downloaded = 0;
     pData->totalToDownload = 0;
-    
+
     fDesc->fp = nullptr;
     fDesc->curl = nullptr;
-    
+
     Error err;
     err.customId = customId;
-    
+
     // Asserts
     // Find file name and file extension
     unsigned long found = storagePath.find_last_of("/\\");
@@ -254,16 +240,20 @@ void Downloader::prepareDownload(const std::string &srcUrl, const std::string &s
         if (this->_onError) this->_onError(err);
         return;
     }
-    
+
     // Create a file to save file.
     const std::string outFileName = storagePath + TEMP_EXT;
     if (_supportResuming && resumeDownload && _fileUtils->isFileExist(outFileName))
     {
-        fDesc->fp = fopen(outFileName.c_str(), "ab");
+        fDesc->fp = fopen(_fileUtils->getSuitableFOpen(outFileName).c_str(), "ab");
     }
     else
     {
-        fDesc->fp = fopen(outFileName.c_str(), "wb");
+        if (_fileUtils->isFileExist(outFileName))
+        {
+            _fileUtils->removeFile(outFileName);
+        }
+        fDesc->fp = fopen(_fileUtils->getSuitableFOpen(outFileName).c_str(), "wb");
     }
     if (!fDesc->fp)
     {
@@ -293,7 +283,7 @@ long Downloader::getContentSize(const std::string &srcUrl) const
         curl_easy_getinfo(header, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &contentLength);
     }
     curl_easy_cleanup(header);
-    
+
     return contentLength;
 }
 
@@ -308,12 +298,12 @@ void Downloader::downloadToBufferAsync(const std::string &srcUrl, unsigned char 
         pData.downloader = downloader;
         pData.downloaded = 0;
         pData.totalToDownload = 0;
-        
+
         StreamData streamBuffer;
         streamBuffer.buffer = buffer;
         streamBuffer.total = size;
         streamBuffer.offset = 0;
-        
+
         auto t = std::thread(&Downloader::downloadToBuffer, this, srcUrl, customId, streamBuffer, pData);
         t.detach();
     }
@@ -330,12 +320,12 @@ void Downloader::downloadToBufferSync(const std::string &srcUrl, unsigned char *
         pData.downloader = downloader;
         pData.downloaded = 0;
         pData.totalToDownload = 0;
-        
+
         StreamData streamBuffer;
         streamBuffer.buffer = buffer;
         streamBuffer.total = size;
         streamBuffer.offset = 0;
-        
+
         downloadToBuffer(srcUrl, customId, streamBuffer, pData);
     }
 }
@@ -349,7 +339,7 @@ void Downloader::downloadToBuffer(const std::string &srcUrl, const std::string &
         this->notifyError(ErrorCode::CURL_EASY_ERROR, "Can not init curl with curl_easy_init", customId);
         return;
     }
-    
+
     // Download pacakge
     curl_easy_setopt(curl, CURLOPT_URL, srcUrl.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, bufferWriteFunc);
@@ -362,7 +352,7 @@ void Downloader::downloadToBuffer(const std::string &srcUrl, const std::string &
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
     curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, LOW_SPEED_LIMIT);
     curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, LOW_SPEED_TIME);
-    
+
     CURLcode res = curl_easy_perform(curl);
     if (res != CURLE_OK)
     {
@@ -370,14 +360,14 @@ void Downloader::downloadToBuffer(const std::string &srcUrl, const std::string &
         std::string msg = StringUtils::format("Unable to download file: [curl error]%s", curl_easy_strerror(res));
         this->notifyError(msg, customId, res);
     }
-    
+
     curl_easy_cleanup(curl);
-    
+
     Director::getInstance()->getScheduler()->performFunctionInCocosThread([=]{
         if (!ptr.expired())
         {
             std::shared_ptr<Downloader> downloader = ptr.lock();
-            
+
             auto successCB = downloader->getSuccessCallback();
             if (successCB != nullptr)
             {
@@ -419,7 +409,7 @@ void Downloader::download(const std::string &srcUrl, const std::string &customId
         this->notifyError(ErrorCode::CURL_EASY_ERROR, "Can not init curl with curl_easy_init", customId);
         return;
     }
-    
+
     // Download pacakge
     curl_easy_setopt(curl, CURLOPT_URL, srcUrl.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fileWriteFunc);
@@ -432,28 +422,28 @@ void Downloader::download(const std::string &srcUrl, const std::string &customId
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
     curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, LOW_SPEED_LIMIT);
     curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, LOW_SPEED_TIME);
-    
+
     CURLcode res = curl_easy_perform(curl);
-    if (res != CURLE_OK)
+    if (res != CURLE_OK || _isCanceled == true)
     {
         _fileUtils->removeFile(data.path + data.name + TEMP_EXT);
         std::string msg = StringUtils::format("Unable to download file: [curl error]%s", curl_easy_strerror(res));
         this->notifyError(msg, customId, res);
     }
-    
+
     fclose(fDesc.fp);
     curl_easy_cleanup(curl);
-    
+
     // This can only be done after fclose
-    if (res == CURLE_OK)
+    if (res == CURLE_OK && _isCanceled == false)
     {
         _fileUtils->renameFile(data.path, data.name + TEMP_EXT, data.name);
-        
+
         Director::getInstance()->getScheduler()->performFunctionInCocosThread([=]{
             if (!ptr.expired())
             {
                 std::shared_ptr<Downloader> downloader = ptr.lock();
-                
+
                 auto successCB = downloader->getSuccessCallback();
                 if (successCB != nullptr)
                 {
@@ -474,7 +464,7 @@ void Downloader::batchDownloadSync(const DownloadUnits &units, const std::string
 {
     // Make sure downloader won't be released
     std::weak_ptr<Downloader> ptr = shared_from_this();
-    
+
     if (units.size() != 0)
     {
         // Test server download resuming support with the first unit
@@ -492,7 +482,7 @@ void Downloader::batchDownloadSync(const DownloadUnits &units, const std::string
             }
         }
         curl_easy_cleanup(header);
-        
+
         int count = 0;
         DownloadUnits group;
         for (auto it = units.cbegin(); it != units.cend(); ++it, ++count)
@@ -512,7 +502,7 @@ void Downloader::batchDownloadSync(const DownloadUnits &units, const std::string
             groupBatchDownload(group);
         }
     }
-    
+
     Director::getInstance()->getScheduler()->performFunctionInCocosThread([ptr, batchId]{
         if (!ptr.expired()) {
             std::shared_ptr<Downloader> downloader = ptr.lock();
@@ -530,18 +520,18 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
 {
     CURLM* multi_handle = curl_multi_init();
     int still_running = 0;
-    
+
     for (auto it = units.cbegin(); it != units.cend(); ++it)
     {
         DownloadUnit unit = it->second;
         std::string srcUrl = unit.srcUrl;
         std::string storagePath = unit.storagePath;
         std::string customId = unit.customId;
-        
+
         FileDescriptor *fDesc = new FileDescriptor();
         ProgressData *data = new ProgressData();
         prepareDownload(srcUrl, storagePath, customId, unit.resumeDownload, fDesc, data);
-        
+
         if (fDesc->fp != NULL)
         {
             CURL* curl = curl_easy_init();
@@ -558,7 +548,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
             curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, LOW_SPEED_TIME);
             curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, true);
             curl_easy_setopt(curl, CURLOPT_MAXREDIRS, MAX_REDIRS);
-            
+
             // Resuming download support
             if (_supportResuming && unit.resumeDownload)
             {
@@ -570,7 +560,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
                 }
             }
             fDesc->curl = curl;
-            
+
             CURLMcode code = curl_multi_add_handle(multi_handle, curl);
             if (code != CURLM_OK)
             {
@@ -589,7 +579,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
             }
         }
     }
-    
+
     // Query multi perform
     CURLMcode curlm_code = CURLM_CALL_MULTI_PERFORM;
     while(CURLM_CALL_MULTI_PERFORM == curlm_code) {
@@ -609,7 +599,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
             long curl_timeo = -1;
             select_tv.tv_sec = 1;
             select_tv.tv_usec = 0;
-            
+
             curl_multi_timeout(multi_handle, &curl_timeo);
             if(curl_timeo >= 0) {
                 select_tv.tv_sec = curl_timeo / 1000;
@@ -618,7 +608,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
                 else
                     select_tv.tv_usec = (curl_timeo % 1000) * 1000;
             }
-            
+
             int rc;
             fd_set fdread;
             fd_set fdwrite;
@@ -627,14 +617,14 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
             FD_ZERO(&fdread);
             FD_ZERO(&fdwrite);
             FD_ZERO(&fdexcep);
-			// FIXME: when jenkins migrate to ubuntu, we should remove this hack code
+            // FIXME: when jenkins migrate to ubuntu, we should remove this hack code
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-			curl_multi_fdset(multi_handle, &fdread, &fdwrite, &fdexcep, &maxfd);
-			rc = select(maxfd + 1, &fdread, &fdwrite, &fdexcep, &select_tv);
-#else          
-			rc = curl_multi_wait(multi_handle, nullptr, 0, MAX_WAIT_MSECS, &maxfd);
+            curl_multi_fdset(multi_handle, &fdread, &fdwrite, &fdexcep, &maxfd);
+            rc = select(maxfd + 1, &fdread, &fdwrite, &fdexcep, &select_tv);
+#else
+            rc = curl_multi_wait(multi_handle, nullptr, 0, MAX_WAIT_MSECS, &maxfd);
 #endif
-            
+
             switch(rc)
             {
                 case -1:
@@ -654,7 +644,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
             }
         }
     }
-    
+
     // Clean up and close files
     curl_multi_cleanup(multi_handle);
     for (auto it = _files.begin(); it != _files.end(); ++it)
@@ -665,7 +655,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
         curl_multi_remove_handle(multi_handle, single);
         curl_easy_cleanup(single);
     }
-    
+
     // Check unfinished files and notify errors, succeed files will be renamed from temporary file name to real name
     for (auto it = _progDatas.begin(); it != _progDatas.end(); ++it) {
         ProgressData *data = *it;
@@ -678,7 +668,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
             _fileUtils->renameFile(data->path, data->name + TEMP_EXT, data->name);
         }
     }
-    
+
     clearBatchDownloadData();
 }
 

@@ -3,7 +3,7 @@ Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
 Copyright (c) 2013-2014 Chukong Technologies Inc.
- 
+
 http://www.cocos2d-x.org
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -62,15 +62,15 @@ public class AppActivity extends Cocos2dxActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         s_instance = this;
-		
+
 		if(nativeIsLandScape()) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 		} else {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 		}
-		
+
 		//2.Set the format of window
-		
+
 		// Check the wifi is opened when the native is debug.
 		if(nativeIsDebug())
 		{
@@ -81,7 +81,7 @@ public class AppActivity extends Cocos2dxActivity{
 				builder.setTitle("Warning");
 				builder.setMessage("Please open WIFI for debuging...");
 				builder.setPositiveButton("OK",new DialogInterface.OnClickListener() {
-					
+
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
@@ -98,9 +98,9 @@ public class AppActivity extends Cocos2dxActivity{
 		hostIPAdress = getHostIpAddress();
 	}
 	private boolean isNetworkConnected() {
-	        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);  
-	        if (cm != null) {  
-	            NetworkInfo networkInfo = cm.getActiveNetworkInfo();  
+	        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	        if (cm != null) {
+	            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
 			ArrayList networkTypes = new ArrayList();
 			networkTypes.add(ConnectivityManager.TYPE_WIFI);
 			try {
@@ -111,23 +111,23 @@ public class AppActivity extends Cocos2dxActivity{
 				throw new RuntimeException(iae);
 			}
 			if (networkInfo != null && networkTypes.contains(networkInfo.getType())) {
-	                return true;  
-	            }  
-	        }  
-	        return false;  
-	    } 
-	 
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
+
 	public String getHostIpAddress() {
 		WifiManager wifiMgr = (WifiManager) getSystemService(WIFI_SERVICE);
 		WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
 		int ip = wifiInfo.getIpAddress();
 		return ((ip & 0xFF) + "." + ((ip >>>= 8) & 0xFF) + "." + ((ip >>>= 8) & 0xFF) + "." + ((ip >>>= 8) & 0xFF));
 	}
-	
+
 	public static String getLocalIpAddress() {
 		return hostIPAdress;
 	}
-	
+
     static public void showAlertDialog(final String title,
             final String message, final int luaCallbackFunction) {
         s_instance.runOnUiThread(new Runnable() {
@@ -156,5 +156,5 @@ public class AppActivity extends Cocos2dxActivity{
 
 	private static native boolean nativeIsLandScape();
 	private static native boolean nativeIsDebug();
-	
+
 }

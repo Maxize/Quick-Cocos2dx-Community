@@ -94,6 +94,7 @@ math/TransformUtils.cpp \
 math/Vec2.cpp \
 math/Vec3.cpp \
 math/Vec4.cpp \
+base/CCAsyncTaskPool.cpp \
 base/CCAutoreleasePool.cpp \
 base/CCConfiguration.cpp \
 base/CCConsole.cpp \
@@ -197,6 +198,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/base \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \
+                    $(LOCAL_PATH)/../external/tinydir \
                     $(LOCAL_PATH)/../external/unzip \
                     $(LOCAL_PATH)/../external/chipmunk/include/chipmunk \
                     $(LOCAL_PATH)/../external/xxhash \
@@ -207,6 +209,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \
+                    $(LOCAL_PATH)/../external/tinydir \
                     $(LOCAL_PATH)/../external/unzip \
                     $(LOCAL_PATH)/../external/chipmunk/include/chipmunk \
                     $(LOCAL_PATH)/../external/edtaa3func \

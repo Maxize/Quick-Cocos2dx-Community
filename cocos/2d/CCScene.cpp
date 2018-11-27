@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "base/CCEventListenerCustom.h"
 #include "renderer/CCRenderer.h"
 #include "deprecated/CCString.h"
+#include "platform/CCImage.h"
 
 #if CC_USE_PHYSICS
 #include "physics/CCPhysicsWorld.h"

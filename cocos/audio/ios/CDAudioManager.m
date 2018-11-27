@@ -425,6 +425,9 @@ static BOOL configured = FALSE;
         [self setMode:mode];
         soundEngine = [[CDSoundEngine alloc] init];
         
+        // fix the audio error
+//        [self setResignBehavior:kAMRBStopPlay autoHandle:TRUE];
+        
         //Set up audioSource channels
         audioSourceChannels = [[NSMutableArray alloc] init];
         CDLongAudioSource *leftChannel = [[CDLongAudioSource alloc] init];
@@ -666,7 +669,8 @@ static BOOL configured = FALSE;
 - (void) applicationWillResignActive:(NSNotification *) notification
 {
     [self applicationWillResignActive];
-}    
+//    [self audioSessionInterrupted];
+}
 
 - (void) applicationDidBecomeActive {
     
@@ -703,6 +707,7 @@ static BOOL configured = FALSE;
 //Called when application becomes active only if setResignBehavior has been called
 - (void) applicationDidBecomeActive:(NSNotification *) notification
 {
+//    [self audioSessionResumed];
     [self applicationDidBecomeActive];
 }
 

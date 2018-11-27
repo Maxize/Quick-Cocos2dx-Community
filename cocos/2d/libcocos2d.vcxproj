@@ -77,7 +77,7 @@
     </PreBuildEvent>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\include;$(EngineRoot)external\box2d;$(EngineRoot)external\sqlite3\include;$(EngineRoot)external\unzip;$(EngineRoot)external\edtaa3func;$(EngineRoot)external\tinyxml2;$(EngineRoot)external\png\include\win32;$(EngineRoot)external\jpeg\include\win32;$(EngineRoot)external\tiff\include\win32;$(EngineRoot)external\webp\include\win32;$(EngineRoot)external\freetype2\include\win32\freetype2;$(EngineRoot)external\win32-specific\OpenalSoft\include;$(EngineRoot)external\win32-specific\MP3Decoder\include;$(EngineRoot)external\win32-specific\OggDecoder\include;$(EngineRoot)external\win32-specific\icon\include;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)external\xxhash;$(EngineRoot)external\ConvertUTF;$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\websockets\include\win32;$(EngineRoot)external;$(EngineRoot)cocos;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\audio\include;$(EngineRoot)extensions;$(EngineRoot);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\include;$(EngineRoot)external\box2d;$(EngineRoot)external\sqlite3\include;$(EngineRoot)external\unzip;$(EngineRoot)external\edtaa3func;$(EngineRoot)external\tinyxml2;$(EngineRoot)external\tinydir;$(EngineRoot)external\png\include\win32;$(EngineRoot)external\jpeg\include\win32;$(EngineRoot)external\tiff\include\win32;$(EngineRoot)external\webp\include\win32;$(EngineRoot)external\freetype2\include\win32\freetype2;$(EngineRoot)external\win32-specific\OpenalSoft\include;$(EngineRoot)external\win32-specific\MP3Decoder\include;$(EngineRoot)external\win32-specific\OggDecoder\include;$(EngineRoot)external\win32-specific\icon\include;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)external\xxhash;$(EngineRoot)external\ConvertUTF;$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\websockets\include\win32;$(EngineRoot)external;$(EngineRoot)cocos;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\audio\include;$(EngineRoot)extensions;$(EngineRoot);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_USRDLL;_DEBUG;_WINDOWS;_LIB;COCOS2DXWIN32_EXPORTS;GL_GLEXT_PROTOTYPES;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_USE3DDLL;_EXPORT_DLL_;_USRSTUDIODLL;_USREXDLL;_USEGUIDLL;CC_ENABLE_CHIPMUNK_INTEGRATION=1;PROTOBUF_USE_DLLS;LIBPROTOBUF_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -247,6 +247,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClCompile Include="..\audio\win32\SimpleAudioEngine.cpp" />
     <ClCompile Include="..\base\atitc.cpp" />
     <ClCompile Include="..\base\base64.cpp" />
+    <ClCompile Include="..\base\CCAsyncTaskPool.cpp" />
     <ClCompile Include="..\base\CCAutoreleasePool.cpp" />
     <ClCompile Include="..\base\ccCArray.cpp" />
     <ClCompile Include="..\base\CCConfiguration.cpp" />
@@ -418,6 +419,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClCompile Include="..\platform\win32\CCDevice-win32.cpp" />
     <ClCompile Include="..\platform\win32\CCFileUtils-win32.cpp" />
     <ClCompile Include="..\platform\win32\CCStdC-win32.cpp" />
+    <ClCompile Include="..\platform\win32\CCUtils-win32.cpp" />
     <ClCompile Include="..\renderer\CCBatchCommand.cpp" />
     <ClCompile Include="..\renderer\CCCustomCommand.cpp" />
     <ClCompile Include="..\renderer\CCGLProgram.cpp" />
@@ -579,6 +581,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClInclude Include="..\..\external\json\reader.h" />
     <ClInclude Include="..\..\external\json\stringbuffer.h" />
     <ClInclude Include="..\..\external\json\writer.h" />
+    <ClInclude Include="..\..\external\tinydir\tinydir.h" />
     <ClInclude Include="..\..\external\tinyxml2\tinyxml2.h" />
     <ClInclude Include="..\..\external\unzip\ioapi_mem.h" />
     <ClInclude Include="..\..\external\unzip\ioapi.h" />
@@ -613,6 +616,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClInclude Include="..\audio\win32\MciPlayer.h" />
     <ClInclude Include="..\base\atitc.h" />
     <ClInclude Include="..\base\base64.h" />
+    <ClInclude Include="..\base\CCAsyncTaskPool.h" />
     <ClInclude Include="..\base\CCAutoreleasePool.h" />
     <ClInclude Include="..\base\ccCArray.h" />
     <ClInclude Include="..\base\ccConfig.h" />
@@ -818,6 +822,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\*.*" "$(OutDir)
     <ClInclude Include="..\platform\win32\CCGL-win32.h" />
     <ClInclude Include="..\platform\win32\CCPlatformDefine-win32.h" />
     <ClInclude Include="..\platform\win32\CCStdC-win32.h" />
+    <ClInclude Include="..\platform\win32\CCUtils-win32.h" />
     <ClInclude Include="..\platform\win32\compat\stdint.h" />
     <ClInclude Include="..\renderer\CCBatchCommand.h" />
     <ClInclude Include="..\renderer\CCCustomCommand.h" />

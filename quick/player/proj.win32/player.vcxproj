@@ -68,7 +68,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(EngineRoot)external\lua\luajit\include;$(ProjectDir)..\Classes;$(ProjectDir)..\..\lib\quick-src;$(ProjectDir)..\..\lib\quick-src\extra;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot);$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\glfw3\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)external\lua\luajit\include;$(ProjectDir)..\Classes;$(ProjectDir)..\..\lib\quick-src;$(ProjectDir)..\..\lib\quick-src\extra;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot);$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\glfw3\include\win32;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\Library;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\Library\Sources;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\Library\Sources\Shaders;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\Library\Sources\ShadersPrecompiled;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -193,6 +193,57 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_truetype.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\protobuf\pb.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\DefinitionTagBase.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAF.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAnimationFrame.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAnimationSequence.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAsset.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAssetTextureManager.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFCachedTexture.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFCollections.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFDelegates.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFile.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFilterData.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFilterManager.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFHeader.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFLoader.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMacros.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMask.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMovieClip.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFObject.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFPrecompiled.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFQuadCommand.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFResourcesInfo.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFShaderManager.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSoundInfo.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSprite.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFStream.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSubobjectState.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextData.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextField.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextureAtlas.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextureAtlasElement.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTimeline.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTimelineAction.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAF_JS.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAF_LUA.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\PrimitiveDeserializer.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\ShadersPrecompiled\GAFPrecompiledShaders.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationFrames.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationFrames2.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationMasks.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationObjects.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAtlas.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAtlas3.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineNamedParts.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefines.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineSequences.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineSounds.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineStage.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineTextField.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineTimeline.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings\lua_gaf.hpp" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings\lua_gaf_main.hpp" />
     <ClInclude Include="..\Classes\PlayerEditBoxServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerFileDialogServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerLuaCore.h" />
@@ -297,6 +348,46 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGNode.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg.c" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAnimationFrame.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAnimationSequence.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAsset.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAssetTextureManager.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFCachedTexture.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFile.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFilterData.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFilterManager.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFLoader.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMask.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMovieClip.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFObject.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFPrecompiled.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFQuadCommand.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFShaderManager.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSoundInfo.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSprite.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFStream.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSubobjectState.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextData.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextField.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextureAtlas.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextureAtlasElement.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTimeline.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTimelineAction.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\PrimitiveDeserializer.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationFrames.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationFrames2.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationMasks.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationObjects.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAtlas.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAtlas3.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineNamedParts.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineSequences.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineSounds.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineStage.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineTextField.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineTimeline.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings\lua_gaf.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings\lua_gaf_main.cpp" />
     <ClCompile Include="..\Classes\PlayerLuaCore.cpp" />
     <ClCompile Include="..\Classes\PlayerLuaCoreManual.cpp" />
     <ClCompile Include="..\Classes\PlayerMenuServiceProtocol.cpp" />
@@ -306,7 +397,7 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="..\Classes\PlayerTaskServiceProtocol.cpp" />
     <ClCompile Include="..\Classes\PlayerUtils.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\apptools\HelperFunc.cpp" />
-	<ClCompile Include="..\..\lib\quick-src\lua_extensions\protobuf\pb.c">
+    <ClCompile Include="..\..\lib\quick-src\lua_extensions\protobuf\pb.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
@@ -450,6 +541,14 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="player3.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\Doxyfile" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFPlayer-Prefix.pch" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\mainpage.dox" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\Shaders\GaussianBlurFragmentShader.frag" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\Shaders\GlowFragmentShader.frag" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\Shaders\pcShader_PositionTextureAlpha_frag.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -45,7 +45,7 @@ function NetworkTestScene:onResponse(event, index, dumpResponse)
 end
 
 function NetworkTestScene:createHTTPRequestTest()
-    local url = "http://quick-x.com/feed/"
+    local url = "http://graph.facebook.com/694528257411491/picture?width=200&height=200&t=20180421"
     self.requestCount = self.requestCount + 1
     local index = self.requestCount
     local request = network.createHTTPRequest(function(event)

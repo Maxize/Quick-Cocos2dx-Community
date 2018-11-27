@@ -33,3 +33,23 @@ function Sprite:playAnimationForever(animation, delay)
     return transition.playAnimationForever(self, animation, delay)
 end
 
+local setSpriteFrame_ = Sprite.setSpriteFrame
+-- @override
+function Sprite:setSpriteFrame(sprite)
+    if (not sprite) then
+        assert(sprite, "Sprite:setSpriteFrame sprite is not nil!")
+        return
+    end
+    if (type(sprite) == "string") then
+        local spriteFrame = cc.SpriteFrameCache:getInstance():getSpriteFrame(sprite)
+        if (spriteFrame) then
+            setSpriteFrame_(self, spriteFrame)
+        else
+            dump(debug.traceback())
+            assert(spriteFrame, "Sprite:setSpriteFrame can't find spriteFrame " .. sprite)
+        end
+    else
+        setSpriteFrame_(self, sprite)
+    end
+end
+

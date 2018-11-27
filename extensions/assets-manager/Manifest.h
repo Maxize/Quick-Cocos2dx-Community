@@ -1,18 +1,18 @@
 /****************************************************************************
  Copyright (c) 2013 cocos2d-x.org
- 
+
  http://www.cocos2d-x.org
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -37,6 +37,13 @@
 
 NS_CC_EXT_BEGIN
 
+struct ManifestAsset {
+    std::string md5;
+    std::string path;
+    bool compressed;
+    float size;
+    int downloadState;
+};
 
 class CC_EX_DLL Manifest : public Ref
 {
@@ -51,19 +58,15 @@ public:
         MODIFIED
     };
     
-    enum class DownloadState {
+    enum DownloadState {
         UNSTARTED,
         DOWNLOADING,
-        SUCCESSED
+        SUCCESSED,
+        UNMARKED
     };
     
     //! Asset object
-    struct Asset {
-        std::string md5;
-        std::string path;
-        bool compressed;
-        DownloadState downloadState;
-    };
+    typedef ManifestAsset Asset;
     
     //! Object indicate the difference between two Assets
     struct AssetDiff {
@@ -94,7 +97,11 @@ public:
     /** @brief Gets manifest version.
      */
     const std::string& getVersion() const;
-    
+
+    /** @brief Get the search paths list related to the Manifest.
+    */
+    std::vector<std::string> getSearchPaths() const;
+
 protected:
     
     /** @brief Constructor for Manifest class
@@ -119,9 +126,17 @@ protected:
     
     /** @brief Check whether the version of this manifest equals to another.
      * @param b   The other manifest
+     * @return Equal or not
      */
     bool versionEquals(const Manifest *b) const;
-    
+
+    /** @brief Check whether the version of this manifest is greater than another.
+     * @param b         The other manifest
+     * @param [handle]  Customized comparasion handle function
+     * @return Greater or not
+     */
+    bool versionGreater(const Manifest *b, const std::function<int(const std::string& versionA, const std::string& versionB)>& handle) const;
+
     /** @brief Generate difference between this Manifest and another.
      * @param b   The other manifest
      */
@@ -158,8 +173,10 @@ protected:
      * @param group   Key of the requested group
      */
     const std::string& getGroupVersion(const std::string &group) const;
-    
-    /** @brief Gets assets.
+
+    /**
+     * @brief Gets assets.
+     * @lua NA
      */
     const std::unordered_map<std::string, Asset>& getAssets() const;
     
@@ -168,7 +185,9 @@ protected:
      * @param state The current download state of the asset
      */
     void setAssetDownloadState(const std::string &key, const DownloadState &state);
-    
+
+    void setManifestRoot(const std::string &root) { _manifestRoot = root; };
+
 private:
     
     //! Indicate whether the version informations have been fully loaded

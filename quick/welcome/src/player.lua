@@ -151,18 +151,28 @@ function player:buildUI()
     local viewMenu = menuBar:addItem("VIEW_MENU", "&View")
 
     -- screen list
-    local viewSize = {{title = "iPhone 3Gs",w=320,h=480},
-                      {title = "iPhone 4",  w=640,h=960},
-                      {title = "iPhone 5",  w=640,h=1136},
-                      {title = "iPad",      w=768,h=1024},
-                      {title = "iPad Retina", w=1536,h=2048},
-                      {title = "Android",   w=480,h=800},
-                      {title = "Android",   w=480,h=854},
-                      {title = "Android",   w=540,h=960},
-                      {title = "Android",   w=600,h=1024},
-                      {title = "Android",   w=720,h=1280},
-                      {title = "Android",   w=800,h=1280},
-                      {title = "Android",   w=1080,h=1920},
+    local viewSize = {
+        {title = "iPhone 3Gs",       w=320,h=480},
+        {title = "iPhone 4",         w=640,h=960},
+        {title = "iPhone 5/sSE",     w=640,h=1136},
+        {title = "iPhone 6/s 7 8",   w=750,h=1334},
+        {title = "iPhone P lus",     w=1242,h=2208},
+        {title = "iPhone X",         w=1125,h=2436},
+        {title = "iPad",             w=768,h=1024},
+        {title = "iPad Retina",      w=1536,h=2048},
+        {title = "Android",          w=720,h=1280},
+        {title = "Android",          w=480,h=800},
+        {title = "Android",          w=480,h=854},
+        {title = "Android",          w=720,h=1196},
+        {title = "Android",          w=720,h=1184},
+        {title = "Android",          w=1080,h=2016},
+        {title = "Android",          w=320,h=480},
+        {title = "Android",          w=720,h=1356},
+        {title = "Nexus 4",          w=768,h=1196},
+        {title = "Android",          w=540,h=960},
+        {title = "Android",          w=600,h=1024},
+        {title = "Android",          w=800,h=1280},
+        {title = "Android",          w=1080,h=1920},
 	}
     self.screenSizeList = {}
     local s = self.projectConfig_:getFrameSize()
@@ -266,7 +276,7 @@ function player:onScreenChangeFrameSize(sender)
 
     self.projectConfig_:setFrameSize(w, h)
     self.projectConfig_:setFrameScale(1.0)
-    
+
     local player = PlayerProtocol:getInstance()
     if player.getPositionX then
         print(player:getPositionX(), player:getPositionY())

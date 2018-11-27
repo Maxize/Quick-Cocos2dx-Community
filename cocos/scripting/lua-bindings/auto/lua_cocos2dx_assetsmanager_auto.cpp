@@ -23,7 +23,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setStoragePath(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_setStoragePath'", nullptr);
         return 0;
@@ -31,7 +31,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setStoragePath(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 1)
     {
         const char* arg0;
 
@@ -73,7 +73,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setPackageUrl(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_setPackageUrl'", nullptr);
         return 0;
@@ -81,7 +81,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setPackageUrl(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 1)
     {
         const char* arg0;
 
@@ -123,7 +123,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_checkUpdate(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_checkUpdate'", nullptr);
         return 0;
@@ -131,7 +131,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_checkUpdate(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -170,7 +170,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getStoragePath(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_getStoragePath'", nullptr);
         return 0;
@@ -178,7 +178,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getStoragePath(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -217,7 +217,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_update(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_update'", nullptr);
         return 0;
@@ -225,7 +225,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_update(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -264,7 +264,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setConnectionTimeout(lua_State* tol
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_setConnectionTimeout'", nullptr);
         return 0;
@@ -272,7 +272,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setConnectionTimeout(lua_State* tol
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 1)
     {
         unsigned int arg0;
 
@@ -314,7 +314,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setVersionFileUrl(lua_State* tolua_
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_setVersionFileUrl'", nullptr);
         return 0;
@@ -322,7 +322,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_setVersionFileUrl(lua_State* tolua_
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 1)
     {
         const char* arg0;
 
@@ -364,7 +364,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getPackageUrl(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_getPackageUrl'", nullptr);
         return 0;
@@ -372,7 +372,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getPackageUrl(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -411,7 +411,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getConnectionTimeout(lua_State* tol
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_getConnectionTimeout'", nullptr);
         return 0;
@@ -419,7 +419,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getConnectionTimeout(lua_State* tol
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -458,7 +458,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getVersion(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_getVersion'", nullptr);
         return 0;
@@ -466,7 +466,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getVersion(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -505,7 +505,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getVersionFileUrl(lua_State* tolua_
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_getVersionFileUrl'", nullptr);
         return 0;
@@ -513,7 +513,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_getVersionFileUrl(lua_State* tolua_
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -552,7 +552,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_deleteVersion(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManager*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManager_deleteVersion'", nullptr);
         return 0;
@@ -560,7 +560,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_deleteVersion(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -652,7 +652,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_constructor(lua_State* tolua_S)
 
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -666,7 +666,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_constructor(lua_State* tolua_S)
         toluafix_pushusertype_ccobject(tolua_S, ID, luaID, (void*)cobj,"cc.AssetsManager");
         return 1;
     }
-    if (argc == 1) 
+    if (argc == 1)
     {
         const char* arg0;
 
@@ -683,7 +683,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_constructor(lua_State* tolua_S)
         toluafix_pushusertype_ccobject(tolua_S, ID, luaID, (void*)cobj,"cc.AssetsManager");
         return 1;
     }
-    if (argc == 2) 
+    if (argc == 2)
     {
         const char* arg0;
         const char* arg1;
@@ -703,7 +703,7 @@ int lua_cocos2dx_assetsmanager_AssetsManager_constructor(lua_State* tolua_S)
         toluafix_pushusertype_ccobject(tolua_S, ID, luaID, (void*)cobj,"cc.AssetsManager");
         return 1;
     }
-    if (argc == 3) 
+    if (argc == 3)
     {
         const char* arg0;
         const char* arg1;
@@ -787,7 +787,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getAssetsManagerEx(lua_State
     cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getAssetsManagerEx'", nullptr);
         return 0;
@@ -795,7 +795,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getAssetsManagerEx(lua_State
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -834,7 +834,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getAssetId(lua_State* tolua_
     cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getAssetId'", nullptr);
         return 0;
@@ -842,7 +842,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getAssetId(lua_State* tolua_
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -881,7 +881,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getCURLECode(lua_State* tolu
     cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getCURLECode'", nullptr);
         return 0;
@@ -889,7 +889,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getCURLECode(lua_State* tolu
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -928,7 +928,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getMessage(lua_State* tolua_
     cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getMessage'", nullptr);
         return 0;
@@ -936,7 +936,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getMessage(lua_State* tolua_
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -975,7 +975,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getCURLMCode(lua_State* tolu
     cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getCURLMCode'", nullptr);
         return 0;
@@ -983,7 +983,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getCURLMCode(lua_State* tolu
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1022,7 +1022,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercentByFile(lua_State* 
     cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercentByFile'", nullptr);
         return 0;
@@ -1030,7 +1030,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercentByFile(lua_State* 
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1069,7 +1069,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getEventCode(lua_State* tolu
     cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getEventCode'", nullptr);
         return 0;
@@ -1077,7 +1077,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getEventCode(lua_State* tolu
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1116,7 +1116,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercent(lua_State* tolua_
     cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercent'", nullptr);
         return 0;
@@ -1124,7 +1124,7 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercent(lua_State* tolua_
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1141,6 +1141,53 @@ int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercent(lua_State* tolua_
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
     tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercent'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getDownloadState(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::extension::EventAssetsManagerEx* cobj = nullptr;
+    bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S, 1, "cc.EventAssetsManagerEx", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::extension::EventAssetsManagerEx*)tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S, "invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getDownloadState'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+    if (argc == 0)
+    {
+        if (!ok)
+        {
+            tolua_error(tolua_S, "invalid arguments in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getDownloadState'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->getDownloadState();
+        tolua_pushcppstring(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.EventAssetsManagerEx:getDownloadState", argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S, "#ferror in function 'lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getDownloadState'.", &tolua_err);
 #endif
 
     return 0;
@@ -1165,6 +1212,7 @@ int lua_register_cocos2dx_assetsmanager_EventAssetsManagerEx(lua_State* tolua_S)
         tolua_function(tolua_S,"getPercentByFile",lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercentByFile);
         tolua_function(tolua_S,"getEventCode",lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getEventCode);
         tolua_function(tolua_S,"getPercent",lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getPercent);
+        tolua_function(tolua_S, "getDownloadState", lua_cocos2dx_assetsmanager_EventAssetsManagerEx_getDownloadState);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(cocos2d::extension::EventAssetsManagerEx).name();
     g_luaType[typeName] = "cc.EventAssetsManagerEx";
@@ -1190,7 +1238,7 @@ int lua_cocos2dx_assetsmanager_Manifest_getManifestFileUrl(lua_State* tolua_S)
     cobj = (cocos2d::extension::Manifest*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_Manifest_getManifestFileUrl'", nullptr);
         return 0;
@@ -1198,7 +1246,7 @@ int lua_cocos2dx_assetsmanager_Manifest_getManifestFileUrl(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1237,7 +1285,7 @@ int lua_cocos2dx_assetsmanager_Manifest_isVersionLoaded(lua_State* tolua_S)
     cobj = (cocos2d::extension::Manifest*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_Manifest_isVersionLoaded'", nullptr);
         return 0;
@@ -1245,7 +1293,7 @@ int lua_cocos2dx_assetsmanager_Manifest_isVersionLoaded(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1284,7 +1332,7 @@ int lua_cocos2dx_assetsmanager_Manifest_isLoaded(lua_State* tolua_S)
     cobj = (cocos2d::extension::Manifest*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_Manifest_isLoaded'", nullptr);
         return 0;
@@ -1292,7 +1340,7 @@ int lua_cocos2dx_assetsmanager_Manifest_isLoaded(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1331,7 +1379,7 @@ int lua_cocos2dx_assetsmanager_Manifest_getPackageUrl(lua_State* tolua_S)
     cobj = (cocos2d::extension::Manifest*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_Manifest_getPackageUrl'", nullptr);
         return 0;
@@ -1339,7 +1387,7 @@ int lua_cocos2dx_assetsmanager_Manifest_getPackageUrl(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1378,7 +1426,7 @@ int lua_cocos2dx_assetsmanager_Manifest_getVersion(lua_State* tolua_S)
     cobj = (cocos2d::extension::Manifest*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_Manifest_getVersion'", nullptr);
         return 0;
@@ -1386,7 +1434,7 @@ int lua_cocos2dx_assetsmanager_Manifest_getVersion(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1425,7 +1473,7 @@ int lua_cocos2dx_assetsmanager_Manifest_getVersionFileUrl(lua_State* tolua_S)
     cobj = (cocos2d::extension::Manifest*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_Manifest_getVersionFileUrl'", nullptr);
         return 0;
@@ -1433,7 +1481,7 @@ int lua_cocos2dx_assetsmanager_Manifest_getVersionFileUrl(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1497,7 +1545,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_getState(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_getState'", nullptr);
         return 0;
@@ -1505,7 +1553,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_getState(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1544,7 +1592,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_checkUpdate(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_checkUpdate'", nullptr);
         return 0;
@@ -1552,7 +1600,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_checkUpdate(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1591,7 +1639,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_getStoragePath(lua_State* tolua_S
     cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_getStoragePath'", nullptr);
         return 0;
@@ -1599,7 +1647,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_getStoragePath(lua_State* tolua_S
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1638,7 +1686,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_update(lua_State* tolua_S)
     cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_update'", nullptr);
         return 0;
@@ -1646,7 +1694,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_update(lua_State* tolua_S)
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1685,7 +1733,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_getLocalManifest(lua_State* tolua
     cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_getLocalManifest'", nullptr);
         return 0;
@@ -1693,7 +1741,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_getLocalManifest(lua_State* tolua
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1732,7 +1780,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_getRemoteManifest(lua_State* tolu
     cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_getRemoteManifest'", nullptr);
         return 0;
@@ -1740,7 +1788,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_getRemoteManifest(lua_State* tolu
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1779,7 +1827,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_downloadFailedAssets(lua_State* t
     cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
 
 #if COCOS2D_DEBUG >= 1
-    if (!cobj) 
+    if (!cobj)
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_downloadFailedAssets'", nullptr);
         return 0;
@@ -1787,7 +1835,7 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_downloadFailedAssets(lua_State* t
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 0)
     {
         if(!ok)
         {
@@ -1846,6 +1894,103 @@ int lua_cocos2dx_assetsmanager_AssetsManagerEx_create(lua_State* tolua_S)
 #endif
     return 0;
 }
+
+int lua_cocos2dx_assetsmanager_AssetsManagerEx_cancel(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::extension::AssetsManagerEx* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"cc.AssetsManagerEx",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_cancel'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0)
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_cancel'", nullptr);
+            return 0;
+        }
+        cobj->cancel();
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManagerEx:cancel",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_cancel'.",&tolua_err);
+#endif
+
+    return 0;
+}
+
+int lua_cocos2dx_assetsmanager_AssetsManagerEx_singleThread(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::extension::AssetsManagerEx* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"cc.AssetsManagerEx",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::extension::AssetsManagerEx*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_cancel'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0)
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_cancel'", nullptr);
+            return 0;
+        }
+        cobj->singleThread();
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "cc.AssetsManagerEx:cancel",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_assetsmanager_AssetsManagerEx_cancel'.",&tolua_err);
+#endif
+
+    return 0;
+}
+
 static int lua_cocos2dx_assetsmanager_AssetsManagerEx_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (AssetsManagerEx)");
@@ -1866,13 +2011,14 @@ int lua_register_cocos2dx_assetsmanager_AssetsManagerEx(lua_State* tolua_S)
         tolua_function(tolua_S,"getRemoteManifest",lua_cocos2dx_assetsmanager_AssetsManagerEx_getRemoteManifest);
         tolua_function(tolua_S,"downloadFailedAssets",lua_cocos2dx_assetsmanager_AssetsManagerEx_downloadFailedAssets);
         tolua_function(tolua_S,"create", lua_cocos2dx_assetsmanager_AssetsManagerEx_create);
+        tolua_function(tolua_S,"cancel", lua_cocos2dx_assetsmanager_AssetsManagerEx_cancel);
+        tolua_function(tolua_S,"singleThread", lua_cocos2dx_assetsmanager_AssetsManagerEx_singleThread);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(cocos2d::extension::AssetsManagerEx).name();
     g_luaType[typeName] = "cc.AssetsManagerEx";
     g_typeCast["AssetsManagerEx"] = "cc.AssetsManagerEx";
     return 1;
 }
-
 static int lua_cocos2dx_assetsmanager_EventListenerAssetsManagerEx_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (EventListenerAssetsManagerEx)");
@@ -1894,7 +2040,7 @@ int lua_register_cocos2dx_assetsmanager_EventListenerAssetsManagerEx(lua_State* 
 TOLUA_API int register_all_cocos2dx_assetsmanager(lua_State* tolua_S)
 {
 	tolua_open(tolua_S);
-	
+
 	tolua_module(tolua_S,"cc",0);
 	tolua_beginmodule(tolua_S,"cc");
 

@@ -66,7 +66,9 @@ end
 -- end --
 
 function Node:addTo(target, zorder, tag)
-    target:addChild(self, zorder or self:getLocalZOrder(), tag or self:getTag())
+    if target then
+        target:addChild(self, zorder or self:getLocalZOrder(), tag or self:getTag())
+    end
 
     return self
 end
@@ -81,6 +83,10 @@ end
 -- end --
 
 function Node:show()
+    if tolua.isnull(self) then
+        return self;
+    end
+
     self:setVisible(true)
     return self
 end
@@ -95,6 +101,10 @@ end
 -- end --
 
 function Node:hide()
+    if tolua.isnull(self) then
+        return self;
+    end
+
     self:setVisible(false)
     return self
 end
@@ -111,7 +121,14 @@ end
 -- end --
 
 function Node:pos(x, y)
-    self:setPosition(x, y)
+    if tolua.isnull(self) then
+        return self;
+    end
+
+    if x and y then
+        self:setPosition(x, y)
+    end
+
     return self
 end
 
@@ -140,7 +157,14 @@ end
 -- end --
 
 function Node:scale(scale)
-    self:setScale(scale)
+    if tolua.isnull(self) then
+        return self;
+    end
+
+    if scale then
+        self:setScale(scale)
+    end
+
     return self
 end
 
@@ -155,7 +179,14 @@ end
 -- end --
 
 function Node:rotation(r)
-    self:setRotation(r)
+    if tolua.isnull(self) then
+        return self;
+    end
+
+    if r then
+        self:setRotation(r)
+    end
+
     return self
 end
 

@@ -1,4 +1,4 @@
-﻿/****************************************************************************
+/****************************************************************************
 Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2013 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
@@ -62,7 +62,7 @@ THE SOFTWARE.
 
 /**
  Position of the FPS
- 
+
  Default: 0,0 (bottom-left corner)
  */
 #ifndef CC_DIRECTOR_STATS_POSITION
@@ -108,6 +108,7 @@ bool Director::init(void)
     // scenes
     _runningScene = nullptr;
     _nextScene = nullptr;
+    _onCaptured = nullptr;
 
     _notificationNode = nullptr;
 
@@ -173,7 +174,7 @@ Director::~Director(void)
     CC_SAFE_RELEASE(_notificationNode);
     CC_SAFE_RELEASE(_scheduler);
     CC_SAFE_RELEASE(_actionManager);
-    
+
     delete _eventAfterUpdate;
     delete _eventAfterDraw;
     delete _eventAfterVisit;
@@ -185,7 +186,7 @@ Director::~Director(void)
 
 
     CC_SAFE_RELEASE(_eventDispatcher);
-    
+
     // delete _lastUpdate
     CC_SAFE_DELETE(_lastUpdate);
 
@@ -250,7 +251,7 @@ void Director::drawScene()
 {
     // calculate "global" dt
     calculateDeltaTime();
-    
+
     // skip one flame when _deltaTime equal to zero.
     if(_deltaTime < FLT_EPSILON)
     {
@@ -280,15 +281,15 @@ void Director::drawScene()
     }
 
     pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-    
+
     if (_runningScene)
     {
         //clear draw stats
         _renderer->clearDrawStats();
-        
+
         //render the scene
         _runningScene->render(_renderer);
-        
+
         _eventDispatcher->dispatchEvent(_eventAfterVisit);
     }
 
@@ -303,6 +304,11 @@ void Director::drawScene()
         showStats();
     }
     _renderer->render();
+
+    // do Screem Capture after all rendered
+    if (_onCaptured) {
+        doCaptureScreen();
+    }
 
     _eventDispatcher->dispatchEvent(_eventAfterDraw);
 
@@ -444,17 +450,17 @@ void Director::initMatrixStack()
     {
         _modelViewMatrixStack.pop();
     }
-    
+
     while (!_projectionMatrixStack.empty())
     {
         _projectionMatrixStack.pop();
     }
-    
+
     while (!_textureMatrixStack.empty())
     {
         _textureMatrixStack.pop();
     }
-    
+
     _modelViewMatrixStack.push(Mat4::IDENTITY);
     _projectionMatrixStack.push(Mat4::IDENTITY);
     _textureMatrixStack.push(Mat4::IDENTITY);
@@ -601,7 +607,7 @@ void Director::setProjection(Projection projection)
             loadIdentityMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
             break;
         }
-            
+
         case Projection::_3D:
         {
             float zeye = this->getZEye();
@@ -609,7 +615,7 @@ void Director::setProjection(Projection projection)
             Mat4 matrixPerspective, matrixLookup;
 
             loadIdentityMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
-            
+
             // issue #1334
             Mat4::createPerspective(60, (GLfloat)size.width/size.height, 10, zeye+size.height/2, &matrixPerspective);
 
@@ -618,7 +624,7 @@ void Director::setProjection(Projection projection)
             Vec3 eye(size.width/2, size.height/2, zeye), center(size.width/2, size.height/2, 0.0f), up(0.0f, 1.0f, 0.0f);
             Mat4::createLookAt(eye, center, up, &matrixLookup);
             multiplyMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION, matrixLookup);
-            
+
             loadIdentityMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
             break;
         }
@@ -694,7 +700,7 @@ void Director::setDepthTest(bool on)
 static void GLToClipTransform(Mat4 *transformOut)
 {
     if(nullptr == transformOut) return;
-    
+
     Director* director = Director::getInstance();
     CCASSERT(nullptr != director, "Director is null when seting matrix stack");
 
@@ -741,7 +747,7 @@ Vec2 Director::convertToUI(const Vec2& glPoint)
 	b = (a×M)T
 	Out = 1 ⁄ bw(bx, by, bz)
 	*/
-	
+
 	clipCoord.x = clipCoord.x / clipCoord.w;
 	clipCoord.y = clipCoord.y / clipCoord.w;
 	clipCoord.z = clipCoord.z / clipCoord.w;
@@ -785,6 +791,59 @@ Vec2 Director::getVisibleOrigin() const
     }
 }
 
+void Director::doCaptureScreen(void)
+{
+    auto glView = Director::getInstance()->getOpenGLView();
+    auto frameSize = glView->getFrameSize();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+    frameSize = frameSize * glView->getFrameZoomFactor() * glView->getRetinaFactor();
+#endif
+
+     int width = (int)frameSize.width;
+     int height = (int)frameSize.height;
+
+     ssize_t dataLen = width * height * 4;
+     GLubyte *buffer = (GLubyte *)malloc(dataLen);
+    GLubyte *flippedBuffer = (GLubyte *)malloc(dataLen);//free by Image
+    if (!buffer || !flippedBuffer){
+        _onCaptured(NULL);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+        _onCaptured = nullptr;
+#else
+        _onCaptured = NULL;
+#endif
+         CC_SAFE_FREE(buffer);
+         CC_SAFE_FREE(flippedBuffer);
+        return;
+    }
+
+     glPixelStorei(GL_PACK_ALIGNMENT, 1);
+     glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+
+     // do flip
+     for (int row = 0; row < height; ++row) {
+         memcpy(flippedBuffer + (height - row - 1) * width * 4, buffer + row * width * 4, width * 4);
+     }
+     CC_SAFE_FREE(buffer);
+
+     Image *image = new (std::nothrow) Image();
+     image->initWithRawData(flippedBuffer, dataLen, width, height, 8);
+
+     // callback
+     _onCaptured(image);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+     _onCaptured = nullptr;
+#else
+     _onCaptured = NULL;
+#endif
+     image->release();
+}
+
+void Director::captureScreen(CaptureCB onCaptured)
+{
+    _onCaptured = onCaptured;
+}
+
 // scene management
 
 void Director::runWithScene(Scene *scene)
@@ -800,15 +859,15 @@ void Director::replaceScene(Scene *scene)
 {
     //CCASSERT(_runningScene, "Use runWithScene: instead to start the director");
     CCASSERT(scene != nullptr, "the scene should not be null");
-    
+
     if (_runningScene == nullptr) {
         runWithScene(scene);
         return;
     }
-    
+
     if (scene == _nextScene)
         return;
-    
+
     if (_nextScene)
     {
         if (_nextScene->isRunning())
@@ -913,7 +972,7 @@ void Director::purgeDirector()
 {
     // cleanup scheduler
     getScheduler()->unscheduleAll();
-    
+
     // Disable event dispatching
     if (_eventDispatcher)
     {
@@ -926,7 +985,7 @@ void Director::purgeDirector()
         _runningScene->cleanup();
         _runningScene->release();
     }
-    
+
     _runningScene = nullptr;
     _nextScene = nullptr;
 
@@ -946,7 +1005,7 @@ void Director::purgeDirector()
     FontFreeType::shutdownFreeType();
 
     // purge all managed caches
-    
+
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #elif _MSC_VER >= 1400 //vs 2005 or higher
@@ -967,13 +1026,13 @@ void Director::purgeDirector()
 
     // cocos2d-x specific data structures
     UserDefault::destroyInstance();
-    
+
     GL::invalidateStateCache();
-    
+
     destroyTextureCache();
 
     CHECK_GL_ERROR_DEBUG();
-    
+
     // OpenGL view
     if (_openGLView)
     {
@@ -998,7 +1057,7 @@ void Director::setNextScene()
              _runningScene->onExitTransitionDidStart();
              _runningScene->onExit();
          }
- 
+
          // issue #709. the root node (scene) should receive the cleanup message too
          // otherwise it might be leaked.
          if (_sendCleanupToScene && _runningScene)
@@ -1061,7 +1120,7 @@ void Director::showStats()
     static const float FPS_FILTER = 0.10;
 
     _accumDt += _deltaTime;
-    
+
     if (_displayStats && _FPSLabel && _drawnBatchesLabel && _drawnVerticesLabel)
     {
         char buffer[30];
@@ -1108,7 +1167,7 @@ void Director::calculateMPF()
 
     struct timeval now;
     gettimeofday(&now, nullptr);
-    
+
     _secondsPerFrame = (now.tv_sec - _lastUpdate->tv_sec) + (now.tv_usec - _lastUpdate->tv_usec) / 1000000.0f;
 
     _secondsPerFrame = _secondsPerFrame * MPF_FILTER + (1-MPF_FILTER) * prevSecondsPerFrame;
@@ -1122,7 +1181,7 @@ void Director::calculateMPF()
 // returns the FPS image data pointer and len
 void Director::getFPSImageData(unsigned char** datapointer, ssize_t* length)
 {
-    // FIXME: fixed me if it should be used 
+    // FIXME: fixed me if it should be used
     *datapointer = cc_fps_images_png;
     *length = cc_fps_images_len();
 }
@@ -1138,7 +1197,7 @@ void Director::createStatsLabel()
         fpsString = _FPSLabel->getString();
         drawBatchString = _drawnBatchesLabel->getString();
         drawVerticesString = _drawnVerticesLabel->getString();
-        
+
         CC_SAFE_RELEASE_NULL(_FPSLabel);
         CC_SAFE_RELEASE_NULL(_drawnBatchesLabel);
         CC_SAFE_RELEASE_NULL(_drawnVerticesLabel);
@@ -1163,9 +1222,9 @@ void Director::createStatsLabel()
     CC_SAFE_RELEASE(image);
 
     /*
-     We want to use an image which is stored in the file named ccFPSImage.c 
-     for any design resolutions and all resource resolutions. 
-     
+     We want to use an image which is stored in the file named ccFPSImage.c
+     for any design resolutions and all resource resolutions.
+
      To achieve this, we need to ignore 'contentScaleFactor' in 'AtlasNode' and 'LabelAtlas'.
      So I added a new method called 'setIgnoreContentScaleFactor' for 'AtlasNode',
      this is not exposed to game developers, it's only used for displaying FPS now.
@@ -1232,7 +1291,7 @@ void Director::setActionManager(ActionManager* actionManager)
         CC_SAFE_RETAIN(actionManager);
         CC_SAFE_RELEASE(_actionManager);
         _actionManager = actionManager;
-    }    
+    }
 }
 
 void Director::setEventDispatcher(EventDispatcher* dispatcher)
@@ -1277,7 +1336,7 @@ void DisplayLinkDirector::mainLoop()
     else if (! _invalid)
     {
         drawScene();
-     
+
         // release the objects
         PoolManager::getInstance()->getCurrentPool()->clear();
     }
@@ -1295,7 +1354,7 @@ void DisplayLinkDirector::setAnimationInterval(double interval)
     {
         stopAnimation();
         startAnimation();
-    }    
+    }
 }
 
 NS_CC_END

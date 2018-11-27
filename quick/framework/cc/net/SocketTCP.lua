@@ -47,6 +47,11 @@ function SocketTCP:ctor(__host, __port, __retryConnectWhenFailure)
 	self.tcp = nil
 	self.isRetryConnect = __retryConnectWhenFailure
 	self.isConnected = false
+	self._failedMessage = nil;
+end
+
+function SocketTCP:getFailedMsg()
+	return self._failedMessage;
 end
 
 function SocketTCP:setName( __name )
@@ -124,9 +129,12 @@ end
 
 function SocketTCP:_checkConnect()
 	local __succ = self:_connect()
+
 	if __succ then
 		self:_onConnected()
+		self._failedMessage = nil;
 	end
+
 	return __succ
 end
 
@@ -163,7 +171,11 @@ end
 -- @see: http://lua-users.org/lists/lua-l/2009-10/msg00584.html
 function SocketTCP:_connect()
 	local __succ, __status = self.tcp:connect(self.host, self.port)
-	-- print("SocketTCP._connect:", __succ, __status)
+
+	if __status ~= STATUS_ALREADY_IN_PROGRESS then
+		self._failedMessage = __status;
+	end
+
 	return __succ == 1 or __status == STATUS_ALREADY_CONNECTED
 end
 
@@ -185,7 +197,7 @@ function SocketTCP:_onConnected()
 	-- print("%s._onConnectd", self.name)
 	self.isConnected = true
 	self:dispatchEvent({name=SocketTCP.EVENT_CONNECTED})
-	if self.connectTimeTickScheduler then scheduler.unscheduleGlobal(self.connectTimeTickScheduler) end	
+	if self.connectTimeTickScheduler then scheduler.unscheduleGlobal(self.connectTimeTickScheduler) end
 	-- start to read TCP data
 	self.tickScheduler = scheduler.scheduleUpdateGlobal(handler(self, self._tick))
 end

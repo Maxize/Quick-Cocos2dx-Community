@@ -104,7 +104,7 @@ static bool isFloat( std::string myString ) {
     float f;
     iss >> std::noskipws >> f; // noskipws considers leading whitespace invalid
     // Check the entire string was consumed and if either failbit or badbit is set
-    return iss.eof() && !iss.fail(); 
+    return iss.eof() && !iss.fail();
 }
 
 // helper free functions
@@ -229,10 +229,34 @@ static void _log(const char *format, va_list args)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     __android_log_print(ANDROID_LOG_DEBUG, "cocos2d-x debug info",  "%s", buf);
 
+	char chLogFile[256] = { 0 };
+    std::string writablePath = FileUtils::getInstance()->getWritablePath();
+    std::string logPath = writablePath + std::string("/log");
+    bool isCreateDirSuc = false;
+    if (!FileUtils::getInstance()->isDirectoryExist(logPath))
+        isCreateDirSuc = FileUtils::getInstance()->createDirectory(logPath);
+    else
+        isCreateDirSuc = true;
+    if (!isCreateDirSuc)
+        logPath = writablePath;
+
+	sprintf(chLogFile, "%s/Log_%d.log", logPath.c_str(), getpid());
+
+	static FILE* pLogFile = NULL;
+	if (NULL == pLogFile)
+	{
+		pLogFile = fopen(chLogFile, "a+");
+	}
+	if (NULL != pLogFile)
+	{
+		fwrite(buf, strlen(buf), 1, pLogFile);
+		fflush(pLogFile);
+	}
+
 #elif CC_TARGET_PLATFORM ==  CC_PLATFORM_WIN32
-    
+
     SendLogToWindow(buf);
-    
+
     WCHAR wszBuf[MAX_LOG_LENGTH] = {0};
     MultiByteToWideChar(CP_UTF8, 0, buf, -1, wszBuf, sizeof(wszBuf));
     OutputDebugStringW(wszBuf);
@@ -276,7 +300,7 @@ Console::Console()
 , _sendDebugStrings(false)
 {
     // VS2012 doesn't support initializer list, so we create a new array and assign its elements to '_command'.
-	Command commands[] = {     
+	Command commands[] = {
         { "config", "Print the Configuration object", std::bind(&Console::commandConfig, this, std::placeholders::_1, std::placeholders::_2) },
         { "debugmsg", "Whether or not to forward the debug messages on the console. Args: [on | off]", [&](int fd, const std::string& args) {
             if( args.compare("on")==0 || args.compare("off")==0) {
@@ -365,7 +389,7 @@ bool Console::listenOnTCP(int port)
         close(listenfd);
 #endif
     } while ( (res = res->ai_next) != nullptr);
-    
+
     if (res == nullptr) {
         perror("net_listen:");
         freeaddrinfo(ressave);
@@ -439,7 +463,7 @@ void Console::commandHelp(int fd, const std::string &args)
              mydprintf(fd, "\t");
         }
         mydprintf(fd,"%s\n", cmd.help.c_str());
-    } 
+    }
 }
 
 void Console::commandExit(int fd, const std::string &args)
@@ -654,7 +678,7 @@ void Console::commandTouch(int fd, const std::string& args)
     else
     {
         auto argv = split(args,' ');
-        
+
         if(argv.size() == 0)
         {
             return;
@@ -664,7 +688,7 @@ void Console::commandTouch(int fd, const std::string& args)
         {
             if((argv.size() == 3) && (isFloat(argv[1]) && isFloat(argv[2])))
             {
-                
+
                 float x = utils::atof(argv[1].c_str());
                 float y = utils::atof(argv[2].c_str());
 
@@ -676,7 +700,7 @@ void Console::commandTouch(int fd, const std::string& args)
                     Director::getInstance()->getOpenGLView()->handleTouchesEnd(1, &_touchId, &x, &y);
                 });
             }
-            else 
+            else
             {
                 const char msg[] = "touch: invalid arguments.\n";
                 send(fd, msg, sizeof(msg) - 1, 0);
@@ -686,11 +710,11 @@ void Console::commandTouch(int fd, const std::string& args)
 
         if(argv[0]=="swipe")
         {
-            if((argv.size() == 5) 
+            if((argv.size() == 5)
                 && (isFloat(argv[1])) && (isFloat(argv[2]))
                 && (isFloat(argv[3])) && (isFloat(argv[4])))
             {
-                
+
                 float x1 = utils::atof(argv[1].c_str());
                 float y1 = utils::atof(argv[2].c_str());
                 float x2 = utils::atof(argv[3].c_str());
@@ -712,7 +736,7 @@ void Console::commandTouch(int fd, const std::string& args)
                 {
                     while(dx > 1)
                     {
-                        
+
                         if(x1 < x2)
                         {
                             _x_ += 1;
@@ -735,7 +759,7 @@ void Console::commandTouch(int fd, const std::string& args)
                         });
                         dx -= 1;
                     }
-                    
+
                 }
                 else
                 {
@@ -763,7 +787,7 @@ void Console::commandTouch(int fd, const std::string& args)
                         });
                        dy -= 1;
                     }
-                    
+
                 }
 
                 sched->performFunctionInCocosThread( [=](){
@@ -772,12 +796,12 @@ void Console::commandTouch(int fd, const std::string& args)
                 });
 
             }
-            else 
+            else
             {
                 const char msg[] = "touch: invalid arguments.\n";
                 send(fd, msg, sizeof(msg) - 1, 0);
             }
-            
+
         }
 
     }
@@ -793,7 +817,7 @@ void Console::commandUpload(int fd)
     //read file name
     for( n = 0; n < sizeof(buf) - 1; n++ )
     {
-        if( (rc = recv(fd, &c, 1, 0)) ==1 ) 
+        if( (rc = recv(fd, &c, 1, 0)) ==1 )
         {
             for(char x : invalid_filename_char)
             {
@@ -804,21 +828,21 @@ void Console::commandUpload(int fd)
                     return;
                 }
             }
-            if(c == ' ') 
+            if(c == ' ')
             {
                 break;
             }
             *ptr++ = c;
-        } 
-        else if( rc == 0 ) 
+        }
+        else if( rc == 0 )
         {
             break;
-        } 
-        else if( errno == EINTR ) 
+        }
+        else if( errno == EINTR )
         {
             continue;
-        } 
-        else 
+        }
+        else
         {
             break;
         }
@@ -834,8 +858,8 @@ void Console::commandUpload(int fd)
         send(fd, err, sizeof(err),0);
         return;
     }
-    
-    while (true) 
+
+    while (true)
     {
         char data[4];
         for(int i = 0; i < 4; i++)
@@ -908,7 +932,7 @@ bool Console::parseCommand(int fd)
             send(fd, err, sizeof(err),0);
             sendPrompt(fd);
             return true;
-            
+
         }
     }
     if(!more_data)
@@ -931,7 +955,7 @@ bool Console::parseCommand(int fd)
 
     std::vector<std::string> args;
     cmdLine = std::string(buf);
-   
+
     args = split(cmdLine, ' ');
     if(args.empty())
     {
@@ -946,13 +970,13 @@ bool Console::parseCommand(int fd)
     {
         std::string args2;
         for(size_t i = 1; i < args.size(); ++i)
-        {   
+        {
             if(i > 1)
             {
                 args2 += ' ';
             }
             args2 += trim(args[i]);
-            
+
         }
         auto cmd = it->second;
         cmd.callback(fd, args2);
@@ -1046,7 +1070,7 @@ void Console::loop()
 
         copy_set = _read_set;
         timeout_copy = timeout;
-        
+
         int nready = select(_maxfd+1, &copy_set, nullptr, nullptr, &timeout_copy);
 
         if( nready == -1 )
@@ -1072,13 +1096,13 @@ void Console::loop()
             /* data from client */
             std::vector<int> to_remove;
             for(const auto &fd: _fds) {
-                if(FD_ISSET(fd,&copy_set)) 
+                if(FD_ISSET(fd,&copy_set))
                 {
                     //fix Bug #4302 Test case ConsoleTest--ConsoleUploadFile crashed on Linux
-                    //On linux, if you send data to a closed socket, the sending process will 
+                    //On linux, if you send data to a closed socket, the sending process will
                     //receive a SIGPIPE, which will cause linux system shutdown the sending process.
                     //Add this ioctl code to check if the socket has been closed by peer.
-                    
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
                     u_long n = 0;
                     ioctlsocket(fd, FIONREAD, &n);
@@ -1130,7 +1154,7 @@ void Console::loop()
         close(fd);
 #endif
     }
-    
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     closesocket(_listenfd);
 	WSACleanup();

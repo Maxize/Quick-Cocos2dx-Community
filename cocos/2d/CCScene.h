@@ -103,7 +103,7 @@ protected:
     
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Scene);
-    
+
 #if CC_USE_PHYSICS
 public:
     virtual void addChild(Node* child, int zOrder, int tag) override;

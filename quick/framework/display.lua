@@ -131,6 +131,17 @@ if CONFIG_SCREEN_AUTOSCALE and CONFIG_SCREEN_AUTOSCALE ~="NONE" then
         elseif CONFIG_SCREEN_AUTOSCALE == "FIXED_HEIGHT" then
             scale = scaleY
             CONFIG_SCREEN_WIDTH = w / scale
+        elseif CONFIG_SCREEN_AUTOSCALE == "FIXED_AUTO" then
+            local isScaleX = scaleX < scaleY
+            scale = isScaleX and scaleX or scaleY
+            if (isScaleX) then
+                CONFIG_SCREEN_WIDTH  = w
+                CONFIG_SCREEN_HEIGHT = h * scale
+            else
+                CONFIG_SCREEN_WIDTH  = w * scale
+                CONFIG_SCREEN_HEIGHT = h
+            end
+            print("------- scale, width, height = ", scale, CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT)
         else
             scale = 1.0
             printError(string.format("display - invalid CONFIG_SCREEN_AUTOSCALE \"%s\"", CONFIG_SCREEN_AUTOSCALE))
@@ -481,7 +492,7 @@ end
 -- 创建一个颜色填充层
 -- @function [parent=#display] newColorLayer
 -- @param ccColor4B color
--- @return LayerColor#LayerColor ret (return value: cc.LayerColor) 
+-- @return LayerColor#LayerColor ret (return value: cc.LayerColor)
 -- @see LayerColor
 
 -- end --
@@ -616,7 +627,7 @@ display.newClippingRegionNode = display.newClippingRectangleNode
 -- @param number x
 -- @param number y
 -- @param table params
--- @return Sprite#Sprite ret (return value: cc.Sprite) 
+-- @return Sprite#Sprite ret (return value: cc.Sprite)
 -- @see Sprite
 
 
@@ -785,7 +796,7 @@ end
 -- @param size size The tiled node size, use cc.size create it please.
 -- @param integer hPadding Horizontal padding, it will display 1 px gap on moving the node, set padding for fix it.
 -- @param integer vPadding Vertical padding.
--- @return SpriteBatchNode#SpriteBatchNode ret (return value: cc.SpriteBatchNode) 
+-- @return SpriteBatchNode#SpriteBatchNode ret (return value: cc.SpriteBatchNode)
 
 -- end --
 
@@ -888,7 +899,7 @@ end
 --------------------------------
 -- 创建并返回一个空的 DrawNode 对象
 -- @function [parent=#display] newDrawNode
--- @return DrawNode#DrawNode ret (return value: cc.DrawNode) 
+-- @return DrawNode#DrawNode ret (return value: cc.DrawNode)
 -- @see DrawNode
 
 -- end --
@@ -904,7 +915,7 @@ end
 -- @function [parent=#display] newSolidCircle
 -- @param number radius 实心圆的半径
 -- @param table params 创建圆的参数 x,y为圆点位置 color中圆的颜色
--- @return DrawNode#DrawNode ret (return value: cc.DrawNode) 
+-- @return DrawNode#DrawNode ret (return value: cc.DrawNode)
 -- @see DrawNode
 
 
@@ -936,7 +947,7 @@ end
 -- @function [parent=#display] newCircle
 -- @param number radius
 -- @param table params 有参数，x,y 圆的位置 填充色 fillColor, 边线色 borderColor 及边线宽度 borderWidth
--- @return DrawNode#DrawNode ret (return value: cc.DrawNode) 
+-- @return DrawNode#DrawNode ret (return value: cc.DrawNode)
 -- @see DrawNode
 
 
@@ -1012,7 +1023,7 @@ end
 -- @function [parent=#display] newRect
 -- @param table rect table
 -- @param table params 有参数，填充色 fillColor, 边线色 borderColor 及边线宽度 borderWidth
--- @return DrawNode#DrawNode ret (return value: cc.DrawNode) 
+-- @return DrawNode#DrawNode ret (return value: cc.DrawNode)
 -- @see ShapeNode
 
 
@@ -1062,7 +1073,7 @@ end
 -- @function [parent=#display] newLine
 -- @param table point table
 -- @param table params 有参数，边线色 borderColor 及边线宽度 borderWidth
--- @return DrawNode#DrawNode ret (return value: cc.DrawNode) 
+-- @return DrawNode#DrawNode ret (return value: cc.DrawNode)
 -- @see ShapeNode
 
 
@@ -1521,7 +1532,7 @@ end
 -- @function [parent=#display] newBatchNode
 -- @param string image 图像文件名
 -- @param integer capacity
--- @return SpriteBatchNode#SpriteBatchNode ret (return value: cc.SpriteBatchNode) 
+-- @return SpriteBatchNode#SpriteBatchNode ret (return value: cc.SpriteBatchNode)
 -- @see Batch Node
 
 --[[--
@@ -1562,7 +1573,7 @@ end
 -- 创建并返回一个图像帧对象。
 -- @function [parent=#display] newSpriteFrame
 -- @param string 图像帧名称
--- @return SpriteFrameCache#SpriteFrameCache ret (return value: cc.SpriteFrameCache) 
+-- @return SpriteFrameCache#SpriteFrameCache ret (return value: cc.SpriteFrameCache)
 
 --[[--
 
@@ -1715,7 +1726,7 @@ end
 -- 取得以指定名字缓存的动画对象，如果不存在则返回 nil。
 -- @function [parent=#display] getAnimationCache
 -- @param string name
--- @return Animation#Animation ret (return value: cc.Animation) 
+-- @return Animation#Animation ret (return value: cc.Animation)
 
 -- end --
 
@@ -1808,7 +1819,15 @@ display.captureScreen(
 -- end --
 
 function display.captureScreen(callback, fileName)
-    cc.utils:captureScreen(callback, fileName)
+    sharedDirector:captureScreen(function(image)
+        if image then
+            local path = cc.FileUtils:getInstance():getWritablePath() .. fileName
+            image:saveToFile(path)
+            callback(true, path)
+        else
+            callback(false)
+        end
+    end)
 end
 
 return display

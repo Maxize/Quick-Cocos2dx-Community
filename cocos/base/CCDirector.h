@@ -114,6 +114,8 @@ public:
         DEFAULT = _3D,
     };
     
+    typedef std::function<void(Image *)> CaptureCB;
+    
     /** returns a shared instance of the director */
     static Director* getInstance();
 
@@ -391,6 +393,9 @@ public:
     void multiplyMatrix(MATRIX_STACK_TYPE type, const Mat4& mat);
     const Mat4& getMatrix(MATRIX_STACK_TYPE type);
     void resetMatrixStack();
+    
+    /** capture screen from GL buffer */
+    void captureScreen(CaptureCB onCaptured);
 
 protected:
     void purgeDirector();
@@ -411,6 +416,7 @@ protected:
     void destroyTextureCache();
 
     void initMatrixStack();
+    void doCaptureScreen(void);
 
     std::stack<Mat4> _modelViewMatrixStack;
     std::stack<Mat4> _projectionMatrixStack;
@@ -499,6 +505,9 @@ protected:
 
     /* Console for the director */
     Console *_console;
+    
+    /* capture screen cb */
+    CaptureCB _onCaptured;
 
     // GLView will recreate stats labels to fit visible rect
     friend class GLView;

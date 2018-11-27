@@ -67,7 +67,7 @@ public:
      * @lua NA
      */
     virtual ~FileUtils();
-    
+
     /**
      *  Purges the file searching cache.
      *
@@ -77,20 +77,20 @@ public:
      *        this method should be invoked to clean the file search cache.
      */
     virtual void purgeCachedEntries();
-    
+
     /**
      *  Gets string from a file.
      *  IMPORTANT: DO NOT OVERRIDE ME!
      */
     std::string getStringFromFile(const std::string& filename);
-    
+
     /**
      *  Creates binary data from a file.
      *  IMPORTANT: DO NOT OVERRIDE ME!
      *  @return A data object.
      */
     Data getDataFromFile(const std::string& filename);
-    
+
     /**
      *  Gets resource file data
      *
@@ -120,14 +120,14 @@ public:
      */
     virtual unsigned char* getFileDataFromZip(const std::string& zipFilePath, const std::string& filename, ssize_t *size);
 
-    
+
     /** Returns the fullpath for a given filename.
-     
+
      First it will try to get a new filename from the "filenameLookup" dictionary.
      If a new filename can't be found on the dictionary, it will use the original filename.
      Then it will try to obtain the full path of the filename using the FileUtils search rules: resolutions, and search paths.
      The file search is based on the array element order of search paths and resolution directories.
-     
+
      For instance:
 
      	We set two elements("/mnt/sdcard/", "internal_dir/") to search paths vector by setSearchPaths,
@@ -160,19 +160,19 @@ public:
      	    internal_dir/gamescene/uilayer/sprite.pvr.gz                      (if not found, return "gamescene/uilayer/sprite.png")
 
      If the new file can't be found on the file system, it will return the parameter filename directly.
-     
+
      This method was added to simplify multiplatform support. Whether you are using cocos2d-js or any cross-compilation toolchain like StellaSDK or Apportable,
      you might need to load different resources for a given file in the different platforms.
 
      @since v2.1
      */
-    virtual std::string fullPathForFilename(const std::string &filename);
-    
+    virtual std::string fullPathForFilename(const std::string &filename) const;
+
     /**
      * Loads the filenameLookup dictionary from the contents of a filename.
-     * 
+     *
      * @note The plist file name should follow the format below:
-     * 
+     *
      * @code
      * <?xml version="1.0" encoding="UTF-8"?>
      * <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -202,15 +202,15 @@ public:
      * @lua loadFilenameLookup
      */
     virtual void loadFilenameLookupDictionaryFromFile(const std::string &filename);
-    
-    /** 
+
+    /**
      *  Sets the filenameLookup dictionary.
      *
      *  @param pFilenameLookupDict The dictionary for replacing filename.
      *  @since v2.1
      */
     virtual void setFilenameLookupDictionary(const ValueMap& filenameLookupDict);
-    
+
     /**
      *  Gets full path from a file name and the path of the reletive file.
      *  @param filename The file name.
@@ -222,7 +222,7 @@ public:
      */
     virtual std::string fullPathFromRelativeFile(const std::string &filename, const std::string &relativeFile);
 
-    /** 
+    /**
      *  Sets the array that contains the search order of the resources.
      *
      *  @param searchResolutionsOrder The source array that contains the search order of the resources.
@@ -240,7 +240,7 @@ public:
       * @since v2.1
       */
     virtual void addSearchResolutionsOrder(const std::string &order,const bool front=false);
-    
+
     /**
      *  Gets the array that contains the search order of the resources.
      *
@@ -249,10 +249,10 @@ public:
      *  @lua NA
      */
     virtual const std::vector<std::string>& getSearchResolutionsOrder() const;
-    
-    /** 
+
+    /**
      *  Sets the array of search paths.
-     * 
+     *
      *  You can use this array to modify the search path of the resources.
      *  If you want to use "themes" or search resources in the "cache", you can do it easily by adding new entries in this array.
      *
@@ -270,22 +270,22 @@ public:
      *  @lua NA
      */
     virtual void setSearchPaths(const std::vector<std::string>& searchPaths);
-    
+
     /**
      * Set search root path.
      */
     void setSearchRootPath(const char* path);
-    
+
     /**
       * Add search path.
       *
       * @since v2.1
       */
     void addSearchPath(const std::string & path, const bool front=false);
-    
+
     /**
      *  Gets the array of search paths.
-     *  
+     *
      *  @return The array of search paths.
      *  @see fullPathForFilename(const char*).
      *  @lua NA
@@ -297,17 +297,17 @@ public:
      *  @return  The path that can be write/read a file in
      */
     virtual std::string getWritablePath() const = 0;
-    
+
     /**
      *  Set writable/cache path (for debug).
      */
     virtual void setWritablePath(const char *writablePath);
-    
+
     /**
      *  Sets/Gets whether to pop-up a message box when failed to load an image.
      */
     virtual void setPopupNotify(bool notify);
-    virtual bool isPopupNotify();
+    virtual bool isPopupNotify() const;
 
     /**
      *  Converts the contents of a file to a ValueMap.
@@ -320,19 +320,28 @@ public:
      *  @note This method is used internally.
      */
     virtual ValueMap getValueMapFromData(const char* filedata, int filesize);
-    
+
     /**
      *  Write a ValueMap to a plist file.
      *  @note This method is used internally.
      */
     virtual bool writeToFile(ValueMap& dict, const std::string& fullPath);
-    
+
+    /**
+    * Windows fopen can't support UTF-8 filename
+    * Need convert all parameters fopen and other 3rd-party libs
+    *
+    * @param filenameUtf8 std::string name file for conversion from utf-8
+    * @return std::string ansi filename in current locale
+    */
+    virtual std::string getSuitableFOpen(const std::string& filenameUtf8) const;
+
     /**
      *  Converts the contents of a file to a ValueVector.
      *  @note This method is used internally.
      */
     virtual ValueVector getValueVectorFromFile(const std::string& filename);
-    
+
     /**
      *  Checks whether a file exists.
      *
@@ -341,7 +350,7 @@ public:
      *  @return true if the file exists, otherwise it will return false.
      */
     virtual bool isFileExist(const std::string& filename) const;
-    
+
     /**
      *  Checks whether the path is an absolute path.
      *
@@ -352,15 +361,15 @@ public:
      *  @return true if it's an absolute path, otherwise it will return false.
      */
     virtual bool isAbsolutePath(const std::string& path) const;
-    
+
     /**
      *  Checks whether the path is a directory
      *
      *  @param dirPath The path of the directory, it could be a relative or an absolute path.
      *  @return true if the directory exists, otherwise it will return false.
      */
-    virtual bool isDirectoryExist(const std::string& dirPath);
-    
+    virtual bool isDirectoryExist(const std::string& dirPath) const;
+
     /**
      *  Creates a directory
      *
@@ -368,7 +377,7 @@ public:
      *  @return true if the directory have been created successfully, otherwise it will return false.
      */
     virtual bool createDirectory(const std::string& dirPath);
-    
+
     /**
      *  Remove a directory
      *
@@ -376,7 +385,7 @@ public:
      *  @return true if the directory have been removed successfully, otherwise it will return false.
      */
     virtual bool removeDirectory(const std::string& dirPath);
-    
+
     /**
      *  Remove a file
      *
@@ -384,7 +393,16 @@ public:
      *  @return true if the file have been removed successfully, otherwise it will return false.
      */
     virtual bool removeFile(const std::string &filepath);
-    
+
+    /**
+    *  Renames a file under the given directory.
+    *
+    *  @param oldfullpath  The current fullpath of the file. Includes path and name.
+    *  @param newfullpath  The new fullpath of the file. Includes path and name.
+    *  @return True if the file have been renamed successfully, false if not.
+    */
+    virtual bool renameFile(const std::string &oldfullpath, const std::string &newfullpath);
+
     /**
      *  Rename a file under the given directory
      *
@@ -394,7 +412,7 @@ public:
      *  @return true if the file have been renamed successfully, otherwise it will return false.
      */
     virtual bool renameFile(const std::string &path, const std::string &oldname, const std::string &name);
-    
+
     /**
      *  Retrieve the file size
      *
@@ -403,21 +421,39 @@ public:
      *  @return The file size.
      */
     virtual long getFileSize(const std::string &filepath);
-    
+
     /**
      *  Set resource encrypt Sign and key.
      */
     virtual void setResourceEncryptKeyAndSign(const std::string& key, const std::string& sign);
 
+    /**
+    *  List all files recursively in a directory.
+    *
+    *  @param dirPath The path of the directory, it could be a relative or an absolute path.
+    *  @return File paths in a string vector
+    */
+    virtual void listFilesRecursively(const std::string& dirPath, std::vector<std::string> *files) const;
+
     /** Returns the full path cache */
     const std::unordered_map<std::string, std::string>& getFullPathCache() const { return _fullPathCache; }
+
+    /**
+     *  unzip the zip file to the specified path
+     *
+     *  @param zipPath The path of the zip file, it could be an absolute path.
+     *  @param dirPath The path of directory, it could be an absolute path.
+     *  @param password The password of the zip file
+     *  @return true if the file have been unziped successfully, otherwise it will return false.
+     */
+    virtual bool unzipFileToPath(const std::string& zipPath, const std::string& dirPath, const std::string& password);
 
 protected:
     /**
      *  The default constructor.
      */
     FileUtils();
-    
+
     /**
      *  Initializes the instance of FileUtils. It will set _searchPathArray and _searchResolutionsOrderArray to default values.
      *
@@ -427,7 +463,7 @@ protected:
      *
      */
     virtual bool init();
-    
+
     /**
      *  Gets the new filename from the filename lookup dictionary.
      *  It is possible to have a override names.
@@ -436,21 +472,21 @@ protected:
      *          If the original filename wasn't in the dictionary, it will return the original filename.
      */
     virtual std::string getNewFilename(const std::string &filename) const;
-    
+
     /**
      *  Checks whether a file exists without considering search paths and resolution orders.
      *  @param The file (with absolute path) to look up for
      *  @return Returns true if the file found at the given absolute path, otherwise returns false
      */
     virtual bool isFileExistInternal(const std::string& filename) const = 0;
-    
+
     /**
      *  Checks whether a directory exists without considering search paths and resolution orders.
      *  @param The directory (with absolute path) to look up for
      *  @return Returns true if the directory found at the given absolute path, otherwise returns false
      */
     virtual bool isDirectoryExistInternal(const std::string& dirPath) const;
-    
+
     /**
      *  Gets full path for filename, resolution directory and search path.
      *
@@ -459,8 +495,8 @@ protected:
      *  @param searchPath The search path.
      *  @return The full path of the file. It will return an empty string if the full path of the file doesn't exist.
      */
-    virtual std::string getPathForFilename(const std::string& filename, const std::string& resolutionDirectory, const std::string& searchPath);
-    
+    virtual std::string getPathForFilename(const std::string& filename, const std::string& resolutionDirectory, const std::string& searchPath) const;
+
     /**
      *  Gets full path for the directory and the filename.
      *
@@ -471,9 +507,9 @@ protected:
      *  @param strFilename  The name of the file.
      *  @return The full path of the file, if the file can't be found, it will return an empty string.
      */
-    virtual std::string getFullPathForDirectoryAndFilename(const std::string& directory, const std::string& filename);
-    
-    /** 
+    virtual std::string getFullPathForDirectoryAndFilename(const std::string& directory, const std::string& filename) const;
+
+    /**
      *  Returns the fullpath for a given filename.
      *  This is an alternative for fullPathForFilename, there are two main differences:
      *  First, it returns empty string instead of the original filename when no file found for the given name.
@@ -482,8 +518,8 @@ protected:
      *  @return The full path for the file, if not found, the return value will be an empty string
      */
     virtual std::string searchFullPathForFilename(const std::string& filename) const;
-    
-    
+
+
     /** Dictionary used to lookup filenames based on a key.
      *  It is used internally by the following methods:
      *
@@ -492,19 +528,19 @@ protected:
      *  @since v2.1
      */
     ValueMap _filenameLookupDict;
-    
-    /** 
+
+    /**
      *  The vector contains resolution folders.
      *  The lower index of the element in this vector, the higher priority for this resolution directory.
      */
     std::vector<std::string> _searchResolutionsOrderArray;
-    
+
     /**
      * The vector contains search paths.
      * The lower index of the element in this vector, the higher priority for this search path.
      */
     std::vector<std::string> _searchPathArray;
-    
+
     /**
      *  The default root path of resources.
      *  If the default root path of resources needs to be changed, do it in the `init` method of FileUtils's subclass.
@@ -513,33 +549,56 @@ protected:
      *  Similarly on Blackberry, we assign "app/native/Resources/" to this variable in FileUtilsBlackberry::init().
      */
     std::string _defaultResRootPath;
-    
+
     /**
-     *  The full path cache. When a file is found, it will be added into this cache. 
-     *  This variable is used for improving the performance of file search.
-     */
-    std::unordered_map<std::string, std::string> _fullPathCache;
-    
+    *  The full path cache. When a file is found, it will be added into this cache.
+    *  This variable is used for improving the performance of file search.
+    */
+    mutable std::unordered_map<std::string, std::string> _fullPathCache;
+
     /**
      * Writable path (for debug)
      */
     std::string _writablePath;
-    
+
     /**
      * Resource encrypt Sign
      */
     std::string _xxteaSign;
-    
+
     /**
      * Resource encrypt Key
      */
     std::string _xxteaKey;
-    
+
     /**
      *  The singleton pointer of FileUtils.
      */
     static FileUtils* s_sharedFileUtils;
-    
+
+//    template<typename T, typename R, typename ...ARGS>
+//    static void performOperationOffthread(T&& action, R&& callback, ARGS&& ...args)
+//    {
+//
+//        // Visual Studio 2013 does not support using std::bind to forward template parameters into
+//        // a lambda. To get around this, we will just copy these arguments via lambda capture
+//#if defined(_MSC_VER) && _MSC_VER  < 1900
+//        auto lambda = [action, callback, args...]()
+//        {
+//            Director::getInstance()->getScheduler()->performFunctionInCocosThread(std::bind(callback, action(args...)));
+//        };
+//#else
+//        // As cocos2d-x uses c++11, we will use std::bind to leverage move sematics to
+//        // move our arguments into our lambda, to potentially avoid copying.
+//        auto lambda = std::bind([](const T& actionIn, const R& callbackIn, const ARGS& ...argsIn)
+//        {
+//            Director::getInstance()->getScheduler()->performFunctionInCocosThread(std::bind(callbackIn, actionIn(argsIn...)));
+//        }, std::forward<T>(action), std::forward<R>(callback), std::forward<ARGS>(args)...);
+//
+//#endif
+//
+//        AsyncTaskPool::getInstance()->enqueue(AsyncTaskPool::TaskType::TASK_IO, [](void*){}, nullptr, std::move(lambda));
+//    }
 };
 
 // end of platform group

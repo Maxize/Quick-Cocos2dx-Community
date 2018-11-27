@@ -113,13 +113,13 @@ Sprite* Sprite::createWithSpriteFrame(SpriteFrame *spriteFrame)
 Sprite* Sprite::createWithSpriteFrameName(const std::string& spriteFrameName)
 {
     SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
-    
+
 #if COCOS2D_DEBUG > 0
     char msg[256] = {0};
     sprintf(msg, "Invalid spriteFrameName: %s", spriteFrameName.c_str());
     CCASSERT(frame != nullptr, msg);
 #endif
-    
+
     return createWithSpriteFrame(frame);
 }
 
@@ -214,38 +214,38 @@ bool Sprite::initWithTexture(Texture2D *texture, const Rect& rect, bool rotated)
     if (Node::init())
     {
         _batchNode = nullptr;
-        
+
         _recursiveDirty = false;
         setDirty(false);
-        
+
         _opacityModifyRGB = true;
-        
+
         _blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
-        
+
         _flippedX = _flippedY = false;
-        
+
         // default transform anchor: center
         setAnchorPoint(Vec2(0.5f, 0.5f));
-        
+
         // zwoptex default values
         _offsetPosition = Vec2::ZERO;
 
         // clean the Quad
         memset(&_quad, 0, sizeof(_quad));
-        
+
         // Atlas: Color
         _quad.bl.colors = Color4B::WHITE;
         _quad.br.colors = Color4B::WHITE;
         _quad.tl.colors = Color4B::WHITE;
         _quad.tr.colors = Color4B::WHITE;
-        
+
         // shader state
         setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));
 
         // update texture (calls updateBlendFunc)
         setTexture(texture);
         setTextureRect(rect, rotated, rect.size);
-        
+
         // by default use "Self Render".
         // if the sprite is added to a batchnode, then it will automatically switch to "batchnode Render"
         setBatchNode(nullptr);
@@ -281,26 +281,6 @@ Sprite::~Sprite(void)
  * Texture methods
  */
 
-/*
- * This array is the data of a white image with 2 by 2 dimension.
- * It's used for creating a default texture when sprite's texture is set to nullptr.
- * Supposing codes as follows:
- *
- *   auto sp = new (std::nothrow) Sprite();
- *   sp->init();  // Texture was set to nullptr, in order to make opacity and color to work correctly, we need to create a 2x2 white texture.
- *
- * The test is in "TestCpp/SpriteTest/Sprite without texture".
- */
-static unsigned char cc_2x2_white_image[] = {
-    // RGBA8888
-    0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF,
-    0xFF, 0xFF, 0xFF, 0xFF
-};
-
-#define CC_2x2_WHITE_IMAGE_KEY  "/cc_2x2_white_image"
-
 // MARK: texture
 void Sprite::setTexture(const std::string &filename)
 {
@@ -313,6 +293,7 @@ void Sprite::setTexture(const std::string &filename)
     setTextureRect(rect);
 }
 
+#define CC_2x2_WHITE_IMAGE_KEY  "/cc_2x2_white_image"
 void Sprite::setTexture(Texture2D *texture)
 {
     // If batchnode, then texture id should be the same
@@ -326,15 +307,16 @@ void Sprite::setTexture(Texture2D *texture)
         texture = Director::getInstance()->getTextureCache()->getTextureForKey(CC_2x2_WHITE_IMAGE_KEY);
 
         // If texture wasn't in cache, create it from RAW data.
-        if (texture == nullptr)
-        {
-            Image* image = new (std::nothrow) Image();
-            bool isOK = image->initWithRawData(cc_2x2_white_image, sizeof(cc_2x2_white_image), 2, 2, 8);
-            CC_UNUSED_PARAM(isOK);
-            CCASSERT(isOK, "The 2x2 empty texture was created unsuccessfully.");
-
+        if (texture == nullptr) {
+            Image * image = new (std::nothrow) Image();
+            int width = 2;
+            int height = 2;
+            ssize_t dataLen = width * height * 4;
+            unsigned char *buffer = (unsigned char *)malloc(dataLen);//release by image
+            memset(buffer, 0xFF, dataLen);
+            image->initWithRawData(buffer, dataLen, width, height, 8);
             texture = Director::getInstance()->getTextureCache()->addImage(image, CC_2x2_WHITE_IMAGE_KEY);
-            CC_SAFE_RELEASE(image);
+            image->release();
         }
     }
 
@@ -389,7 +371,7 @@ void Sprite::setTextureRect(const Rect& rect, bool rotated, const Size& untrimme
     else
     {
         // self rendering
-        
+
         // Atlas: Vertex
         float x1 = 0 + _offsetPosition.x;
         float y1 = 0 + _offsetPosition.y;
@@ -631,7 +613,7 @@ void Sprite::addChild(Node *child, int zOrder, int tag)
 void Sprite::addChild(Node *child, int zOrder, const std::string &name)
 {
     CCASSERT(child != nullptr, "Argument must be non-nullptr");
-    
+
     if (_batchNode)
     {
         Sprite* childSprite = dynamic_cast<Sprite*>(child);
@@ -639,7 +621,7 @@ void Sprite::addChild(Node *child, int zOrder, const std::string &name)
         CCASSERT(childSprite->getTexture()->getName() == _textureAtlas->getTexture()->getName(), "");
         //put it in descendants array of batch node
         _batchNode->appendChild(childSprite);
-        
+
         if (!_reorderChildDirty)
         {
             setReorderChildDirtyRecursively();
@@ -764,7 +746,7 @@ void Sprite::setPosition(float x, float y)
 void Sprite::setRotation(float rotation)
 {
     Node::setRotation(rotation);
-    
+
     SET_DIRTY_RECURSIVELY();
 }
 
@@ -875,7 +857,7 @@ bool Sprite::isFlippedY(void) const
 void Sprite::updateColor(void)
 {
     Color4B color4( _displayedColor.r, _displayedColor.g, _displayedColor.b, _displayedOpacity );
-    
+
     // special opacity for premultiplied textures
 	if (_opacityModifyRGB)
     {
@@ -930,8 +912,10 @@ void Sprite::setSpriteFrame(const std::string &spriteFrameName)
     SpriteFrame *spriteFrame = cache->getSpriteFrameByName(spriteFrameName);
 
     CCASSERT(spriteFrame, std::string("Invalid spriteFrameName :").append(spriteFrameName).c_str());
-
-    setSpriteFrame(spriteFrame);
+    
+    if (spriteFrame != nullptr) {
+        setSpriteFrame(spriteFrame);
+    }
 }
 
 void Sprite::setSpriteFrame(SpriteFrame *spriteFrame)
@@ -939,6 +923,14 @@ void Sprite::setSpriteFrame(SpriteFrame *spriteFrame)
     _unflippedOffsetPositionFromCenter = spriteFrame->getOffset();
 
     Texture2D *texture = spriteFrame->getTexture();
+    
+    CCASSERT(texture, std::string("SpriteFrame:setSpriteFrame Invalid texture ").c_str());
+    
+    if (texture == nullptr) {
+        CCLOG("Sprite:setSpriteFrame texture is null!");
+        return;
+    }
+    
     // update texture before updating texture rect
     if (texture != _texture)
     {

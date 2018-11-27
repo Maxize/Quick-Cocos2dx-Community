@@ -548,6 +548,7 @@ function transition.playAnimationOnce(target, animation, removeWhenFinished, onC
         actions[#actions + 1] = cc.Show:create()
     end
 
+    assert(animation, "transition.playAnimationOnce animation need not nil")
     actions[#actions + 1] = cc.Animate:create(animation)
 
     if removeWhenFinished then
@@ -593,6 +594,7 @@ sprite:playAnimationForever(animation)
 -- end --
 
 function transition.playAnimationForever(target, animation, delay)
+    assert(animation, "transition.playAnimationForever animation need not nil")
     local animate = cc.Animate:create(animation)
     local action
     if type(delay) == "number" and delay > 0 then

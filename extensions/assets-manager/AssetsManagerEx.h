@@ -1,18 +1,18 @@
 /****************************************************************************
  Copyright (c) 2013 cocos2d-x.org
- 
+
  http://www.cocos2d-x.org
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -46,10 +46,10 @@ NS_CC_EXT_BEGIN
 class CC_EX_DLL AssetsManagerEx : public Ref
 {
 public:
-    
+
     friend class Downloader;
     friend int downloadProgressFunc(Downloader::ProgressData *ptr, double totalToDownload, double nowDownloaded, double totalToUpLoad, double nowUpLoaded);
-    
+
     //! Update states
     enum class State
     {
@@ -62,14 +62,14 @@ public:
         MANIFEST_LOADED,
         NEED_UPDATE,
         UPDATING,
+        UNZIPPING,
         UP_TO_DATE,
         FAIL_TO_UPDATE
     };
-    
+
     const static std::string VERSION_ID;
     const static std::string MANIFEST_ID;
-    const static std::string BATCH_UPDATE_ID;
-    
+
     /** @brief Create function for creating a new AssetsManagerEx
      @param manifestUrl   The url for the local manifest file
      @param storagePath   The storage path for downloaded assetes
@@ -77,61 +77,90 @@ public:
                 only if it doesn't exist, AssetsManagerEx will use the given manifestUrl.
      */
     static AssetsManagerEx* create(const std::string &manifestUrl, const std::string &storagePath);
-    
+
     /** @brief  Check out if there is a new version of manifest.
      *          You may use this method before updating, then let user determine whether
      *          he wants to update resources.
      */
     void checkUpdate();
-    
+
     /** @brief Update with the current local manifest.
      */
     void update();
-    
+
     /** @brief Reupdate all failed assets under the current AssetsManagerEx context
      */
     void downloadFailedAssets();
-    
+
     /** @brief Gets the current update state.
      */
     State getState() const;
-    
+
     /** @brief Gets storage path.
      */
     const std::string& getStoragePath() const;
-    
+
     /** @brief Function for retrieve the local manifest object
      */
     const Manifest* getLocalManifest() const;
-    
+
     /** @brief Function for retrieve the remote manifest object
      */
     const Manifest* getRemoteManifest() const;
-    
+
+    /** @brief Function for retrieving the max concurrent task count
+     */
+    const int getMaxConcurrentTask() const {return _maxConcurrentTask;};
+
+    /** @brief Function for setting the max concurrent task count
+     */
+    void setMaxConcurrentTask(const int max) {_maxConcurrentTask = max;};
+
+    /** @brief Set the handle function for comparing manifests versions
+     * @param handle    The compare function
+     */
+    void setVersionCompareHandle(const std::function<int(const std::string& versionA, const std::string& versionB)>& handle) {_versionCompareHandle = handle;};
+
+    /** @brief Set the verification function for checking whether downloaded asset is correct, e.g. using md5 verification
+     * @param callback  The verify callback function
+     */
+    void setVerifyCallback(const std::function<bool(const std::string& path, Manifest::Asset asset)>& callback) {_verifyCallback = callback;};
+
+    /**
+     * @brief cancel the request
+     */
+    void cancel();
+
+    /**
+     * @brief set the download thread is single
+     */
+    void singleThread();
+
+
 CC_CONSTRUCTOR_ACCESS:
-    
+
     AssetsManagerEx(const std::string& manifestUrl, const std::string& storagePath);
-    
+
     virtual ~AssetsManagerEx();
-    
+
 protected:
-    
+
     std::string basename(const std::string& path) const;
-    
+
     std::string get(const std::string& key) const;
-    
+
     void initManifests(const std::string& manifestUrl);
-    
+
     void loadLocalManifest(const std::string& manifestUrl);
-    
+
     void prepareLocalManifest();
-    
+
     void setStoragePath(const std::string& storagePath);
-    
+
     void adjustPath(std::string &path);
-    
+
     void dispatchUpdateEvent(EventAssetsManagerEx::EventCode code, const std::string &message = "", const std::string &assetId = "", int curle_code = 0, int curlm_code = 0);
-    
+
     void downloadVersion();
     void parseVersion();
     void downloadManifest();
@@ -139,20 +168,28 @@ protected:
     void startUpdate();
     void updateSucceed();
     bool decompress(const std::string &filename);
-    void decompressDownloadedZip();
-    
+    void decompressDownloadedZip(const std::string &customId, const std::string &storagePath);
+
     /** @brief Update a list of assets under the current AssetsManagerEx context
      */
     void updateAssets(const Downloader::DownloadUnits& assets);
-    
+
     /** @brief Retrieve all failed assets during the last update
      */
     const Downloader::DownloadUnits& getFailedAssets() const;
-    
+
     /** @brief Function for destorying the downloaded version file and manifest file
      */
     void destroyDownloadedVersion();
-    
+
+    /** @brief Download items in queue with max concurrency setting
+     */
+    void queueDowload();
+
+    void fileError(const std::string& identifier, const std::string& errorStr, int errorCode = 0, int errorCodeInternal = 0);
+
+    void fileSuccess(const std::string &customId, const std::string &storagePath);
+
     /** @brief  Call back function for error handling,
      the error will then be reported to user's listener registed in addUpdateEventListener
      @param error   The error object contains ErrorCode, message, asset url, asset key
@@ -161,7 +198,7 @@ protected:
      * @lua NA
      */
     virtual void onError(const Downloader::Error &error);
-    
+
     /** @brief  Call back function for recording downloading percent of the current asset,
      the progression will then be reported to user's listener registed in addUpdateProgressEventListener
      @param total       Total size to download for this asset
@@ -173,7 +210,7 @@ protected:
      * @lua NA
      */
     virtual void onProgress(double total, double downloaded, const std::string &url, const std::string &customId);
-    
+
     /** @brief  Call back function for success of the current asset
      the success event will then be send to user's listener registed in addUpdateEventListener
      @param srcUrl      The url of this asset
@@ -183,87 +220,129 @@ protected:
      * @lua NA
      */
     virtual void onSuccess(const std::string &srcUrl, const std::string &storagePath, const std::string &customId);
-    
+
 private:
-    
+    void batchDownload();
+
+    // Called when one DownloadUnits finished
+    void onDownloadUnitsFinished();
     //! The event of the current AssetsManagerEx in event dispatcher
     std::string _eventName;
-    
+
     //! Reference to the global event dispatcher
     EventDispatcher *_eventDispatcher;
     //! Reference to the global file utils
     FileUtils *_fileUtils;
-    
+
     //! State of update
     State _updateState;
-    
+
     //! Downloader
     std::shared_ptr<Downloader> _downloader;
-    
+
     //! The reference to the local assets
     const std::unordered_map<std::string, Manifest::Asset> *_assets;
-    
-    //! The path to store downloaded resources.
+
+    //! The path to store successfully downloaded version.
     std::string _storagePath;
-    
-    //! The local path of cached version file
-    std::string _cacheVersionPath;
-    
+
+    //! The path to store downloading version.
+    std::string _tempStoragePath;
+
+    //! The local path of cached temporary version file
+    std::string _tempVersionPath;
+
     //! The local path of cached manifest file
     std::string _cacheManifestPath;
-    
+
     //! The local path of cached temporary manifest file
     std::string _tempManifestPath;
-    
+
     //! The path of local manifest file
     std::string _manifestUrl;
-    
+
     //! Local manifest
     Manifest *_localManifest;
-    
+
     //! Local temporary manifest for download resuming
     Manifest *_tempManifest;
-    
+
     //! Remote manifest
     Manifest *_remoteManifest;
-    
+
     //! Whether user have requested to update
-    bool _waitToUpdate;
-    
+    enum class UpdateEntry : char
+    {
+        NONE,
+        CHECK_UPDATE,
+        DO_UPDATE
+    };
+
+    UpdateEntry _updateEntry;
+
     //! All assets unit to download
     Downloader::DownloadUnits _downloadUnits;
-    
+
     //! All failed units
     Downloader::DownloadUnits _failedUnits;
-    
-    //! All files to be decompressed
-    std::vector<std::string> _compressedFiles;
-    
+
+    //! Download queue
+    std::vector<std::string> _queue;
+
+    //! Max concurrent task count for downloading
+    int _maxConcurrentTask;
+
+    //! Current concurrent task count
+    int _currConcurrentTask;
+
     //! Download percent
     float _percent;
-    
+
     //! Download percent by file
     float _percentByFile;
-    
+
     //! Indicate whether the total size should be enabled
     int _totalEnabled;
-    
+
     //! Indicate the number of file whose total size have been collected
     int _sizeCollected;
-    
+
     //! Total file size need to be downloaded (sum of all file)
     double _totalSize;
-    
+
     //! Downloaded size for each file
     std::unordered_map<std::string, double> _downloadedSize;
-    
+
     //! Total number of assets to download
     int _totalToDownload;
     //! Total number of assets still waiting to be downloaded
     int _totalWaitToDownload;
-    
+    //! Next target percent for saving the manifest file
+    float _nextSavePoint;
+
+    //! Handle function to compare versions between different manifests
+    std::function<int(const std::string& versionA, const std::string& versionB)> _versionCompareHandle;
+
+    //! Callback function to verify the downloaded assets
+    std::function<bool(const std::string& path, Manifest::Asset asset)> _verifyCallback;
+
     //! Marker for whether the assets manager is inited
     bool _inited;
+
+    //! download state like 1:10:100:1024 downloadedFile:totalFiles:downloadedSize:totalSize
+    std::string _downloadState;
+
+    //! Total downloaded file size
+    double _hasDownloadSize;
+
+    //! Marker for whether the assets manager is canceled
+    bool _isCanceled;
+
+    //! the download index
+    int _downloadIndex;
+
+    //! Marker for whether the download thread is single
+    bool _isSingleThread;
 };
 
 NS_CC_EXT_END

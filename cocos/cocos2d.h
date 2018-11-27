@@ -42,6 +42,7 @@ THE SOFTWARE.
 #include "base/CCRefPtr.h"
 #include "base/CCVector.h"
 #include "base/CCMap.h"
+#include "base/CCAsyncTaskPool.h"
 #include "base/CCAutoreleasePool.h"
 #include "base/CCNS.h"
 #include "base/CCData.h"
