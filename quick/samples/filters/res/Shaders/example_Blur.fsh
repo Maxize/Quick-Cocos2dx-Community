@@ -23,12 +23,12 @@ vec3 blur(vec2 p)
     {
         vec3 col = vec3(0);
         vec2 unit = 1.0 / resolution.xy;
-
+        
         float r = blurRadius;
         float sampleStep = r / sampleNum;
-
+        
         float count = 0.0;
-
+        
         for(float x = -r; x < r; x += sampleStep)
         {
             for(float y = -r; y < r; y += sampleStep)
@@ -38,9 +38,9 @@ vec3 blur(vec2 p)
                 count += weight;
             }
         }
-
+        
         return col / count;
     }
-
+    
     return texture2D(CC_Texture0, p).rgb;
 }

@@ -427,8 +427,12 @@ int register_all_quick_manual(lua_State* tolua_S)
     extendFunctions(tolua_S);
     extendNode(tolua_S);
 
-    CCLOG("Quick-Cocos2dx-Community C++ support ready.");
-    
+#if _ARM64_>=1
+    CCLOG("Quick-Cocos2dx-Community C++ support ready. ARM64, g++ Version: %s, compile at %s %s", __VERSION__, __TIME__, __DATE__);
+#else
+	CCLOG("Quick-Cocos2dx-Community C++ support ready. x86, g++ Version: %s, compile at %s %s", __VERSION__, __TIME__, __DATE__);
+#endif
+
     return 0;
 }
 

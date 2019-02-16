@@ -178,6 +178,11 @@ public:
      * @js NA
      */
     static bool isXMLFileExist();
+    /**
+    * custom func 
+    * check the xml file is availd, if no delete it and return false, else return true.
+    */
+    static bool checkAvaildXmlFile();
 
 private:
     UserDefault();

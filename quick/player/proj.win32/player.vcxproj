@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,13 +19,19 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -62,7 +68,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(EngineRoot)external\lua\luajit\include;$(ProjectDir)..\Classes;$(ProjectDir)..\..\lib\quick-src;$(ProjectDir)..\..\lib\quick-src\extra;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot);$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\glfw3\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot)external\lua\luajit\include;$(ProjectDir)..\Classes;$(ProjectDir)..\..\lib\quick-src;$(ProjectDir)..\..\lib\quick-src\extra;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot);$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\glfw3\include\win32;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\Library;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\Library\Sources;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\Library\Sources\Shaders;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\Library\Sources\ShadersPrecompiled;$(ProjectDir)..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -71,7 +77,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_UNQLITE=1;CC_USE_PROTOBUF=1;CC_USE_SPROTO=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -128,7 +134,7 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
       <ExceptionHandling>
       </ExceptionHandling>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_UNQLITE=1;CC_USE_PROTOBUF=1;CC_USE_SPROTO=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;CC_USE_JSON=1;CC_USE_SQLITE=1;CC_USE_CURL=1;CC_LUA_ENGINE_ENABLED=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;USE_WIN32_CONSOLE=1;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -185,18 +191,59 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg_gl_utils.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_image.h" />
     <ClInclude Include="..\..\lib\quick-src\extra\nanovg\nanovg\stb_truetype.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcap.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcode.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpprint.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lptree.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lptypes.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\lpeg\lpvm.h" />
     <ClInclude Include="..\..\lib\quick-src\lua_extensions\protobuf\pb.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\sproto\msvcint.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\sproto\sproto.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\unqlite\lunqlite.h" />
-    <ClInclude Include="..\..\lib\quick-src\lua_extensions\unqlite\unqlite.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\DefinitionTagBase.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAF.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAnimationFrame.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAnimationSequence.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAsset.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAssetTextureManager.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFCachedTexture.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFCollections.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFDelegates.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFile.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFilterData.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFilterManager.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFHeader.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFLoader.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMacros.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMask.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMovieClip.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFObject.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFPrecompiled.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFQuadCommand.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFResourcesInfo.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFShaderManager.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSoundInfo.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSprite.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFStream.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSubobjectState.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextData.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextField.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextureAtlas.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextureAtlasElement.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTimeline.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTimelineAction.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAF_JS.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAF_LUA.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\PrimitiveDeserializer.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\ShadersPrecompiled\GAFPrecompiledShaders.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationFrames.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationFrames2.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationMasks.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationObjects.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAtlas.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAtlas3.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineNamedParts.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefines.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineSequences.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineSounds.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineStage.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineTextField.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineTimeline.h" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings\lua_gaf.hpp" />
+    <ClInclude Include="..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings\lua_gaf_main.hpp" />
     <ClInclude Include="..\Classes\PlayerEditBoxServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerFileDialogServiceProtocol.h" />
     <ClInclude Include="..\Classes\PlayerLuaCore.h" />
@@ -300,79 +347,47 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGDrawNode.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanonode\NVGNode.cpp" />
     <ClCompile Include="..\..\lib\quick-src\extra\nanovg\nanovg\nanovg.c" />
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcap.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpcode.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpprint.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lptree.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\lpeg\lpvm.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\sproto\lsproto.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\sproto\sproto.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\unqlite\lunqlite.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\quick-src\lua_extensions\unqlite\unqlite.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAnimationFrame.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAnimationSequence.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAsset.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFAssetTextureManager.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFCachedTexture.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFile.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFilterData.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFFilterManager.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFLoader.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMask.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFMovieClip.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFObject.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFPrecompiled.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFQuadCommand.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFShaderManager.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSoundInfo.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSprite.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFStream.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFSubobjectState.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextData.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextField.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextureAtlas.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTextureAtlasElement.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTimeline.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFTimelineAction.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\PrimitiveDeserializer.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationFrames.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationFrames2.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationMasks.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAnimationObjects.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAtlas.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineAtlas3.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineNamedParts.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineSequences.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineSounds.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineStage.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineTextField.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\TagDefineTimeline.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings\lua_gaf.cpp" />
+    <ClCompile Include="..\Classes\Cocos2dxGAFPlayer\lua_bindings\bindings\lua_gaf_main.cpp" />
     <ClCompile Include="..\Classes\PlayerLuaCore.cpp" />
     <ClCompile Include="..\Classes\PlayerLuaCoreManual.cpp" />
     <ClCompile Include="..\Classes\PlayerMenuServiceProtocol.cpp" />
@@ -526,6 +541,14 @@ xcopy /Y /Q "$(TargetPath)" "$(ProjectDir)..\win32\"</Command>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="player3.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\Doxyfile" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\GAFPlayer-Prefix.pch" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\mainpage.dox" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\Shaders\GaussianBlurFragmentShader.frag" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\Shaders\GlowFragmentShader.frag" />
+    <None Include="..\Classes\Cocos2dxGAFPlayer\Library\Sources\Shaders\pcShader_PositionTextureAlpha_frag.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

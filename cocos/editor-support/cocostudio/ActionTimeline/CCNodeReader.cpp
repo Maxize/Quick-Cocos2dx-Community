@@ -194,7 +194,7 @@ Node* NodeReader::loadNodeWithContent(const std::string& content)
     doc.Parse<0>(content.c_str());
     if (doc.HasParseError()) 
     {
-        CCLOG("GetParseError %s\n", doc.GetParseError());
+        CCLOG("GetParseError %d\n", doc.GetParseError());
     }
 
     // decode plist 

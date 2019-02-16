@@ -196,9 +196,6 @@ public:
      * Get whether GL_SCISSOR_TEST is enable
      */
     virtual bool isScissorEnabled();
-    
-    void setRenderTextureMode(bool mode) {_isRenderTextureMode = mode;};
-    bool getRenderTextureMode(void) {return _isRenderTextureMode;};
 
     /**
      * Get the current scissor rectangle
@@ -262,7 +259,6 @@ protected:
     float _scaleX;
     float _scaleY;
     ResolutionPolicy _resolutionPolicy;
-    bool _isRenderTextureMode;
 };
 
 // end of platform group

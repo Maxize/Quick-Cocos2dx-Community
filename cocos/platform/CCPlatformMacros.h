@@ -264,7 +264,8 @@ public: virtual void set##funName(varType var)   \
  * only certain compilers support __attribute__((deprecated))
  */
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
-    #define CC_DEPRECATED_ATTRIBUTE __attribute__((deprecated))
+	#define CC_DEPRECATED_ATTRIBUTE
+    //#define CC_DEPRECATED_ATTRIBUTE __attribute__((deprecated))//对于官方不建议调用的接口，会在编译时报警，去掉编译警告
 #elif _MSC_VER >= 1400 //vs 2005 or higher
     #define CC_DEPRECATED_ATTRIBUTE __declspec(deprecated) 
 #else

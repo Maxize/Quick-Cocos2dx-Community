@@ -724,6 +724,9 @@ function UIListView:increaseOrReduceItem_()
 	end
 
 	local count = self.delegate_[UIListView.DELEGATE](self, UIListView.COUNT_TAG)
+	if not count then
+		return;
+	end
 	local nNeedAdjust = 2 --作为是否还需要再增加或减少item的标志,2表示上下两个方向或左右都需要调整
 	local cascadeBound = getContainerCascadeBoundingBox()
 	local localPos = self:convertToNodeSpace(cc.p(cascadeBound.x, cascadeBound.y))

@@ -105,10 +105,7 @@ local CURRENT_MODULE_NAME = ...
 
 cc = cc or {}
 cc.PACKAGE_NAME = string.sub(CURRENT_MODULE_NAME, 1, -6)
-print("--------------- +++++++++++++++++++++++ ----------------")
-print(CURRENT_MODULE_NAME)
-print(cc.PACKAGE_NAME)
-print("--------------- +++++++++++++++++++++++ ----------------")
+
 if cc.Node.removeTouchEvent then
     cc.bPlugin_ = true
 end

@@ -72,7 +72,7 @@ function MainScene:_addUI()
 		:align(display.RIGHT_BOTTOM, display.width, display.bottom)
 		:addTo(self, 0)
 		:onButtonClicked(handler(self, self._onClose))
-
+	
 	self._prevBtn = cc.ui.UIPushButton.new({normal="b1.png",pressed="b2.png"})
 		:align(display.BOTTOM_CENTER, display.cx-100, display.bottom)
 		:addTo(self, 0)

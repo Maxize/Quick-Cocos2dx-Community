@@ -241,6 +241,9 @@
     <Filter Include="external\xxtea">
       <UniqueIdentifier>{06127459-97a1-496c-84aa-7921b5792ddd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external\tinydir">
+      <UniqueIdentifier>{ea791c56-5f99-4a25-9c9d-9cb5dc05d77d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\physics\CCPhysicsBody.cpp">
@@ -829,6 +832,9 @@
     <ClCompile Include="..\network\HttpClient.cpp">
       <Filter>network\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\network\SocketIO.cpp">
+      <Filter>network\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\network\WebSocket.cpp">
       <Filter>network\Source Files</Filter>
     </ClCompile>
@@ -1291,6 +1297,12 @@
     </ClCompile>
     <ClCompile Include="..\..\external\xxtea\xxtea.cpp">
       <Filter>external\xxtea</Filter>
+    </ClCompile>
+    <ClCompile Include="..\platform\win32\CCUtils-win32.cpp">
+      <Filter>platform\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\CCAsyncTaskPool.cpp">
+      <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1973,6 +1985,9 @@
     <ClInclude Include="..\network\HttpResponse.h">
       <Filter>network\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\network\SocketIO.h">
+      <Filter>network\Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\network\WebSocket.h">
       <Filter>network\Header Files</Filter>
     </ClInclude>
@@ -2495,6 +2510,15 @@
     </ClInclude>
     <ClInclude Include="..\..\external\xxtea\xxtea.h">
       <Filter>external\xxtea</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\external\tinydir\tinydir.h">
+      <Filter>external\tinydir</Filter>
+    </ClInclude>
+    <ClInclude Include="..\platform\win32\CCUtils-win32.h">
+      <Filter>platform\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\CCAsyncTaskPool.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

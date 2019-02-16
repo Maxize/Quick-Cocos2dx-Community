@@ -912,7 +912,7 @@ y+=ytranslate;         \
         //
         // draw children and protectedChildren zOrder < 0
         //
-        for(auto size = _children.size(); i < size; i++)
+        for( ; i < _children.size(); i++ )
         {
             auto node = _children.at(i);
             
@@ -924,7 +924,7 @@ y+=ytranslate;         \
         
         if (_scale9Enabled)
         {
-            for(auto size = _protectedChildren.size(); j < size; j++ )
+            for( ; j < _protectedChildren.size(); j++ )
             {
                 auto node = _protectedChildren.at(j);
                 
@@ -965,7 +965,7 @@ y+=ytranslate;         \
         }
         
         
-        for(auto it=_children.cbegin()+i, itCend = _children.cend(); it != itCend; ++it)
+        for(auto it=_children.cbegin()+i; it != _children.cend(); ++it)
             (*it)->visit(renderer, _modelViewTransform, flags);
         
         // FIX ME: Why need to set _orderOfArrival to 0??

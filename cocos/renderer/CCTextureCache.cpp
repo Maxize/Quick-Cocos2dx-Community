@@ -81,13 +81,13 @@ void TextureCache::destroyInstance()
 {
 }
 
-TextureCache * TextureCache::sharedTextureCache()
+TextureCache * TextureCache::sharedTextureCache() 
 {
     return Director::getInstance()->getTextureCache();
 }
 
-void TextureCache::purgeSharedTextureCache()
-{
+void TextureCache::purgeSharedTextureCache() 
+{ 
 }
 
 std::string TextureCache::getDescription() const
@@ -113,9 +113,9 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
 
     // lazy init
     if (_asyncStructQueue == nullptr)
-    {
+    {             
         _asyncStructQueue = new queue<AsyncStruct*>();
-        _imageInfoQueue   = new deque<ImageInfo*>();
+        _imageInfoQueue   = new deque<ImageInfo*>();        
 
         // create a new thread to load images
         _loadingThread = new std::thread(&TextureCache::loadImage, this);
@@ -131,7 +131,7 @@ void TextureCache::addImageAsync(const std::string &path, const std::function<vo
     ++_asyncRefCount;
 
     // generate async struct
-    AsyncStruct *data = new (std::nothrow) AsyncStruct(fullpath, callback, Texture2D::getDefaultAlphaPixelFormat());
+    AsyncStruct *data = new (std::nothrow) AsyncStruct(fullpath, callback);
 
     // add async struct into queue
     _asyncStructQueueMutex.lock();
@@ -191,7 +191,7 @@ void TextureCache::loadImage()
             asyncStruct = pQueue->front();
             pQueue->pop();
             _asyncStructQueueMutex.unlock();
-        }
+        }        
 
         Image *image = nullptr;
         bool generateImage = false;
@@ -217,7 +217,7 @@ void TextureCache::loadImage()
         if (generateImage)
         {
             const std::string& filename = asyncStruct->filename;
-            // generate image
+            // generate image      
             image = new (std::nothrow) Image();
             if (image && !image->initWithImageFileThreadSafe(filename))
             {
@@ -225,7 +225,7 @@ void TextureCache::loadImage()
                 CCLOG("can not load %s", filename.c_str());
                 continue;
             }
-        }
+        }    
 
         // generate image info
         ImageInfo *imageInfo = new (std::nothrow) ImageInfo();
@@ -237,7 +237,7 @@ void TextureCache::loadImage()
         _imageInfoQueue->push_back(imageInfo);
         _imageInfoMutex.unlock();
     }
-
+    
 	if(_asyncStructQueue != nullptr)
     {
         delete _asyncStructQueue;
@@ -274,7 +274,7 @@ void TextureCache::addImageAsyncCallBack(float dt)
             // generate texture in render thread
             texture = new (std::nothrow) Texture2D();
 
-            texture->initWithImage(image, asyncStruct->pixelFormat);
+            texture->initWithImage(image);
 
 #if CC_ENABLE_CACHE_TEXTURE_DATA
             // cache the texture file name
@@ -292,16 +292,16 @@ void TextureCache::addImageAsyncCallBack(float dt)
             if(it != _textures.end())
                 texture = it->second;
         }
-
+        
         if (asyncStruct->callback)
         {
             asyncStruct->callback(texture);
         }
-
+        
         if(image)
         {
             image->release();
-        }
+        }       
         delete asyncStruct;
         delete imageInfo;
 
@@ -333,7 +333,7 @@ Texture2D * TextureCache::addImage(const std::string &path)
     if (! texture)
     {
         // all images are handled by UIImage except PVR extension that is handled by our own handler
-        do
+        do 
         {
             image = new (std::nothrow) Image();
             CC_BREAK_IF(nullptr == image);
@@ -396,11 +396,11 @@ Texture2D* TextureCache::addImage(Image *image, const std::string &key)
         }
 
     } while (0);
-
+    
 #if CC_ENABLE_CACHE_TEXTURE_DATA
     VolatileTextureMgr::addImage(texture, image);
 #endif
-
+    
     return texture;
 }
 
@@ -433,11 +433,11 @@ bool TextureCache::reloadTexture(const std::string& fileName)
 
             bool bRet = image->initWithImageFile(fullpath);
             CC_BREAK_IF(!bRet);
-
+            
             ret = texture->initWithImage(image);
         } while (0);
     }
-
+    
     CC_SAFE_RELEASE(image);
 
     return ret;
@@ -560,7 +560,7 @@ std::string TextureCache::getCachedTextureInfo() const
                (long)tex->getPixelsHigh(),
                (long)bpp,
                (long)bytes / 1024);
-
+        
         buffer += buftmp;
     }
 
@@ -631,13 +631,13 @@ VolatileTexture* VolatileTextureMgr::findVolotileTexture(Texture2D *tt)
             break;
         }
     }
-
+    
     if (! vt)
     {
         vt = new (std::nothrow) VolatileTexture(tt);
         _textures.push_back(vt);
     }
-
+    
     return vt;
 }
 
@@ -691,13 +691,13 @@ void VolatileTextureMgr::setTexParameters(Texture2D *t, const Texture2D::TexPara
         vt->_texParams.wrapT = texParams.wrapT;
 }
 
-void VolatileTextureMgr::removeTexture(Texture2D *t)
+void VolatileTextureMgr::removeTexture(Texture2D *t) 
 {
     auto i = _textures.begin();
     while (i != _textures.end())
     {
         VolatileTexture *vt = *i++;
-        if (vt->_texture == t)
+        if (vt->_texture == t) 
         {
             _textures.remove(vt);
             delete vt;
@@ -728,14 +728,17 @@ void VolatileTextureMgr::reloadAllTextures()
         case VolatileTexture::kImageFile:
             {
                 Image* image = new (std::nothrow) Image();
-
+                
                 Data data = FileUtils::getInstance()->getDataFromFile(vt->_fileName);
-
+                
                 if (image && image->initWithImageData(data.getBytes(), data.getSize()))
                 {
-                    vt->_texture->initWithImage(image, vt->_pixelFormat);
+                    Texture2D::PixelFormat oldPixelFormat = Texture2D::getDefaultAlphaPixelFormat();
+                    Texture2D::setDefaultAlphaPixelFormat(vt->_pixelFormat);
+                    vt->_texture->initWithImage(image);
+                    Texture2D::setDefaultAlphaPixelFormat(oldPixelFormat);
                 }
-
+                
                 CC_SAFE_RELEASE(image);
             }
             break;
@@ -743,9 +746,9 @@ void VolatileTextureMgr::reloadAllTextures()
             {
                 vt->_texture->initWithData(vt->_textureData,
                                            vt->_dataLen,
-                                          vt->_pixelFormat,
-                                          vt->_textureSize.width,
-                                          vt->_textureSize.height,
+                                          vt->_pixelFormat, 
+                                          vt->_textureSize.width, 
+                                          vt->_textureSize.height, 
                                           vt->_textureSize);
             }
             break;

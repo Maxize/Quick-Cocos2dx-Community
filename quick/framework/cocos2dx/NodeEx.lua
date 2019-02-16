@@ -398,7 +398,8 @@ function Node:EventDispatcher( idx, data )
         local code = data[1]
         -- local evt = data[2]
         local ename = data[3]
-        event = { code=code, key=KeypadEventCodeConvert(code), type=ename }
+        if ename~='Released' then return true end
+        event = { code=code, key=KeypadEventCodeConvert(code), }
     else
         event = data
         -- dump(event)
@@ -500,7 +501,7 @@ function Node:copyClonedWidgetChildren_(node)
         if cloneChild then
             self:addChild(cloneChild)
         end
-		if child.name and self.subChildren then
+		if child.name then
             self.subChildren[child.name] = cloneChild
         end
     end

@@ -45,7 +45,6 @@ function Sprite:setSpriteFrame(sprite)
         if (spriteFrame) then
             setSpriteFrame_(self, spriteFrame)
         else
-            dump(debug.traceback())
             assert(spriteFrame, "Sprite:setSpriteFrame can't find spriteFrame " .. sprite)
         end
     else

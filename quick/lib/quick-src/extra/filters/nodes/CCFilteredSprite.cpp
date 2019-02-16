@@ -32,9 +32,8 @@ NS_CC_EXT_BEGIN
 //================== FilteredSprite
 
 FilteredSprite::FilteredSprite()
-: _pFilters(NULL)
 {
-
+	_pFilters.clear();
 }
 
 FilteredSprite::~FilteredSprite()

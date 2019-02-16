@@ -399,16 +399,6 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
     glfwWindowHint(GLFW_DEPTH_BITS,_glContextAttrs.depthBits);
     glfwWindowHint(GLFW_STENCIL_BITS,_glContextAttrs.stencilBits);
 
-    // bugfix: change windows size with Monitor size, make win32 touch event happy.
-    GLFWmonitor* pMonitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode * mode = glfwGetVideoMode(pMonitor);
-    float scale = MIN((mode->width - 120) / rect.size.width, (mode->height - 120) / rect.size.height);
-    if (scale >= 1.0) {
-        scale = 1.0;
-    }
-    rect.size.width = scale * rect.size.width;
-    rect.size.height = scale * rect.size.height;
-    
     _mainWindow = glfwCreateWindow(rect.size.width * _frameZoomFactor,
                                    rect.size.height * _frameZoomFactor,
                                    _viewName.c_str(),
@@ -605,14 +595,10 @@ void GLViewImpl::setViewPortInPoints(float x , float y , float w , float h)
 
 void GLViewImpl::setScissorInPoints(float x , float y , float w , float h)
 {
-    if (_isRenderTextureMode) {
-        glScissor(x, y, w, h);
-        return;
-    }
     glScissor((GLint)(x * _scaleX * _retinaFactor * _frameZoomFactor + _viewPortRect.origin.x * _retinaFactor * _frameZoomFactor),
-              (GLint)(y * _scaleY * _retinaFactor  * _frameZoomFactor + _viewPortRect.origin.y * _retinaFactor * _frameZoomFactor),
-              (GLsizei)(w * _scaleX * _retinaFactor * _frameZoomFactor),
-              (GLsizei)(h * _scaleY * _retinaFactor * _frameZoomFactor));
+               (GLint)(y * _scaleY * _retinaFactor  * _frameZoomFactor + _viewPortRect.origin.y * _retinaFactor * _frameZoomFactor),
+               (GLsizei)(w * _scaleX * _retinaFactor * _frameZoomFactor),
+               (GLsizei)(h * _scaleY * _retinaFactor * _frameZoomFactor));
 }
 
 void GLViewImpl::onGLFWError(int errorID, const char* errorDesc)

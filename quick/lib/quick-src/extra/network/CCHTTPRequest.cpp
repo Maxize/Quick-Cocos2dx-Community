@@ -78,9 +78,9 @@ bool HTTPRequest::initWithUrl(const char *url, int method)
 	{
 		curl_easy_setopt(m_curl, CURLOPT_CUSTOMREQUEST, "DELETE");
 	}
-
+    
     ++s_id;
-    CCLOG("HTTPRequest[0x%04x] - create request with url: %s", s_id, url);
+    // CCLOG("HTTPRequest[0x%04x] - create request with url: %s", s_id, url);
     return true;
 }
 
@@ -103,7 +103,6 @@ void HTTPRequest::setRequestUrl(const char *url)
 
 const string HTTPRequest::getRequestUrl(void)
 {
-    CCLOG("HTTPRequest:getRequestUrl");
     return m_url;
 }
 
@@ -191,11 +190,11 @@ void HTTPRequest::setAcceptEncoding(int acceptEncoding)
         case kCCHTTPRequestAcceptEncodingGzip:
             curl_easy_setopt(m_curl, CURLOPT_ACCEPT_ENCODING, "gzip");
             break;
-
+            
         case kCCHTTPRequestAcceptEncodingDeflate:
             curl_easy_setopt(m_curl, CURLOPT_ACCEPT_ENCODING, "deflate");
             break;
-
+            
         default:
             curl_easy_setopt(m_curl, CURLOPT_ACCEPT_ENCODING, "identity");
     }
@@ -241,7 +240,7 @@ bool HTTPRequest::start(void)
     pthread_detach(m_thread);
 #endif
 
-
+    
     Director::getInstance()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
     // CCLOG("HTTPRequest[0x%04x] - request start", s_id);
     return true;
@@ -317,10 +316,10 @@ int HTTPRequest::getResponseDataLength(void)
 size_t HTTPRequest::saveResponseData(const char *filename)
 {
     CCAssert(m_state == kCCHTTPRequestStateCompleted, "HTTPRequest::saveResponseData() - request not completed");
-
+    
     FILE *fp = fopen(filename, "wb");
     CCAssert(fp, "HTTPRequest::saveResponseData() - open file failure");
-
+    
     size_t writedBytes = m_responseDataLength;
     if (writedBytes > 0)
     {
@@ -363,12 +362,12 @@ void HTTPRequest::update(float dt)
         if (m_listener)
         {
             LuaValueDict dict;
-
+            
             dict["name"] = LuaValue::stringValue("progress");
             dict["total"] = LuaValue::intValue((int)m_dltotal);
             dict["dltotal"] = LuaValue::intValue((int)m_dlnow);
             dict["request"] = LuaValue::ccobjectValue(this, "HTTPRequest");
-
+            
             LuaStack *stack = LuaEngine::getInstance()->getLuaStack();
             stack->clean();
             stack->pushLuaValueDict(dict);
@@ -377,7 +376,7 @@ void HTTPRequest::update(float dt)
 #endif
         return;
     }
-
+    
     Director::getInstance()->getScheduler()->unscheduleAllForTarget(this);
     if (m_curlState != kCCHTTPRequestCURLStateIdle)
     {
@@ -405,15 +404,15 @@ void HTTPRequest::update(float dt)
             case kCCHTTPRequestStateCompleted:
                 dict["name"] = LuaValue::stringValue("completed");
                 break;
-
+                
             case kCCHTTPRequestStateCancelled:
                 dict["name"] = LuaValue::stringValue("cancelled");
                 break;
-
+                
             case kCCHTTPRequestStateFailed:
                 dict["name"] = LuaValue::stringValue("failed");
                 break;
-
+                
             default:
                 dict["name"] = LuaValue::stringValue("unknown");
         }
@@ -440,11 +439,11 @@ void HTTPRequest::onRequest(void)
             buf.sputn(part, strlen(part));
             buf.sputc('=');
             curl_free(part);
-
+            
             part = curl_easy_escape(m_curl, it->second.c_str(), 0);
             buf.sputn(part, strlen(part));
             curl_free(part);
-
+            
             buf.sputc('&');
         }
         curl_easy_setopt(m_curl, CURLOPT_COPYPOSTFIELDS, buf.str().c_str());
@@ -490,7 +489,7 @@ void HTTPRequest::onRequest(void)
 		m_formPost = NULL;
 	}
     curl_slist_free_all(chunk);
-
+    
     m_errorCode = code;
     m_errorMessage = (code == CURLE_OK) ? "" : curl_easy_strerror(code);
     m_state = (code == CURLE_OK) ? kCCHTTPRequestStateCompleted : kCCHTTPRequestStateFailed;
@@ -515,7 +514,7 @@ size_t HTTPRequest::onWriteHeader(void *buffer, size_t bytes)
 {
     char *headerBuffer = new char[bytes + 1];
     headerBuffer[bytes] = 0;
-    memcpy(headerBuffer, buffer, bytes);
+    memcpy(headerBuffer, buffer, bytes);    
     m_responseHeaders.push_back(string(headerBuffer));
     delete []headerBuffer;
     return bytes;
@@ -527,7 +526,7 @@ int HTTPRequest::onProgress(double dltotal, double dlnow, double ultotal, double
     m_dlnow = dlnow;
     m_ultotal = ultotal;
     m_ulnow = ulnow;
-
+    
     return m_state == kCCHTTPRequestStateCancelled ? 1: 0;
 }
 

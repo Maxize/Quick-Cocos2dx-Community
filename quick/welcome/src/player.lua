@@ -173,6 +173,8 @@ function player:buildUI()
         {title = "Android",          w=600,h=1024},
         {title = "Android",          w=800,h=1280},
         {title = "Android",          w=1080,h=1920},
+        {title = "Android",          w=720,h=1424},
+        {title = "Android",          w=720,h=1520},
 	}
     self.screenSizeList = {}
     local s = self.projectConfig_:getFrameSize()

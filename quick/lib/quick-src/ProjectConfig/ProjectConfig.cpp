@@ -25,7 +25,6 @@ ProjectConfig::ProjectConfig()
     , _showConsole(true)
     , _loadPrecompiledFramework(false)
     , _writeDebugLogToFile(true)
-	, _isMultiLogFiles(false)
     , _windowOffset(0, 0)
     , _debuggerType(kCCLuaDebuggerNone)
     , _isAppMenu(true)
@@ -270,16 +269,8 @@ void ProjectConfig::setWriteDebugLogToFile(bool writeDebugLogToFile)
 
 string ProjectConfig::getDebugLogFilePath() const
 {
-	auto path(getProjectDir());
-	path.append("debug");
-	if (_isMultiLogFiles)
-	{		
-		time_t t = time(0);
-		char tmp[64] = {};
-		strftime(tmp, sizeof(tmp), "_%Y%m%d_%H%M%S", localtime(&t));		
-		path.append(tmp);
-	}
-	path.append(".log");
+    auto path(getProjectDir());
+    path.append("debug.log");
     return path;
 }
 
@@ -382,10 +373,6 @@ void ProjectConfig::parseCommandLine(const vector<string> &args)
         {
             setWriteDebugLogToFile(false);
         }
-		else if (arg.compare("-multi-log-files") == 0)
-		{
-			_isMultiLogFiles = true;
-		}
         else if (arg.compare("-console") == 0)
         {
             setShowConsole(true);
@@ -595,7 +582,6 @@ void ProjectConfig::dump()
     CCLOG("    frame scale: %0.2f", _frameScale);
     CCLOG("    show console: %s", _showConsole ? "YES" : "NO");
     CCLOG("    write debug log: %s", _writeDebugLogToFile ? "YES" : "NO");
-	CCLOG("    create multi log files: %s", _isMultiLogFiles ? "YES" : "NO");
     CCLOG("    debugger: none");
     CCLOG("\n\n");
 }

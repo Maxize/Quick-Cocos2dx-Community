@@ -29,7 +29,7 @@ function EventProtocol:addEventListener(eventName, listener, tag)
     self.listeners_[eventName][handle] = {listener, tag}
 
     if DEBUG > 1 then
-        printInfo("%s [EventProtocol] addEventListener() - event: %s, handle: %s, tag: %s", tostring(self.target_), eventName, handle, tostring(tag))
+        --printInfo("%s [EventProtocol] addEventListener() - event: %s, handle: %s, tag: %s", tostring(self.target_), eventName, handle, tostring(tag))
     end
 
     return handle
@@ -39,7 +39,7 @@ function EventProtocol:dispatchEvent(event)
     event.name = string.upper(tostring(event.name))
     local eventName = event.name
     if DEBUG > 1 then
-        printInfo("%s [EventProtocol] dispatchEvent() - event %s", tostring(self.target_), eventName)
+        --printInfo("%s [EventProtocol] dispatchEvent() - event %s", tostring(self.target_), eventName)
     end
 
     if self.listeners_[eventName] == nil then return end
@@ -51,7 +51,7 @@ function EventProtocol:dispatchEvent(event)
 
     for handle, listener in pairs(self.listeners_[eventName]) do
         if DEBUG > 1 then
-            printInfo("%s [EventProtocol] dispatchEvent() - dispatching event %s to listener %s", tostring(self.target_), eventName, handle)
+            --printInfo("%s [EventProtocol] dispatchEvent() - dispatching event %s to listener %s", tostring(self.target_), eventName, handle)
         end
         -- listener[1] = listener
         -- listener[2] = tag
@@ -74,7 +74,7 @@ function EventProtocol:removeEventListener(handleToRemove)
             if handle == handleToRemove then
                 listenersForEvent[handle] = nil
                 if DEBUG > 1 then
-                    printInfo("%s [EventProtocol] removeEventListener() - remove listener [%s] for event %s", tostring(self.target_), handle, eventName)
+                    --printInfo("%s [EventProtocol] removeEventListener() - remove listener [%s] for event %s", tostring(self.target_), handle, eventName)
                 end
                 return self.target_
             end
@@ -92,7 +92,7 @@ function EventProtocol:removeEventListenersByTag(tagToRemove)
             if listener[2] == tagToRemove then
                 listenersForEvent[handle] = nil
                 if DEBUG > 1 then
-                    printInfo("%s [EventProtocol] removeEventListener() - remove listener [%s] for event %s", tostring(self.target_), handle, eventName)
+                    --printInfo("%s [EventProtocol] removeEventListener() - remove listener [%s] for event %s", tostring(self.target_), handle, eventName)
                 end
             end
         end
@@ -104,7 +104,7 @@ end
 function EventProtocol:removeEventListenersByEvent(eventName)
     self.listeners_[string.upper(eventName)] = nil
     if DEBUG > 1 then
-        printInfo("%s [EventProtocol] removeAllEventListenersForEvent() - remove all listeners for event %s", tostring(self.target_), eventName)
+        --printInfo("%s [EventProtocol] removeAllEventListenersForEvent() - remove all listeners for event %s", tostring(self.target_), eventName)
     end
     return self.target_
 end
@@ -112,7 +112,7 @@ end
 function EventProtocol:removeAllEventListeners()
     self.listeners_ = {}
     if DEBUG > 1 then
-        printInfo("%s [EventProtocol] removeAllEventListeners() - remove all listeners", tostring(self.target_))
+        --printInfo("%s [EventProtocol] removeAllEventListeners() - remove all listeners", tostring(self.target_))
     end
     return self.target_
 end
@@ -130,7 +130,7 @@ function EventProtocol:hasEventListener(eventName)
 end
 
 function EventProtocol:dumpAllEventListeners()
-    print("---- EventProtocol:dumpAllEventListeners() ----")
+    -- print("---- EventProtocol:dumpAllEventListeners() ----")
     for name, listeners in pairs(self.listeners_) do
         printf("-- event: %s", name)
         for handle, listener in pairs(listeners) do

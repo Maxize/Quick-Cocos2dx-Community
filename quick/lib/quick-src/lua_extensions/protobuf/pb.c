@@ -75,6 +75,15 @@ typedef struct{
     char buf[IOSTRING_BUF_LEN];
 } IOString;
 
+union IntOrDouble
+{
+    double d;
+    struct {
+        int32_t a;
+        int32_t b;
+    } i;
+};
+
 static void pack_varint(luaL_Buffer *b, uint64_t value)
 {
     if (value >= 0x80)
@@ -387,7 +396,12 @@ static int struct_unpack(lua_State *L)
             }
         case 'd':
             {
-                lua_pushnumber(L, (lua_Number)*(double*)unpack_fixed64(buffer, out));
+                // use union to avoid crash on Android (signal 7)
+                int32_t *buf = (int32_t *)unpack_fixed64(buffer, out);
+                union IntOrDouble intOrDouble;
+                intOrDouble.i.a = *buf;
+                intOrDouble.i.b = *(buf + 1);
+                lua_pushnumber(L, (lua_Number)intOrDouble.d);
                 break;
             }
         case 'I':
@@ -464,7 +478,7 @@ static int iostring_clear(lua_State* L)
     return 0;
 }
 
-static const struct luaL_reg _pb [] = {
+static const struct luaL_Reg _pb [] = {
     {"varint_encoder", varint_encoder},
     {"signed_varint_encoder", signed_varint_encoder},
     {"read_tag", read_tag},
@@ -480,7 +494,7 @@ static const struct luaL_reg _pb [] = {
     {NULL, NULL}
 };
 
-static const struct luaL_reg _c_iostring_m [] = {
+static const struct luaL_Reg _c_iostring_m [] = {
     {"__tostring", iostring_str},
     {"__len", iostring_len},
     {"write", iostring_write},
@@ -495,8 +509,6 @@ int luaopen_pb (lua_State *L)
     lua_pushvalue(L, -1);
     lua_setfield(L, -2, "__index");
     luaL_register(L, NULL, _c_iostring_m);
-    /* remove metatable from stack */
-    lua_pop(L, 1);
 
     luaL_register(L, "pb", _pb);
     return 1;

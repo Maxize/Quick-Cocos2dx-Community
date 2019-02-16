@@ -184,7 +184,7 @@ void Helper::doLayout(cocos2d::Node *rootNode)
         }
     }
 }
-    
+
 Rect Helper::restrictCapInsetRect(const cocos2d::Rect &capInsets, const Size& textureSize )
 {
     float x = capInsets.origin.x;

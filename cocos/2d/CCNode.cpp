@@ -1263,11 +1263,6 @@ uint32_t Node::processParentFlags(const Mat4& parentTransform, uint32_t parentFl
         }
     }
 
-    // Fixes Github issue #16100. Basically when having two cameras, one camera might set as dirty the
-    // node that is not visited by it, and might affect certain calculations. Besides, it is faster to do this.
-    if (!isVisitableByVisitingCamera())
-        return parentFlags;
-
     uint32_t flags = parentFlags;
     flags |= (_transformUpdated ? FLAGS_TRANSFORM_DIRTY : 0);
     flags |= (_contentSizeDirty ? FLAGS_CONTENT_SIZE_DIRTY : 0);
@@ -1285,7 +1280,7 @@ uint32_t Node::processParentFlags(const Mat4& parentTransform, uint32_t parentFl
 bool Node::isVisitableByVisitingCamera() const
 {
     auto camera = Camera::getVisitingCamera();
-    bool visibleByCamera = camera ? ((unsigned short)camera->getCameraFlag() & _cameraMask) != 0 : true;
+    bool visibleByCamera = camera ? (unsigned short)camera->getCameraFlag() & _cameraMask : true;
     return visibleByCamera;
 }
 
@@ -1314,7 +1309,7 @@ void Node::visit(Renderer* renderer, const Mat4 &parentTransform, uint32_t paren
     {
         sortAllChildren();
         // draw children zOrder < 0
-        for(auto size = _children.size(); i < size; i++)
+        for( ; i < _children.size(); i++ )
         {
             auto node = _children.at(i);
 
@@ -1327,7 +1322,7 @@ void Node::visit(Renderer* renderer, const Mat4 &parentTransform, uint32_t paren
         if (visibleByCamera)
             this->draw(renderer, _modelViewTransform, flags);
 
-        for(auto it=_children.cbegin()+i, itCend = _children.cend(); it != itCend; ++it)
+        for(auto it=_children.cbegin()+i; it != _children.cend(); ++it)
             (*it)->visit(renderer, _modelViewTransform, flags);
     }
     else if (visibleByCamera)

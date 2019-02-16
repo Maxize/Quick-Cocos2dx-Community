@@ -410,7 +410,7 @@ UserDefault* UserDefault::getInstance()
 
     // only create xml file one time
     // the file exists after the program exit
-    if ((! isXMLFileExist()) && (! createXMLFile()))
+    if (((!isXMLFileExist()) && (!createXMLFile())) || (isXMLFileExist() && (!checkAvaildXmlFile()) && (!createXMLFile())))
     {
         return nullptr;
     }
@@ -450,7 +450,6 @@ bool UserDefault::isXMLFileExist()
 		bRet = true;
 		fclose(fp);
 	}
-
 	return bRet;
 }
 
@@ -492,6 +491,23 @@ bool UserDefault::createXMLFile()
 	}
 
 	return bRet;
+}
+
+bool UserDefault::checkAvaildXmlFile()
+{
+    tinyxml2::XMLDocument *pDoc = new tinyxml2::XMLDocument();
+    if (nullptr == pDoc)
+    {
+        return false;
+    }
+    tinyxml2::XMLError tmpResult = pDoc->LoadFile(_filePath.c_str());
+    if (tmpResult != tinyxml2::XML_SUCCESS)
+    {
+        // delete the file
+        FileUtils::getInstance()->removeFile(_filePath);
+        return false;
+    }
+    return true;
 }
 
 const string& UserDefault::getXMLFilePath()

@@ -20,8 +20,7 @@
 #include <vector>
 #include <map>
 #include <string>
-
-#if (CC_USE_CURL)
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
 #include "curl/curl.h"
 #endif
 
@@ -155,7 +154,7 @@ private:
     , m_curlState(kCCHTTPRequestCURLStateIdle)
     , m_postData(NULL)
     , m_postDataLen(0)
-#if (!CC_USE_CURL)
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     , m_httpConnect(NULL)
     , m_cookies(NULL)
     , m_nTimeOut(0)
@@ -186,7 +185,7 @@ private:
     int m_listener;
     int m_curlState;
 
-#if (CC_USE_CURL)
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
     CURL *m_curl;
 	curl_httppost *m_formPost;
 	curl_httppost *m_lastPost;
@@ -204,7 +203,7 @@ private:
     void* m_postData;
     size_t m_postDataLen;
 
-#if (!CC_USE_CURL)
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     jobject m_httpConnect;
     const char* m_httpMethod;
     Fields m_postFile;
@@ -247,7 +246,8 @@ private:
     static size_t writeHeaderCURL(void *buffer, size_t size, size_t nmemb, void *userdata);
     static int progressCURL(void *userdata, double dltotal, double dlnow, double ultotal, double ulnow);
 
-#if (!CC_USE_CURL)
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+
     pthread_attr_t m_threadAttr;
 
     bool isNeedBoundary();

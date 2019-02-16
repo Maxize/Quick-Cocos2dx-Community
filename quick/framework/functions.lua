@@ -477,7 +477,7 @@ function import(moduleName, currentModuleName)
         end
         table.remove(currentModuleNameParts, #currentModuleNameParts)
     end
-    -- print("debug_framework moduleFullName = ", moduleFullName)
+
     return require(moduleFullName)
 end
 
@@ -570,7 +570,7 @@ end
 -- 对数值进行四舍五入，如果不是数值则返回 0
 -- @function [parent=#math] round
 -- @param number value 输入值
--- @return number#number
+-- @return number#number 
 
 -- end --
 
@@ -614,7 +614,7 @@ end
 -- 检查指定的文件或目录是否存在，如果存在返回 true，否则返回 false
 -- @function [parent=#io] exists
 -- @param string path 要检查的文件或目录的完全路径
--- @return boolean#boolean
+-- @return boolean#boolean 
 
 --[[--
 
@@ -650,7 +650,7 @@ end
 -- 读取文件内容，返回包含文件内容的字符串，如果失败返回 nil
 -- @function [parent=#io] readfile
 -- @param string path 文件完全路径
--- @return string#string
+-- @return string#string 
 
 --[[--
 
@@ -680,7 +680,7 @@ end
 -- @param string path 文件完全路径
 -- @param string content 要写入的内容
 -- @param string mode 写入模式，默认值为 "w+b"
--- @return boolean#boolean
+-- @return boolean#boolean 
 
 --[[--
 
@@ -717,7 +717,7 @@ end
 -- 拆分一个路径字符串，返回组成路径的各个部分
 -- @function [parent=#io] pathinfo
 -- @param string path 要分拆的路径字符串
--- @return table#table
+-- @return table#table 
 
 --[[--
 
@@ -771,7 +771,7 @@ end
 -- 返回指定文件的大小，如果失败返回 false
 -- @function [parent=#io] filesize
 -- @param string path 文件完全路径
--- @return integer#integer
+-- @return integer#integer 
 
 -- end --
 
@@ -797,7 +797,7 @@ end
 -- 计算表格包含的字段数量
 -- @function [parent=#table] nums
 -- @param table t 要检查的表格
--- @return integer#integer
+-- @return integer#integer 
 
 --[[--
 
@@ -823,7 +823,7 @@ end
 -- 返回指定表格中的所有键
 -- @function [parent=#table] keys
 -- @param table hashtable 要检查的表格
--- @return table#table
+-- @return table#table 
 
 --[[--
 
@@ -855,7 +855,7 @@ end
 -- 返回指定表格中的所有值
 -- @function [parent=#table] values
 -- @param table hashtable 要检查的表格
--- @return table#table
+-- @return table#table 
 
 --[[--
 
@@ -962,7 +962,7 @@ end
 -- @param table array 表格
 -- @param mixed value 要查找的值
 -- @param integer begin 起始索引值
--- @return integer#integer
+-- @return integer#integer 
 
 --[[--
 
@@ -1025,7 +1025,7 @@ end
 -- @param table array 表格
 -- @param mixed value 要删除的值
 -- @param boolean removeall 是否删除所有相同的值
--- @return integer#integer
+-- @return integer#integer 
 
 --[[--
 

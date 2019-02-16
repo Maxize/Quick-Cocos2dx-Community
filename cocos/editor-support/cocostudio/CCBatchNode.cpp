@@ -107,31 +107,28 @@ void BatchNode::removeChild(Node* child, bool cleanup)
 void BatchNode::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags)
 {
     // quick return if not visible. children won't be drawn.
-    if (!_visible)
+    if (!_visible || !isVisitableByVisitingCamera())
     {
         return;
     }
-    
+
     uint32_t flags = processParentFlags(parentTransform, parentFlags);
-    
-    if (isVisitableByVisitingCamera())
-    {
-        // IMPORTANT:
-        // To ease the migration to v3.0, we still support the Mat4 stack,
-        // but it is deprecated and your code should not rely on it
-        Director* director = Director::getInstance();
-        director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-        director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, _modelViewTransform);
-        
-        sortAllChildren();
-        draw(renderer, _modelViewTransform, flags);
-        
-        // FIX ME: Why need to set _orderOfArrival to 0??
-        // Please refer to https://github.com/cocos2d/cocos2d-x/pull/6920
-        // setOrderOfArrival(0);
-        
-        director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-    }
+
+    // IMPORTANT:
+    // To ease the migration to v3.0, we still support the Mat4 stack,
+    // but it is deprecated and your code should not rely on it
+    Director* director = Director::getInstance();
+    director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+    director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, _modelViewTransform);
+
+    sortAllChildren();
+    draw(renderer, _modelViewTransform, flags);
+
+    // FIX ME: Why need to set _orderOfArrival to 0??
+    // Please refer to https://github.com/cocos2d/cocos2d-x/pull/6920
+    // setOrderOfArrival(0);
+
+    director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 }
 
 void BatchNode::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)

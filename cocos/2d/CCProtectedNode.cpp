@@ -271,7 +271,7 @@ void ProtectedNode::reorderProtectedChild(cocos2d::Node *child, int localZOrder)
 void ProtectedNode::visit(Renderer* renderer, const Mat4 &parentTransform, uint32_t parentFlags)
 {
     // quick return if not visible. children won't be drawn.
-    if (!_visible)
+    if (!_visible || !isVisitableByVisitingCamera())
     {
         return;
     }
@@ -282,7 +282,7 @@ void ProtectedNode::visit(Renderer* renderer, const Mat4 &parentTransform, uint3
     // To ease the migration to v3.0, we still support the Mat4 stack,
     // but it is deprecated and your code should not rely on it
     Director* director = Director::getInstance();
-    CCASSERT(nullptr != director, "Director is null when setting matrix stack");
+    CCASSERT(nullptr != director, "Director is null when seting matrix stack");
     director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
     director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, _modelViewTransform);
     
@@ -295,7 +295,7 @@ void ProtectedNode::visit(Renderer* renderer, const Mat4 &parentTransform, uint3
     //
     // draw children and protectedChildren zOrder < 0
     //
-    for(auto size = _children.size(); i < size; i++)
+    for( ; i < _children.size(); i++ )
     {
         auto node = _children.at(i);
         
@@ -305,7 +305,7 @@ void ProtectedNode::visit(Renderer* renderer, const Mat4 &parentTransform, uint3
             break;
     }
     
-    for(auto size = _protectedChildren.size(); j < size; j++)
+    for( ; j < _protectedChildren.size(); j++ )
     {
         auto node = _protectedChildren.at(j);
         
@@ -324,10 +324,10 @@ void ProtectedNode::visit(Renderer* renderer, const Mat4 &parentTransform, uint3
     //
     // draw children and protectedChildren zOrder >= 0
     //
-    for(auto it=_protectedChildren.cbegin()+j, itCend = _protectedChildren.cend(); it != itCend; ++it)
+    for(auto it=_protectedChildren.cbegin()+j; it != _protectedChildren.cend(); ++it)
         (*it)->visit(renderer, _modelViewTransform, flags);
     
-    for(auto it=_children.cbegin()+i, itCend = _children.cend(); it != itCend; ++it)
+    for(auto it=_children.cbegin()+i; it != _children.cend(); ++it)
         (*it)->visit(renderer, _modelViewTransform, flags);
     
     // FIX ME: Why need to set _orderOfArrival to 0??
@@ -429,19 +429,6 @@ void ProtectedNode::disableCascadeOpacity()
     for(auto child : _protectedChildren){
         child->updateDisplayedOpacity(255);
     }
-}
-
-void ProtectedNode::setCameraMask(unsigned short mask, bool applyChildren)
-{
-    Node::setCameraMask(mask, applyChildren);
-    if (applyChildren)
-    {
-        for (auto& iter: _protectedChildren)
-        {
-            iter->setCameraMask(mask);
-        }
-    }
-    
 }
 
 NS_CC_END

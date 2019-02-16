@@ -1,4 +1,5 @@
-
+RES_SERVER="https://raw.githubusercontent.com/katichar/Resource/master/"
+GAME_VERSION = 0.01
 -- 0 - disable debug info, 1 - less debug info, 2 - verbose debug info
 DEBUG = 1
 
@@ -18,7 +19,8 @@ LOAD_SHORTCODES_API = true
 CONFIG_SCREEN_ORIENTATION = "landscape"
 
 -- design resolution
-CONFIG_SCREEN_WIDTH  = 960
-CONFIG_SCREEN_HEIGHT = 640
+CONFIG_SCREEN_WIDTH  = 800
+CONFIG_SCREEN_HEIGHT = 480
 
+-- auto scale mode
 CONFIG_SCREEN_AUTOSCALE = "FIXED_HEIGHT"

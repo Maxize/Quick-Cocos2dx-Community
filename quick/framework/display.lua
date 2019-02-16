@@ -135,13 +135,11 @@ if CONFIG_SCREEN_AUTOSCALE and CONFIG_SCREEN_AUTOSCALE ~="NONE" then
             local isScaleX = scaleX < scaleY
             scale = isScaleX and scaleX or scaleY
             if (isScaleX) then
-                CONFIG_SCREEN_WIDTH  = w
-                CONFIG_SCREEN_HEIGHT = h * scale
+                CONFIG_SCREEN_HEIGHT = h / scale
             else
-                CONFIG_SCREEN_WIDTH  = w * scale
-                CONFIG_SCREEN_HEIGHT = h
+                CONFIG_SCREEN_WIDTH  = w / scale
             end
-            print("------- scale, width, height = ", scale, CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT)
+            -- print("------- scale, width, height = ", scale, CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HEIGHT)
         else
             scale = 1.0
             printError(string.format("display - invalid CONFIG_SCREEN_AUTOSCALE \"%s\"", CONFIG_SCREEN_AUTOSCALE))

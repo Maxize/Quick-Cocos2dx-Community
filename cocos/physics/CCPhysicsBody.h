@@ -26,10 +26,13 @@
 #define __CCPHYSICS_BODY_H__
 
 #include "base/ccConfig.h"
+#include "math/CCGeometry.h"
+NS_CC_BEGIN
+typedef Vec2 Vect;//为了避免关闭CC_USE_PHYSICS后GAF无法编译
+NS_CC_END
 #if CC_USE_PHYSICS
 
 #include "base/CCRef.h"
-#include "math/CCGeometry.h"
 #include "physics/CCPhysicsShape.h"
 #include "base/CCVector.h"
 
@@ -41,7 +44,7 @@ class PhysicsWorld;
 class PhysicsJoint;
 class PhysicsBodyInfo;
 
-typedef Vec2 Vect;
+//typedef Vec2 Vect;
 
 
 const PhysicsMaterial PHYSICSBODY_MATERIAL_DEFAULT(0.1f, 0.5f, 0.5f);

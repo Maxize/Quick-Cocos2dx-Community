@@ -157,7 +157,7 @@ void HTTPRequest::addFormContents(const char *name, const char *value)
     m_postContent[string(name)] = string(value);
     string str = string("Content-Type:multipart/form-data");
     m_headers.push_back(str);
-    CCLOG("addFormContents:%d", m_headers.size());
+    CCLOG("addFormContents:%d", (int)m_headers.size());
 }
 
 void HTTPRequest::setCookieString(const char *cookie)
@@ -193,9 +193,6 @@ bool HTTPRequest::start(void)
     retain();
 
     createURLConnectJava();
-	if (!m_httpConnect) {
-		return false;
-	}
     setRequestMethodJava();
     setTimeoutJava(m_nTimeOut*1000);
 

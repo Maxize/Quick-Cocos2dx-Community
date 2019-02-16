@@ -737,6 +737,10 @@ void EventDispatcher::dispatchEventToListeners(EventListenerVector* listeners, c
         {
             for (; i < listeners->getGt0Index(); ++i)
             {
+				if(i >= fixedPriorityListeners->size())
+				{
+					break;
+				}
                 auto l = fixedPriorityListeners->at(i);
                 if (l->isEnabled() && !l->isPaused() && l->isRegistered() && onEvent(l))
                 {
@@ -768,8 +772,8 @@ void EventDispatcher::dispatchEventToListeners(EventListenerVector* listeners, c
         if (!shouldStopPropagation)
         {
             // priority > 0
-            ssize_t size = fixedPriorityListeners->size();
-            for (; i < size; ++i)
+            //ssize_t size = fixedPriorityListeners->size();
+            for (; i < fixedPriorityListeners->size(); ++i)
             {
                 auto l = fixedPriorityListeners->at(i);
                 

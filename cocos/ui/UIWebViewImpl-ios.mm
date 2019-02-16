@@ -154,6 +154,7 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
         self.uiWebView.delegate = self;
         self.uiWebView.opaque = NO;
         self.uiWebView.backgroundColor = [UIColor clearColor];
+        self.uiWebView.tag = 999;
     }
     if (!self.loadingView) {
         self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -375,9 +376,12 @@ static std::string getFixedBaseUrl(const std::string& baseUrl)
                 } else {
                     // use js call back send json string to lua, don't need to define a new function
                     jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                    if (weakSelf.onJsCallback){
-                        weakSelf.onJsCallback([jsonString UTF8String]);
-                    }
+                    //模拟异步回调
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        if (weakSelf.onJsCallback) {
+                            weakSelf.onJsCallback([jsonString UTF8String]);
+                        }
+                    });
                 }
             }
         };
