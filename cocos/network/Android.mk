@@ -5,9 +5,7 @@ LOCAL_MODULE := cocos_network_static
 
 LOCAL_MODULE_FILENAME := libnetwork
 
-LOCAL_SRC_FILES := \
-SocketIO.cpp \
-WebSocket.cpp
+LOCAL_SRC_FILES := WebSocket.cpp
 
 ifeq ($(CC_USE_CURL),1)
 LOCAL_SRC_FILES += HttpClient.cpp
@@ -25,6 +23,8 @@ ifeq ($(CC_USE_CURL),1)
 LOCAL_STATIC_LIBRARIES += cocos_curl_static
 endif
 
+ifeq ($(CC_USE_WEBSOCKET),1)
 LOCAL_STATIC_LIBRARIES += libwebsockets_static
+endif
 
 include $(BUILD_STATIC_LIBRARY)

@@ -28,7 +28,6 @@
 #include "lua_cocos2dx_experimental_video_manual.hpp"
 #include "lua_cocos2dx_experimental_webview_auto.hpp"
 #include "lua_cocos2dx_experimental_webview_manual.hpp"
-
 #endif
 #include "cocos2d.h"
 #include "tolua_fix.h"

@@ -3,6 +3,7 @@ package org.cocos2dx.lib;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -58,7 +59,23 @@ public class Cocos2dxWebViewHelper {
         sCocos2dxActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Cocos2dxWebView webView = new Cocos2dxWebView(sCocos2dxActivity, index);
+                final Cocos2dxWebView webView = new Cocos2dxWebView(sCocos2dxActivity, index);
+                webView.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                            if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+                                webView.goBack();
+                                Cocos2dxGLSurfaceView.getInstance().requestFocus();
+                                return true;
+                            }
+                        }
+                        else {
+                            Cocos2dxGLSurfaceView.getInstance().requestFocus();
+                        }
+                        return false;
+                    }
+                });
                 FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.WRAP_CONTENT,
                         FrameLayout.LayoutParams.WRAP_CONTENT);
