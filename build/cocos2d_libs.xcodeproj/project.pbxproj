@@ -1918,6 +1918,12 @@
 		50ED2BE119BEAF7900A0AB90 /* UIEditBoxImpl-win32.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ED2BDC19BEAF7900A0AB90 /* UIEditBoxImpl-win32.h */; };
 		50ED2BE419BEAF7900A0AB90 /* UIEditBoxImpl-win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50ED2BDE19BEAF7900A0AB90 /* UIEditBoxImpl-win32.cpp */; };
 		50ED2BE519BEAF7900A0AB90 /* UIEditBoxImpl-win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50ED2BDE19BEAF7900A0AB90 /* UIEditBoxImpl-win32.cpp */; };
+		624FC6EA223A0D6A00C4C749 /* tinydir.h in Headers */ = {isa = PBXBuildFile; fileRef = 624FC6E7223A0D6A00C4C749 /* tinydir.h */; };
+		624FC6EB223A0D6A00C4C749 /* tinydir.h in Headers */ = {isa = PBXBuildFile; fileRef = 624FC6E7223A0D6A00C4C749 /* tinydir.h */; };
+		624FCDA7223A0EC600C4C749 /* CCAsyncTaskPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 624FCDA5223A0EC600C4C749 /* CCAsyncTaskPool.h */; };
+		624FCDA8223A0EC600C4C749 /* CCAsyncTaskPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 624FCDA5223A0EC600C4C749 /* CCAsyncTaskPool.h */; };
+		624FCDA9223A0EC600C4C749 /* CCAsyncTaskPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FCDA6223A0EC600C4C749 /* CCAsyncTaskPool.cpp */; };
+		624FCDAA223A0EC600C4C749 /* CCAsyncTaskPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FCDA6223A0EC600C4C749 /* CCAsyncTaskPool.cpp */; };
 		A07A4CAF1783777C0073F6A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1551A342158F2AB200E66CFE /* Foundation.framework */; };
 		B2165EEA19921124000BE3E6 /* CCPrimitiveCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B257B45E198A353E00D9A687 /* CCPrimitiveCommand.cpp */; };
 		B217703C1977ECB4009EE11B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217703B1977ECB4009EE11B /* IOKit.framework */; };
@@ -3015,6 +3021,11 @@
 		50FCEB9018C72017004AD434 /* WidgetReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetReader.cpp; sourceTree = "<group>"; };
 		50FCEB9118C72017004AD434 /* WidgetReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetReader.h; sourceTree = "<group>"; };
 		50FCEB9218C72017004AD434 /* WidgetReaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetReaderProtocol.h; sourceTree = "<group>"; };
+		624FC6E7223A0D6A00C4C749 /* tinydir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinydir.h; sourceTree = "<group>"; };
+		624FC6E8223A0D6A00C4C749 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		624FC6E9223A0D6A00C4C749 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		624FCDA5223A0EC600C4C749 /* CCAsyncTaskPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAsyncTaskPool.h; path = ../base/CCAsyncTaskPool.h; sourceTree = "<group>"; };
+		624FCDA6223A0EC600C4C749 /* CCAsyncTaskPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCAsyncTaskPool.cpp; path = ../base/CCAsyncTaskPool.cpp; sourceTree = "<group>"; };
 		A07A4D641783777C0073F6A7 /* libcocos2d iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B217703B1977ECB4009EE11B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		B217703D1977ECC1009EE11B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -3279,6 +3290,8 @@
 		1A5700A2180BC5E60088DEC7 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				624FCDA6223A0EC600C4C749 /* CCAsyncTaskPool.cpp */,
+				624FCDA5223A0EC600C4C749 /* CCAsyncTaskPool.h */,
 				299CF1F919A434BC00C378C1 /* ccRandom.cpp */,
 				299CF1FA19A434BC00C378C1 /* ccRandom.h */,
 				464AD6E3197EBB1400E502D8 /* pvr.cpp */,
@@ -3571,6 +3584,7 @@
 		1A57033E180BD0490088DEC7 /* external */ = {
 			isa = PBXGroup;
 			children = (
+				624FC6E6223A0D6A00C4C749 /* tinydir */,
 				382383E11A258FA7002C4610 /* flatbuffers */,
 				1AC026971914068200FA920D /* ConvertUTF */,
 				46C02E0418E91123004B7456 /* xxhash */,
@@ -5170,6 +5184,17 @@
 			path = TextReader;
 			sourceTree = "<group>";
 		};
+		624FC6E6223A0D6A00C4C749 /* tinydir */ = {
+			isa = PBXGroup;
+			children = (
+				624FC6E7223A0D6A00C4C749 /* tinydir.h */,
+				624FC6E8223A0D6A00C4C749 /* COPYING */,
+				624FC6E9223A0D6A00C4C749 /* package.json */,
+			);
+			name = tinydir;
+			path = ../external/tinydir;
+			sourceTree = "<group>";
+		};
 		B29594B81926D61F003EEF37 /* 3d */ = {
 			isa = PBXGroup;
 			children = (
@@ -5429,6 +5454,7 @@
 				15AE1A3119AAD3D500C27E9E /* b2ChainShape.h in Headers */,
 				1A5701FD180BCBAD0088DEC7 /* CCMenuItem.h in Headers */,
 				1A570204180BCBD40088DEC7 /* CCClippingNode.h in Headers */,
+				624FCDA7223A0EC600C4C749 /* CCAsyncTaskPool.h in Headers */,
 				15AE1A7B19AAD40300C27E9E /* b2PolygonContact.h in Headers */,
 				0AE62CEF1C1036A700BF1BF4 /* filewritestream.h in Headers */,
 				15AE1A2919AAD3D500C27E9E /* b2Collision.h in Headers */,
@@ -5631,6 +5657,7 @@
 				50ABBE471925AB6F00A911A9 /* CCEvent.h in Headers */,
 				15AE1B9E19AADFDF00C27E9E /* UIVBox.h in Headers */,
 				15AE192319AAD35000C27E9E /* DictionaryHelper.h in Headers */,
+				624FC6EA223A0D6A00C4C749 /* tinydir.h in Headers */,
 				B257B4501989D5E800D9A687 /* CCPrimitive.h in Headers */,
 				15B3707E19EE414C00ABE682 /* CCEventAssetsManagerEx.h in Headers */,
 				50ABBE6B1925AB6F00A911A9 /* CCEventListenerFocus.h in Headers */,
@@ -5908,6 +5935,7 @@
 				1A57011E180BC90D0088DEC7 /* CCGrabber.h in Headers */,
 				1A570122180BC90D0088DEC7 /* CCGrid.h in Headers */,
 				15AE1AB319AAD40300C27E9E /* b2CircleContact.h in Headers */,
+				624FCDA8223A0EC600C4C749 /* CCAsyncTaskPool.h in Headers */,
 				5034CA2E191D591100CE6051 /* ccShader_PositionTextureA8Color.frag in Headers */,
 				15AE1A4F19AAD3D500C27E9E /* b2Shape.h in Headers */,
 				29394CF519B01DBA00D2DE1A /* UIWebViewImpl-ios.h in Headers */,
@@ -6012,6 +6040,7 @@
 				50ABBEA21925AB6F00A911A9 /* CCScheduler.h in Headers */,
 				1A57020B180BCBDF0088DEC7 /* CCMotionStreak.h in Headers */,
 				15AE195219AAD35100C27E9E /* CCDecorativeDisplay.h in Headers */,
+				624FC6EB223A0D6A00C4C749 /* tinydir.h in Headers */,
 				15AE196619AAD35100C27E9E /* CCTween.h in Headers */,
 				15AE194619AAD35100C27E9E /* CCComAttribute.h in Headers */,
 				382384241A2590DA002C4610 /* GameMapReader.h in Headers */,
@@ -6661,6 +6690,7 @@
 				15AE196C19AAD35700C27E9E /* CCActionTimeline.cpp in Sources */,
 				1A570310180BCF190088DEC7 /* CCComponentContainer.cpp in Sources */,
 				15AE190719AAD35000C27E9E /* CCDatas.cpp in Sources */,
+				624FCDA9223A0EC600C4C749 /* CCAsyncTaskPool.cpp in Sources */,
 				0A21110A1D71569200002345 /* Attachment.c in Sources */,
 				B37510711823AC9F00B3BA6A /* CCPhysicsBodyInfo_chipmunk.cpp in Sources */,
 				1A01C69C18F57BE800EFE3A6 /* CCString.cpp in Sources */,
@@ -6823,6 +6853,7 @@
 				46A171051807CECB005B8026 /* CCPhysicsWorld.cpp in Sources */,
 				50ABBDA01925AB4100A911A9 /* CCGroupCommand.cpp in Sources */,
 				46A171031807CECB005B8026 /* CCPhysicsShape.cpp in Sources */,
+				624FCDAA223A0EC600C4C749 /* CCAsyncTaskPool.cpp in Sources */,
 				50ABC0161926664800A911A9 /* CCImage.cpp in Sources */,
 				1A01C6A518F58F7500EFE3A6 /* CCNotificationCenter.cpp in Sources */,
 				292DB14E19B4574100A80320 /* UIEditBoxImpl-mac.mm in Sources */,

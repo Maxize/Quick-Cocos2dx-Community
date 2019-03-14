@@ -35,6 +35,66 @@
 		50D7C96C17EBBEDF005D0B91 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96B17EBBEDF005D0B91 /* OpenGL.framework */; };
 		50D7C96E17EBBEE6005D0B91 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96D17EBBEE6005D0B91 /* AppKit.framework */; };
 		50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96F17EBBEEC005D0B91 /* IOKit.framework */; };
+		624FCCB2223A0E1400C4C749 /* TagDefineAnimationMasks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC935223A0E1300C4C749 /* TagDefineAnimationMasks.cpp */; };
+		624FCCB3223A0E1400C4C749 /* TagDefineTimeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC938223A0E1300C4C749 /* TagDefineTimeline.cpp */; };
+		624FCCB4223A0E1400C4C749 /* GAFCachedTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC939223A0E1300C4C749 /* GAFCachedTexture.cpp */; };
+		624FCCB5223A0E1400C4C749 /* GAFMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC93A223A0E1300C4C749 /* GAFMask.cpp */; };
+		624FCCB6223A0E1400C4C749 /* TagDefineAnimationFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC93F223A0E1300C4C749 /* TagDefineAnimationFrames.cpp */; };
+		624FCCB7223A0E1400C4C749 /* GAFQuadCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC940223A0E1300C4C749 /* GAFQuadCommand.cpp */; };
+		624FCCB8223A0E1400C4C749 /* TagDefineAnimationFrames2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC941223A0E1300C4C749 /* TagDefineAnimationFrames2.cpp */; };
+		624FCCB9223A0E1400C4C749 /* GAFAssetTextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC943223A0E1300C4C749 /* GAFAssetTextureManager.cpp */; };
+		624FCCBA223A0E1400C4C749 /* GAFLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC944223A0E1300C4C749 /* GAFLoader.cpp */; };
+		624FCCBB223A0E1400C4C749 /* TagDefineAnimationObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC945223A0E1300C4C749 /* TagDefineAnimationObjects.cpp */; };
+		624FCCBC223A0E1400C4C749 /* TagDefineTextField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC948223A0E1300C4C749 /* TagDefineTextField.cpp */; };
+		624FCCBD223A0E1400C4C749 /* GAFTextData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC94A223A0E1300C4C749 /* GAFTextData.cpp */; };
+		624FCCBE223A0E1400C4C749 /* PrimitiveDeserializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC94B223A0E1300C4C749 /* PrimitiveDeserializer.cpp */; };
+		624FCCBF223A0E1400C4C749 /* GAFAnimationSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC94C223A0E1300C4C749 /* GAFAnimationSequence.cpp */; };
+		624FCCC0223A0E1400C4C749 /* TagDefineNamedParts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC94E223A0E1300C4C749 /* TagDefineNamedParts.cpp */; };
+		624FCCC1223A0E1400C4C749 /* GAFPrecompiled.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC951223A0E1300C4C749 /* GAFPrecompiled.cpp */; };
+		624FCCC2223A0E1400C4C749 /* GAFTextureAtlasElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC956223A0E1300C4C749 /* GAFTextureAtlasElement.cpp */; };
+		624FCCC3223A0E1400C4C749 /* mainpage.dox in Resources */ = {isa = PBXBuildFile; fileRef = 624FC957223A0E1300C4C749 /* mainpage.dox */; };
+		624FCCC4223A0E1400C4C749 /* GAFStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC958223A0E1300C4C749 /* GAFStream.cpp */; };
+		624FCCC5223A0E1400C4C749 /* GAFShaderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC95C223A0E1300C4C749 /* GAFShaderManager.cpp */; };
+		624FCCC6223A0E1400C4C749 /* GAFTimelineAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC960223A0E1300C4C749 /* GAFTimelineAction.cpp */; };
+		624FCCC7223A0E1400C4C749 /* TagDefineSequences.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC963223A0E1300C4C749 /* TagDefineSequences.cpp */; };
+		624FCCC8223A0E1400C4C749 /* GAFAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC966223A0E1300C4C749 /* GAFAsset.cpp */; };
+		624FCCC9223A0E1400C4C749 /* GAFTimeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC967223A0E1300C4C749 /* GAFTimeline.cpp */; };
+		624FCCCA223A0E1400C4C749 /* TagDefineAtlas3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC968223A0E1300C4C749 /* TagDefineAtlas3.cpp */; };
+		624FCCCB223A0E1400C4C749 /* GAFFilterData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC969223A0E1300C4C749 /* GAFFilterData.cpp */; };
+		624FCCCC223A0E1400C4C749 /* GAFSubobjectState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC96B223A0E1300C4C749 /* GAFSubobjectState.cpp */; };
+		624FCCCD223A0E1400C4C749 /* GAFFilterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC96D223A0E1300C4C749 /* GAFFilterManager.cpp */; };
+		624FCCCE223A0E1400C4C749 /* GAFObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC970223A0E1300C4C749 /* GAFObject.cpp */; };
+		624FCCCF223A0E1400C4C749 /* GAFSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC972223A0E1300C4C749 /* GAFSprite.cpp */; };
+		624FCCD0223A0E1400C4C749 /* GAFSoundInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC973223A0E1300C4C749 /* GAFSoundInfo.cpp */; };
+		624FCCD1223A0E1400C4C749 /* GaussianBlurFragmentShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = 624FC976223A0E1300C4C749 /* GaussianBlurFragmentShader.frag */; };
+		624FCCD2223A0E1400C4C749 /* pcShader_PositionTextureAlpha_frag.frag in Resources */ = {isa = PBXBuildFile; fileRef = 624FC977223A0E1300C4C749 /* pcShader_PositionTextureAlpha_frag.frag */; };
+		624FCCD3223A0E1400C4C749 /* GlowFragmentShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = 624FC978223A0E1300C4C749 /* GlowFragmentShader.frag */; };
+		624FCCD4223A0E1400C4C749 /* GAFFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC979223A0E1300C4C749 /* GAFFile.cpp */; };
+		624FCCD5223A0E1400C4C749 /* TagDefineSounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC97C223A0E1300C4C749 /* TagDefineSounds.cpp */; };
+		624FCCD6223A0E1400C4C749 /* TagDefineAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC97E223A0E1300C4C749 /* TagDefineAtlas.cpp */; };
+		624FCCD7223A0E1400C4C749 /* GAFTextField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC97F223A0E1300C4C749 /* GAFTextField.cpp */; };
+		624FCCD8223A0E1400C4C749 /* GAFTextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC981223A0E1300C4C749 /* GAFTextureAtlas.cpp */; };
+		624FCCD9223A0E1400C4C749 /* TagDefineStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC983223A0E1300C4C749 /* TagDefineStage.cpp */; };
+		624FCCDA223A0E1400C4C749 /* Doxyfile in Resources */ = {isa = PBXBuildFile; fileRef = 624FC985223A0E1300C4C749 /* Doxyfile */; };
+		624FCCDB223A0E1400C4C749 /* GAFAnimationFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC98A223A0E1300C4C749 /* GAFAnimationFrame.cpp */; };
+		624FCCDC223A0E1400C4C749 /* GAFMovieClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FC98B223A0E1300C4C749 /* GAFMovieClip.cpp */; };
+		624FCD94223A0E1500C4C749 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 624FCA9E223A0E1400C4C749 /* CMakeLists.txt */; };
+		624FCD95223A0E1500C4C749 /* conversions.yaml.diff in Resources */ = {isa = PBXBuildFile; fileRef = 624FCA9F223A0E1400C4C749 /* conversions.yaml.diff */; };
+		624FCD96223A0E1500C4C749 /* userconf.ini in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAA1223A0E1400C4C749 /* userconf.ini */; };
+		624FCD97223A0E1500C4C749 /* gaf.ini in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAA2223A0E1400C4C749 /* gaf.ini */; };
+		624FCD98223A0E1500C4C749 /* genbindings.py in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAA3223A0E1400C4C749 /* genbindings.py */; };
+		624FCD99223A0E1500C4C749 /* lua_gaf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FCAA9223A0E1400C4C749 /* lua_gaf.cpp */; };
+		624FCD9A223A0E1500C4C749 /* lua_gaf_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 624FCAAA223A0E1400C4C749 /* lua_gaf_main.cpp */; };
+		624FCD9B223A0E1500C4C749 /* GAFMovieClip.lua in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAAC223A0E1400C4C749 /* GAFMovieClip.lua */; };
+		624FCD9C223A0E1500C4C749 /* GAFAsset.lua in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAAD223A0E1400C4C749 /* GAFAsset.lua */; };
+		624FCD9D223A0E1500C4C749 /* GAFObject.lua in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAAE223A0E1400C4C749 /* GAFObject.lua */; };
+		624FCD9E223A0E1500C4C749 /* GAFSprite.lua in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAAF223A0E1400C4C749 /* GAFSprite.lua */; };
+		624FCD9F223A0E1500C4C749 /* GAFAnimationSequence.lua in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAB0223A0E1400C4C749 /* GAFAnimationSequence.lua */; };
+		624FCDA0223A0E1500C4C749 /* lua_gaf_api.lua in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAB1223A0E1400C4C749 /* lua_gaf_api.lua */; };
+		624FCDA1223A0E1500C4C749 /* GAFAssetTextureManager.lua in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAB2223A0E1400C4C749 /* GAFAssetTextureManager.lua */; };
+		624FCDA2223A0E1500C4C749 /* libGAFLuaBinding.sln in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAB6223A0E1400C4C749 /* libGAFLuaBinding.sln */; };
+		624FCDA3223A0E1500C4C749 /* libGAFLuaBinding.vcxproj in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAB7223A0E1400C4C749 /* libGAFLuaBinding.vcxproj */; };
+		624FCDA4223A0E1500C4C749 /* Library.props in Resources */ = {isa = PBXBuildFile; fileRef = 624FCAB8223A0E1400C4C749 /* Library.props */; };
 		9F72892B1A24957700EE0234 /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288311A24957700EE0234 /* HelperFunc.cpp */; };
 		9F72892C1A24957700EE0234 /* libbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288361A24957700EE0234 /* libbase64.c */; };
 		9F72892D1A24957700EE0234 /* CCCrypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F7288381A24957700EE0234 /* CCCrypto.cpp */; };
@@ -126,6 +186,34 @@
 			remoteGlobalIDString = 1551A33F158F2AB200E66CFE;
 			remoteInfo = "cocos2dx Mac";
 		};
+		624FCAC9223A0E1400C4C749 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 624FCAA5223A0E1400C4C749 /* gaf_lua_bindings.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B6E0DD211A9CC9D800B95002;
+			remoteInfo = "gaf_lua_bindings iOS";
+		};
+		624FCACB223A0E1400C4C749 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 624FCAA5223A0E1400C4C749 /* gaf_lua_bindings.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B6E0DD7F1A9DD9E300B95002;
+			remoteInfo = "gaf_lua_bindings Mac";
+		};
+		624FCACF223A0E1400C4C749 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 624FC931223A0E1300C4C749 /* GAFPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1A2FBEC1192DEF8700631FE9;
+			remoteInfo = gafplayer;
+		};
+		624FCAD1223A0E1400C4C749 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 624FC931223A0E1300C4C749 /* GAFPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 29CC58251A36113E00B31D72;
+			remoteInfo = "gafplayer Mac";
+		};
 		9F7287F91A24914D00EE0234 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */;
@@ -204,6 +292,120 @@
 		50D7C96B17EBBEDF005D0B91 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		50D7C96D17EBBEE6005D0B91 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		50D7C96F17EBBEEC005D0B91 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		624FC931223A0E1300C4C749 /* GAFPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GAFPlayer.xcodeproj; sourceTree = "<group>"; };
+		624FC935223A0E1300C4C749 /* TagDefineAnimationMasks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineAnimationMasks.cpp; sourceTree = "<group>"; };
+		624FC936223A0E1300C4C749 /* GAFResourcesInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFResourcesInfo.h; sourceTree = "<group>"; };
+		624FC937223A0E1300C4C749 /* GAFHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFHeader.h; sourceTree = "<group>"; };
+		624FC938223A0E1300C4C749 /* TagDefineTimeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineTimeline.cpp; sourceTree = "<group>"; };
+		624FC939223A0E1300C4C749 /* GAFCachedTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFCachedTexture.cpp; sourceTree = "<group>"; };
+		624FC93A223A0E1300C4C749 /* GAFMask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFMask.cpp; sourceTree = "<group>"; };
+		624FC93B223A0E1300C4C749 /* GAFFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFFile.h; sourceTree = "<group>"; };
+		624FC93C223A0E1300C4C749 /* GAFTextureAtlasElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTextureAtlasElement.h; sourceTree = "<group>"; };
+		624FC93D223A0E1300C4C749 /* GAFTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTimeline.h; sourceTree = "<group>"; };
+		624FC93E223A0E1300C4C749 /* TagDefineAnimationObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineAnimationObjects.h; sourceTree = "<group>"; };
+		624FC93F223A0E1300C4C749 /* TagDefineAnimationFrames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineAnimationFrames.cpp; sourceTree = "<group>"; };
+		624FC940223A0E1300C4C749 /* GAFQuadCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFQuadCommand.cpp; sourceTree = "<group>"; };
+		624FC941223A0E1300C4C749 /* TagDefineAnimationFrames2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineAnimationFrames2.cpp; sourceTree = "<group>"; };
+		624FC942223A0E1300C4C749 /* GAFCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFCollections.h; sourceTree = "<group>"; };
+		624FC943223A0E1300C4C749 /* GAFAssetTextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFAssetTextureManager.cpp; sourceTree = "<group>"; };
+		624FC944223A0E1300C4C749 /* GAFLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFLoader.cpp; sourceTree = "<group>"; };
+		624FC945223A0E1300C4C749 /* TagDefineAnimationObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineAnimationObjects.cpp; sourceTree = "<group>"; };
+		624FC946223A0E1300C4C749 /* TagDefineSounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineSounds.h; sourceTree = "<group>"; };
+		624FC947223A0E1300C4C749 /* GAFTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTextField.h; sourceTree = "<group>"; };
+		624FC948223A0E1300C4C749 /* TagDefineTextField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineTextField.cpp; sourceTree = "<group>"; };
+		624FC949223A0E1300C4C749 /* GAFTextData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTextData.h; sourceTree = "<group>"; };
+		624FC94A223A0E1300C4C749 /* GAFTextData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFTextData.cpp; sourceTree = "<group>"; };
+		624FC94B223A0E1300C4C749 /* PrimitiveDeserializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PrimitiveDeserializer.cpp; sourceTree = "<group>"; };
+		624FC94C223A0E1300C4C749 /* GAFAnimationSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFAnimationSequence.cpp; sourceTree = "<group>"; };
+		624FC94D223A0E1300C4C749 /* TagDefineSequences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineSequences.h; sourceTree = "<group>"; };
+		624FC94E223A0E1300C4C749 /* TagDefineNamedParts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineNamedParts.cpp; sourceTree = "<group>"; };
+		624FC94F223A0E1300C4C749 /* TagDefineAnimationFrames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineAnimationFrames.h; sourceTree = "<group>"; };
+		624FC950223A0E1300C4C749 /* PrimitiveDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimitiveDeserializer.h; sourceTree = "<group>"; };
+		624FC951223A0E1300C4C749 /* GAFPrecompiled.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFPrecompiled.cpp; sourceTree = "<group>"; };
+		624FC952223A0E1300C4C749 /* GAFPrecompiled.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFPrecompiled.h; sourceTree = "<group>"; };
+		624FC953223A0E1300C4C749 /* GAFStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFStream.h; sourceTree = "<group>"; };
+		624FC954223A0E1300C4C749 /* GAFMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFMask.h; sourceTree = "<group>"; };
+		624FC955223A0E1300C4C749 /* TagDefineTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineTimeline.h; sourceTree = "<group>"; };
+		624FC956223A0E1300C4C749 /* GAFTextureAtlasElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFTextureAtlasElement.cpp; sourceTree = "<group>"; };
+		624FC957223A0E1300C4C749 /* mainpage.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mainpage.dox; sourceTree = "<group>"; };
+		624FC958223A0E1300C4C749 /* GAFStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFStream.cpp; sourceTree = "<group>"; };
+		624FC959223A0E1300C4C749 /* TagDefineAnimationMasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineAnimationMasks.h; sourceTree = "<group>"; };
+		624FC95A223A0E1300C4C749 /* GAFMovieClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFMovieClip.h; sourceTree = "<group>"; };
+		624FC95B223A0E1300C4C749 /* GAFTimelineAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTimelineAction.h; sourceTree = "<group>"; };
+		624FC95C223A0E1300C4C749 /* GAFShaderManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFShaderManager.cpp; sourceTree = "<group>"; };
+		624FC95D223A0E1300C4C749 /* GAFFilterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFFilterData.h; sourceTree = "<group>"; };
+		624FC95E223A0E1300C4C749 /* GAFPlayer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAFPlayer-Prefix.pch"; sourceTree = "<group>"; };
+		624FC95F223A0E1300C4C749 /* TagDefineAtlas3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineAtlas3.h; sourceTree = "<group>"; };
+		624FC960223A0E1300C4C749 /* GAFTimelineAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFTimelineAction.cpp; sourceTree = "<group>"; };
+		624FC961223A0E1300C4C749 /* TagDefineStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineStage.h; sourceTree = "<group>"; };
+		624FC962223A0E1300C4C749 /* GAFAssetTextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFAssetTextureManager.h; sourceTree = "<group>"; };
+		624FC963223A0E1300C4C749 /* TagDefineSequences.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineSequences.cpp; sourceTree = "<group>"; };
+		624FC964223A0E1300C4C749 /* GAFAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFAnimationFrame.h; sourceTree = "<group>"; };
+		624FC965223A0E1300C4C749 /* GAFMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFMacros.h; sourceTree = "<group>"; };
+		624FC966223A0E1300C4C749 /* GAFAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFAsset.cpp; sourceTree = "<group>"; };
+		624FC967223A0E1300C4C749 /* GAFTimeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFTimeline.cpp; sourceTree = "<group>"; };
+		624FC968223A0E1300C4C749 /* TagDefineAtlas3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineAtlas3.cpp; sourceTree = "<group>"; };
+		624FC969223A0E1300C4C749 /* GAFFilterData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFFilterData.cpp; sourceTree = "<group>"; };
+		624FC96A223A0E1300C4C749 /* GAFCachedTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFCachedTexture.h; sourceTree = "<group>"; };
+		624FC96B223A0E1300C4C749 /* GAFSubobjectState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFSubobjectState.cpp; sourceTree = "<group>"; };
+		624FC96C223A0E1300C4C749 /* GAFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFObject.h; sourceTree = "<group>"; };
+		624FC96D223A0E1300C4C749 /* GAFFilterManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFFilterManager.cpp; sourceTree = "<group>"; };
+		624FC96E223A0E1300C4C749 /* GAFSubobjectState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFSubobjectState.h; sourceTree = "<group>"; };
+		624FC96F223A0E1300C4C749 /* GAFQuadCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFQuadCommand.h; sourceTree = "<group>"; };
+		624FC970223A0E1300C4C749 /* GAFObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFObject.cpp; sourceTree = "<group>"; };
+		624FC971223A0E1300C4C749 /* GAFTextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFTextureAtlas.h; sourceTree = "<group>"; };
+		624FC972223A0E1300C4C749 /* GAFSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFSprite.cpp; sourceTree = "<group>"; };
+		624FC973223A0E1300C4C749 /* GAFSoundInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFSoundInfo.cpp; sourceTree = "<group>"; };
+		624FC974223A0E1300C4C749 /* GAFShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFShaderManager.h; sourceTree = "<group>"; };
+		624FC976223A0E1300C4C749 /* GaussianBlurFragmentShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = GaussianBlurFragmentShader.frag; sourceTree = "<group>"; };
+		624FC977223A0E1300C4C749 /* pcShader_PositionTextureAlpha_frag.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pcShader_PositionTextureAlpha_frag.frag; sourceTree = "<group>"; };
+		624FC978223A0E1300C4C749 /* GlowFragmentShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = GlowFragmentShader.frag; sourceTree = "<group>"; };
+		624FC979223A0E1300C4C749 /* GAFFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFFile.cpp; sourceTree = "<group>"; };
+		624FC97A223A0E1300C4C749 /* GAFSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFSprite.h; sourceTree = "<group>"; };
+		624FC97B223A0E1300C4C749 /* GAFLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFLoader.h; sourceTree = "<group>"; };
+		624FC97C223A0E1300C4C749 /* TagDefineSounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineSounds.cpp; sourceTree = "<group>"; };
+		624FC97D223A0E1300C4C749 /* GAFDelegates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFDelegates.h; sourceTree = "<group>"; };
+		624FC97E223A0E1300C4C749 /* TagDefineAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineAtlas.cpp; sourceTree = "<group>"; };
+		624FC97F223A0E1300C4C749 /* GAFTextField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFTextField.cpp; sourceTree = "<group>"; };
+		624FC980223A0E1300C4C749 /* TagDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefines.h; sourceTree = "<group>"; };
+		624FC981223A0E1300C4C749 /* GAFTextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFTextureAtlas.cpp; sourceTree = "<group>"; };
+		624FC982223A0E1300C4C749 /* TagDefineNamedParts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineNamedParts.h; sourceTree = "<group>"; };
+		624FC983223A0E1300C4C749 /* TagDefineStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TagDefineStage.cpp; sourceTree = "<group>"; };
+		624FC984223A0E1300C4C749 /* GAF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAF.h; sourceTree = "<group>"; };
+		624FC985223A0E1300C4C749 /* Doxyfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Doxyfile; sourceTree = "<group>"; };
+		624FC986223A0E1300C4C749 /* GAFAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFAsset.h; sourceTree = "<group>"; };
+		624FC987223A0E1300C4C749 /* GAF_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAF_JS.h; sourceTree = "<group>"; };
+		624FC988223A0E1300C4C749 /* TagDefineAnimationFrames2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineAnimationFrames2.h; sourceTree = "<group>"; };
+		624FC989223A0E1300C4C749 /* DefinitionTagBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinitionTagBase.h; sourceTree = "<group>"; };
+		624FC98A223A0E1300C4C749 /* GAFAnimationFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFAnimationFrame.cpp; sourceTree = "<group>"; };
+		624FC98B223A0E1300C4C749 /* GAFMovieClip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GAFMovieClip.cpp; sourceTree = "<group>"; };
+		624FC98C223A0E1300C4C749 /* TagDefineAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineAtlas.h; sourceTree = "<group>"; };
+		624FC98D223A0E1300C4C749 /* GAFFilterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFFilterManager.h; sourceTree = "<group>"; };
+		624FC98E223A0E1300C4C749 /* GAFSoundInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFSoundInfo.h; sourceTree = "<group>"; };
+		624FC98F223A0E1300C4C749 /* TagDefineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagDefineTextField.h; sourceTree = "<group>"; };
+		624FC990223A0E1300C4C749 /* GAFAnimationSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFAnimationSequence.h; sourceTree = "<group>"; };
+		624FC992223A0E1300C4C749 /* GAFPrecompiledShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAFPrecompiledShaders.h; sourceTree = "<group>"; };
+		624FC993223A0E1300C4C749 /* GAF_LUA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAF_LUA.h; sourceTree = "<group>"; };
+		624FCA9E223A0E1400C4C749 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		624FCA9F223A0E1400C4C749 /* conversions.yaml.diff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = conversions.yaml.diff; sourceTree = "<group>"; };
+		624FCAA1223A0E1400C4C749 /* userconf.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = userconf.ini; sourceTree = "<group>"; };
+		624FCAA2223A0E1400C4C749 /* gaf.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gaf.ini; sourceTree = "<group>"; };
+		624FCAA3223A0E1400C4C749 /* genbindings.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = genbindings.py; sourceTree = "<group>"; };
+		624FCAA5223A0E1400C4C749 /* gaf_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = gaf_lua_bindings.xcodeproj; sourceTree = "<group>"; };
+		624FCAA9223A0E1400C4C749 /* lua_gaf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_gaf.cpp; sourceTree = "<group>"; };
+		624FCAAA223A0E1400C4C749 /* lua_gaf_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_gaf_main.cpp; sourceTree = "<group>"; };
+		624FCAAC223A0E1400C4C749 /* GAFMovieClip.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GAFMovieClip.lua; sourceTree = "<group>"; };
+		624FCAAD223A0E1400C4C749 /* GAFAsset.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GAFAsset.lua; sourceTree = "<group>"; };
+		624FCAAE223A0E1400C4C749 /* GAFObject.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GAFObject.lua; sourceTree = "<group>"; };
+		624FCAAF223A0E1400C4C749 /* GAFSprite.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GAFSprite.lua; sourceTree = "<group>"; };
+		624FCAB0223A0E1400C4C749 /* GAFAnimationSequence.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GAFAnimationSequence.lua; sourceTree = "<group>"; };
+		624FCAB1223A0E1400C4C749 /* lua_gaf_api.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lua_gaf_api.lua; sourceTree = "<group>"; };
+		624FCAB2223A0E1400C4C749 /* GAFAssetTextureManager.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GAFAssetTextureManager.lua; sourceTree = "<group>"; };
+		624FCAB3223A0E1400C4C749 /* lua_gaf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_gaf.hpp; sourceTree = "<group>"; };
+		624FCAB4223A0E1400C4C749 /* lua_gaf_main.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_gaf_main.hpp; sourceTree = "<group>"; };
+		624FCAB6223A0E1400C4C749 /* libGAFLuaBinding.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libGAFLuaBinding.sln; sourceTree = "<group>"; };
+		624FCAB7223A0E1400C4C749 /* libGAFLuaBinding.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = libGAFLuaBinding.vcxproj; sourceTree = "<group>"; };
+		624FCAB8223A0E1400C4C749 /* Library.props */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Library.props; sourceTree = "<group>"; };
 		9F7288311A24957700EE0234 /* HelperFunc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperFunc.cpp; sourceTree = "<group>"; };
 		9F7288321A24957700EE0234 /* HelperFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunc.h; sourceTree = "<group>"; };
 		9F7288331A24957700EE0234 /* cocos2dx_extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2dx_extra.h; sourceTree = "<group>"; };
@@ -554,6 +756,226 @@
 				5023817517EBBE3400990C9B /* Prefix.pch */,
 			);
 			path = mac;
+			sourceTree = "<group>";
+		};
+		624FC6EC223A0E1300C4C749 /* Cocos2dxGAFPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				624FC80A223A0E1300C4C749 /* Library */,
+				624FCA9D223A0E1300C4C749 /* lua_bindings */,
+			);
+			name = Cocos2dxGAFPlayer;
+			path = ../Classes/Cocos2dxGAFPlayer;
+			sourceTree = "<group>";
+		};
+		624FC80A223A0E1300C4C749 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				624FC931223A0E1300C4C749 /* GAFPlayer.xcodeproj */,
+				624FC934223A0E1300C4C749 /* Sources */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		624FC932223A0E1300C4C749 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				624FCAD0223A0E1400C4C749 /* libgafplayer.a */,
+				624FCAD2223A0E1400C4C749 /* libgafplayer Mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		624FC934223A0E1300C4C749 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				624FC935223A0E1300C4C749 /* TagDefineAnimationMasks.cpp */,
+				624FC936223A0E1300C4C749 /* GAFResourcesInfo.h */,
+				624FC937223A0E1300C4C749 /* GAFHeader.h */,
+				624FC938223A0E1300C4C749 /* TagDefineTimeline.cpp */,
+				624FC939223A0E1300C4C749 /* GAFCachedTexture.cpp */,
+				624FC93A223A0E1300C4C749 /* GAFMask.cpp */,
+				624FC93B223A0E1300C4C749 /* GAFFile.h */,
+				624FC93C223A0E1300C4C749 /* GAFTextureAtlasElement.h */,
+				624FC93D223A0E1300C4C749 /* GAFTimeline.h */,
+				624FC93E223A0E1300C4C749 /* TagDefineAnimationObjects.h */,
+				624FC93F223A0E1300C4C749 /* TagDefineAnimationFrames.cpp */,
+				624FC940223A0E1300C4C749 /* GAFQuadCommand.cpp */,
+				624FC941223A0E1300C4C749 /* TagDefineAnimationFrames2.cpp */,
+				624FC942223A0E1300C4C749 /* GAFCollections.h */,
+				624FC943223A0E1300C4C749 /* GAFAssetTextureManager.cpp */,
+				624FC944223A0E1300C4C749 /* GAFLoader.cpp */,
+				624FC945223A0E1300C4C749 /* TagDefineAnimationObjects.cpp */,
+				624FC946223A0E1300C4C749 /* TagDefineSounds.h */,
+				624FC947223A0E1300C4C749 /* GAFTextField.h */,
+				624FC948223A0E1300C4C749 /* TagDefineTextField.cpp */,
+				624FC949223A0E1300C4C749 /* GAFTextData.h */,
+				624FC94A223A0E1300C4C749 /* GAFTextData.cpp */,
+				624FC94B223A0E1300C4C749 /* PrimitiveDeserializer.cpp */,
+				624FC94C223A0E1300C4C749 /* GAFAnimationSequence.cpp */,
+				624FC94D223A0E1300C4C749 /* TagDefineSequences.h */,
+				624FC94E223A0E1300C4C749 /* TagDefineNamedParts.cpp */,
+				624FC94F223A0E1300C4C749 /* TagDefineAnimationFrames.h */,
+				624FC950223A0E1300C4C749 /* PrimitiveDeserializer.h */,
+				624FC951223A0E1300C4C749 /* GAFPrecompiled.cpp */,
+				624FC952223A0E1300C4C749 /* GAFPrecompiled.h */,
+				624FC953223A0E1300C4C749 /* GAFStream.h */,
+				624FC954223A0E1300C4C749 /* GAFMask.h */,
+				624FC955223A0E1300C4C749 /* TagDefineTimeline.h */,
+				624FC956223A0E1300C4C749 /* GAFTextureAtlasElement.cpp */,
+				624FC957223A0E1300C4C749 /* mainpage.dox */,
+				624FC958223A0E1300C4C749 /* GAFStream.cpp */,
+				624FC959223A0E1300C4C749 /* TagDefineAnimationMasks.h */,
+				624FC95A223A0E1300C4C749 /* GAFMovieClip.h */,
+				624FC95B223A0E1300C4C749 /* GAFTimelineAction.h */,
+				624FC95C223A0E1300C4C749 /* GAFShaderManager.cpp */,
+				624FC95D223A0E1300C4C749 /* GAFFilterData.h */,
+				624FC95E223A0E1300C4C749 /* GAFPlayer-Prefix.pch */,
+				624FC95F223A0E1300C4C749 /* TagDefineAtlas3.h */,
+				624FC960223A0E1300C4C749 /* GAFTimelineAction.cpp */,
+				624FC961223A0E1300C4C749 /* TagDefineStage.h */,
+				624FC962223A0E1300C4C749 /* GAFAssetTextureManager.h */,
+				624FC963223A0E1300C4C749 /* TagDefineSequences.cpp */,
+				624FC964223A0E1300C4C749 /* GAFAnimationFrame.h */,
+				624FC965223A0E1300C4C749 /* GAFMacros.h */,
+				624FC966223A0E1300C4C749 /* GAFAsset.cpp */,
+				624FC967223A0E1300C4C749 /* GAFTimeline.cpp */,
+				624FC968223A0E1300C4C749 /* TagDefineAtlas3.cpp */,
+				624FC969223A0E1300C4C749 /* GAFFilterData.cpp */,
+				624FC96A223A0E1300C4C749 /* GAFCachedTexture.h */,
+				624FC96B223A0E1300C4C749 /* GAFSubobjectState.cpp */,
+				624FC96C223A0E1300C4C749 /* GAFObject.h */,
+				624FC96D223A0E1300C4C749 /* GAFFilterManager.cpp */,
+				624FC96E223A0E1300C4C749 /* GAFSubobjectState.h */,
+				624FC96F223A0E1300C4C749 /* GAFQuadCommand.h */,
+				624FC970223A0E1300C4C749 /* GAFObject.cpp */,
+				624FC971223A0E1300C4C749 /* GAFTextureAtlas.h */,
+				624FC972223A0E1300C4C749 /* GAFSprite.cpp */,
+				624FC973223A0E1300C4C749 /* GAFSoundInfo.cpp */,
+				624FC974223A0E1300C4C749 /* GAFShaderManager.h */,
+				624FC975223A0E1300C4C749 /* Shaders */,
+				624FC979223A0E1300C4C749 /* GAFFile.cpp */,
+				624FC97A223A0E1300C4C749 /* GAFSprite.h */,
+				624FC97B223A0E1300C4C749 /* GAFLoader.h */,
+				624FC97C223A0E1300C4C749 /* TagDefineSounds.cpp */,
+				624FC97D223A0E1300C4C749 /* GAFDelegates.h */,
+				624FC97E223A0E1300C4C749 /* TagDefineAtlas.cpp */,
+				624FC97F223A0E1300C4C749 /* GAFTextField.cpp */,
+				624FC980223A0E1300C4C749 /* TagDefines.h */,
+				624FC981223A0E1300C4C749 /* GAFTextureAtlas.cpp */,
+				624FC982223A0E1300C4C749 /* TagDefineNamedParts.h */,
+				624FC983223A0E1300C4C749 /* TagDefineStage.cpp */,
+				624FC984223A0E1300C4C749 /* GAF.h */,
+				624FC985223A0E1300C4C749 /* Doxyfile */,
+				624FC986223A0E1300C4C749 /* GAFAsset.h */,
+				624FC987223A0E1300C4C749 /* GAF_JS.h */,
+				624FC988223A0E1300C4C749 /* TagDefineAnimationFrames2.h */,
+				624FC989223A0E1300C4C749 /* DefinitionTagBase.h */,
+				624FC98A223A0E1300C4C749 /* GAFAnimationFrame.cpp */,
+				624FC98B223A0E1300C4C749 /* GAFMovieClip.cpp */,
+				624FC98C223A0E1300C4C749 /* TagDefineAtlas.h */,
+				624FC98D223A0E1300C4C749 /* GAFFilterManager.h */,
+				624FC98E223A0E1300C4C749 /* GAFSoundInfo.h */,
+				624FC98F223A0E1300C4C749 /* TagDefineTextField.h */,
+				624FC990223A0E1300C4C749 /* GAFAnimationSequence.h */,
+				624FC991223A0E1300C4C749 /* ShadersPrecompiled */,
+				624FC993223A0E1300C4C749 /* GAF_LUA.h */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		624FC975223A0E1300C4C749 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				624FC976223A0E1300C4C749 /* GaussianBlurFragmentShader.frag */,
+				624FC977223A0E1300C4C749 /* pcShader_PositionTextureAlpha_frag.frag */,
+				624FC978223A0E1300C4C749 /* GlowFragmentShader.frag */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		624FC991223A0E1300C4C749 /* ShadersPrecompiled */ = {
+			isa = PBXGroup;
+			children = (
+				624FC992223A0E1300C4C749 /* GAFPrecompiledShaders.h */,
+			);
+			path = ShadersPrecompiled;
+			sourceTree = "<group>";
+		};
+		624FCA9D223A0E1300C4C749 /* lua_bindings */ = {
+			isa = PBXGroup;
+			children = (
+				624FCA9E223A0E1400C4C749 /* CMakeLists.txt */,
+				624FCA9F223A0E1400C4C749 /* conversions.yaml.diff */,
+				624FCAA0223A0E1400C4C749 /* tolua */,
+				624FCAA4223A0E1400C4C749 /* proj.ios_mac */,
+				624FCAA8223A0E1400C4C749 /* bindings */,
+				624FCAB5223A0E1400C4C749 /* proj.win32 */,
+			);
+			path = lua_bindings;
+			sourceTree = "<group>";
+		};
+		624FCAA0223A0E1400C4C749 /* tolua */ = {
+			isa = PBXGroup;
+			children = (
+				624FCAA1223A0E1400C4C749 /* userconf.ini */,
+				624FCAA2223A0E1400C4C749 /* gaf.ini */,
+				624FCAA3223A0E1400C4C749 /* genbindings.py */,
+			);
+			path = tolua;
+			sourceTree = "<group>";
+		};
+		624FCAA4223A0E1400C4C749 /* proj.ios_mac */ = {
+			isa = PBXGroup;
+			children = (
+				624FCAA5223A0E1400C4C749 /* gaf_lua_bindings.xcodeproj */,
+			);
+			path = proj.ios_mac;
+			sourceTree = "<group>";
+		};
+		624FCAA6223A0E1400C4C749 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				624FCACA223A0E1400C4C749 /* libgaf_lua_bindings iOS.a */,
+				624FCACC223A0E1400C4C749 /* libgaf_lua_bindings Mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		624FCAA8223A0E1400C4C749 /* bindings */ = {
+			isa = PBXGroup;
+			children = (
+				624FCAA9223A0E1400C4C749 /* lua_gaf.cpp */,
+				624FCAAA223A0E1400C4C749 /* lua_gaf_main.cpp */,
+				624FCAAB223A0E1400C4C749 /* api */,
+				624FCAB3223A0E1400C4C749 /* lua_gaf.hpp */,
+				624FCAB4223A0E1400C4C749 /* lua_gaf_main.hpp */,
+			);
+			path = bindings;
+			sourceTree = "<group>";
+		};
+		624FCAAB223A0E1400C4C749 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				624FCAAC223A0E1400C4C749 /* GAFMovieClip.lua */,
+				624FCAAD223A0E1400C4C749 /* GAFAsset.lua */,
+				624FCAAE223A0E1400C4C749 /* GAFObject.lua */,
+				624FCAAF223A0E1400C4C749 /* GAFSprite.lua */,
+				624FCAB0223A0E1400C4C749 /* GAFAnimationSequence.lua */,
+				624FCAB1223A0E1400C4C749 /* lua_gaf_api.lua */,
+				624FCAB2223A0E1400C4C749 /* GAFAssetTextureManager.lua */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+		624FCAB5223A0E1400C4C749 /* proj.win32 */ = {
+			isa = PBXGroup;
+			children = (
+				624FCAB6223A0E1400C4C749 /* libGAFLuaBinding.sln */,
+				624FCAB7223A0E1400C4C749 /* libGAFLuaBinding.vcxproj */,
+				624FCAB8223A0E1400C4C749 /* Library.props */,
+			);
+			path = proj.win32;
 			sourceTree = "<group>";
 		};
 		9F7287FE1A24957700EE0234 /* quick-src */ = {
@@ -980,6 +1402,7 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				624FC6EC223A0E1300C4C749 /* Cocos2dxGAFPlayer */,
 				9F7287FE1A24957700EE0234 /* quick-src */,
 				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
@@ -1049,6 +1472,14 @@
 					ProductGroup = C03781AF18BF654500FE4F13 /* Products */;
 					ProjectRef = C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */;
 				},
+				{
+					ProductGroup = 624FCAA6223A0E1400C4C749 /* Products */;
+					ProjectRef = 624FCAA5223A0E1400C4C749 /* gaf_lua_bindings.xcodeproj */;
+				},
+				{
+					ProductGroup = 624FC932223A0E1300C4C749 /* Products */;
+					ProjectRef = 624FC931223A0E1300C4C749 /* GAFPlayer.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1072,6 +1503,34 @@
 			remoteRef = 15A8A4161834BDA200142BE0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		624FCACA223A0E1400C4C749 /* libgaf_lua_bindings iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libgaf_lua_bindings iOS.a";
+			remoteRef = 624FCAC9223A0E1400C4C749 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		624FCACC223A0E1400C4C749 /* libgaf_lua_bindings Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libgaf_lua_bindings Mac.a";
+			remoteRef = 624FCACB223A0E1400C4C749 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		624FCAD0223A0E1400C4C749 /* libgafplayer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libgafplayer.a;
+			remoteRef = 624FCACF223A0E1400C4C749 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		624FCAD2223A0E1400C4C749 /* libgafplayer Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libgafplayer Mac.a";
+			remoteRef = 624FCAD1223A0E1400C4C749 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		9F7287FA1A24914D00EE0234 /* libcocos2d iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1093,9 +1552,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				624FCD94223A0E1500C4C749 /* CMakeLists.txt in Resources */,
+				624FCD9F223A0E1500C4C749 /* GAFAnimationSequence.lua in Resources */,
+				624FCD9B223A0E1500C4C749 /* GAFMovieClip.lua in Resources */,
+				624FCD9D223A0E1500C4C749 /* GAFObject.lua in Resources */,
+				624FCDA1223A0E1500C4C749 /* GAFAssetTextureManager.lua in Resources */,
+				624FCCDA223A0E1400C4C749 /* Doxyfile in Resources */,
+				624FCD97223A0E1500C4C749 /* gaf.ini in Resources */,
+				624FCCD3223A0E1400C4C749 /* GlowFragmentShader.frag in Resources */,
 				F405C6C919ED14AA005AD31C /* MainMenu.xib in Resources */,
+				624FCD98223A0E1500C4C749 /* genbindings.py in Resources */,
+				624FCDA4223A0E1500C4C749 /* Library.props in Resources */,
+				624FCDA3223A0E1500C4C749 /* libGAFLuaBinding.vcxproj in Resources */,
+				624FCD9C223A0E1500C4C749 /* GAFAsset.lua in Resources */,
 				9FD01B1119F8C69C005E0C49 /* ConsoleWindow.xib in Resources */,
+				624FCD96223A0E1500C4C749 /* userconf.ini in Resources */,
 				5023817617EBBE3400990C9B /* Icon.icns in Resources */,
+				624FCDA2223A0E1500C4C749 /* libGAFLuaBinding.sln in Resources */,
+				624FCDA0223A0E1500C4C749 /* lua_gaf_api.lua in Resources */,
+				624FCD9E223A0E1500C4C749 /* GAFSprite.lua in Resources */,
+				624FCD95223A0E1500C4C749 /* conversions.yaml.diff in Resources */,
+				624FCCD2223A0E1400C4C749 /* pcShader_PositionTextureAlpha_frag.frag in Resources */,
+				624FCCD1223A0E1400C4C749 /* GaussianBlurFragmentShader.frag in Resources */,
+				624FCCC3223A0E1400C4C749 /* mainpage.dox in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,19 +1587,27 @@
 			files = (
 				9F7289381A24957700EE0234 /* CCGrayFilter.cpp in Sources */,
 				9FD01B2519F8C6A3005E0C49 /* PlayerEditBoxServiceMac.mm in Sources */,
+				624FCCB2223A0E1400C4C749 /* TagDefineAnimationMasks.cpp in Sources */,
+				624FCCC1223A0E1400C4C749 /* GAFPrecompiled.cpp in Sources */,
+				624FCCD7223A0E1400C4C749 /* GAFTextField.cpp in Sources */,
 				9FD01B2319F8C6A3005E0C49 /* NSApplication+SheetAdditions.m in Sources */,
 				9F7289651A24957700EE0234 /* lua_cocos2dx_extension_filter_auto.cpp in Sources */,
 				9F7289791A24957700EE0234 /* ReachabilityIOSMac.m in Sources */,
+				624FCCBF223A0E1400C4C749 /* GAFAnimationSequence.cpp in Sources */,
 				9FD0193319F8C4D4005E0C49 /* PlayerSettings.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				9FD01B2819F8C6A3005E0C49 /* PlayerMenuServiceMac.mm in Sources */,
+				624FCCBB223A0E1400C4C749 /* TagDefineAnimationObjects.cpp in Sources */,
 				494047851A31C0A6004CECA6 /* nanovg.c in Sources */,
 				9F72897B1A24957700EE0234 /* CCNative.mm in Sources */,
+				624FCCCA223A0E1400C4C749 /* TagDefineAtlas3.cpp in Sources */,
 				9F72893C1A24957700EE0234 /* CCRGBFilter.cpp in Sources */,
 				9F7289911A24957700EE0234 /* sqlite3.c in Sources */,
 				9F7289901A24957700EE0234 /* lsqlite3.c in Sources */,
 				9F7289421A24957700EE0234 /* ccFilterShaders.cpp in Sources */,
 				9F72898E1A24957700EE0234 /* lfs.c in Sources */,
+				624FCCC6223A0E1400C4C749 /* GAFTimelineAction.cpp in Sources */,
+				624FCCC9223A0E1400C4C749 /* GAFTimeline.cpp in Sources */,
 				0AA993221DAF389F002339DC /* pb.c in Sources */,
 				9F72893D1A24957700EE0234 /* CCSaturationFilter.cpp in Sources */,
 				49C655D31A36C71400603AF5 /* lua_cocos2dx_extension_nanovg_manual.cpp in Sources */,
@@ -1130,27 +1617,38 @@
 				0450D5F61D05B05F00B9B05E /* unqlite.c in Sources */,
 				9FD01B2919F8C6A3005E0C49 /* PlayerMessageBoxServiceMac.mm in Sources */,
 				9FD01B2D19F8C6BA005E0C49 /* AppController.mm in Sources */,
+				624FCCBE223A0E1400C4C749 /* PrimitiveDeserializer.cpp in Sources */,
 				9F7289351A24957700EE0234 /* CCExposureFilter.cpp in Sources */,
 				9F7289341A24957700EE0234 /* CCDropShadowFilter.cpp in Sources */,
 				9F7289301A24957700EE0234 /* CCBlurFilter.cpp in Sources */,
 				9F72893B1A24957700EE0234 /* CCMaskFilter.cpp in Sources */,
 				9F7289921A24957700EE0234 /* lua_extensions_more.c in Sources */,
 				9F7289781A24957700EE0234 /* CCNetworkIOSMac.mm in Sources */,
+				624FCCCE223A0E1400C4C749 /* GAFObject.cpp in Sources */,
+				624FCCCF223A0E1400C4C749 /* GAFSprite.cpp in Sources */,
 				9FD0193219F8C4D4005E0C49 /* PlayerServiceProtocol.cpp in Sources */,
+				624FCCD4223A0E1400C4C749 /* GAFFile.cpp in Sources */,
 				0A532A2D1E62B2F8004E2B32 /* lsproto.c in Sources */,
 				9FD0192E19F8C4D4005E0C49 /* PlayerLuaCore.cpp in Sources */,
+				624FCCBC223A0E1400C4C749 /* TagDefineTextField.cpp in Sources */,
+				624FCCCB223A0E1400C4C749 /* GAFFilterData.cpp in Sources */,
+				624FCCC4223A0E1400C4C749 /* GAFStream.cpp in Sources */,
 				C033B51D191B337200D06937 /* VisibleRect.cpp in Sources */,
+				624FCD99223A0E1500C4C749 /* lua_gaf.cpp in Sources */,
 				9F7289611A24957700EE0234 /* cocos2dx_extra_luabinding.cpp in Sources */,
 				9F72897A1A24957700EE0234 /* CCCryptoMac.mm in Sources */,
 				9F7289361A24957700EE0234 /* CCFilter.cpp in Sources */,
 				9F72898B1A24957700EE0234 /* strbuf.c in Sources */,
 				9F72893A1A24957700EE0234 /* CCHueFilter.cpp in Sources */,
 				9F7289311A24957700EE0234 /* CCBrightnessFilter.cpp in Sources */,
+				624FCCC0223A0E1400C4C749 /* TagDefineNamedParts.cpp in Sources */,
 				9FD0193019F8C4D4005E0C49 /* PlayerMenuServiceProtocol.cpp in Sources */,
+				624FCCB9223A0E1400C4C749 /* GAFAssetTextureManager.cpp in Sources */,
 				9F7289371A24957700EE0234 /* CCGammaFilter.cpp in Sources */,
 				9FD0193119F8C4D4005E0C49 /* PlayerProtocol.cpp in Sources */,
 				0A5237C01BCD45E000B39D5F /* UncaughtExceptionHandler.mm in Sources */,
 				9F72897D1A24957700EE0234 /* OpenUDIDMac.m in Sources */,
+				624FCCC2223A0E1400C4C749 /* GAFTextureAtlasElement.cpp in Sources */,
 				9F72893E1A24957700EE0234 /* CCSepiaFilter.cpp in Sources */,
 				9F7289391A24957700EE0234 /* CCHazeFilter.cpp in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
@@ -1158,35 +1656,56 @@
 				9FD0193519F8C4D4005E0C49 /* PlayerUtils.cpp in Sources */,
 				9F72898A1A24957700EE0234 /* lua_cjson.c in Sources */,
 				49C655D01A3692EF00603AF5 /* lua_cocos2dx_extension_nanovg_auto.cpp in Sources */,
+				624FCD9A223A0E1500C4C749 /* lua_gaf_main.cpp in Sources */,
 				0A532A8D1E62FE19004E2B32 /* lpcode.c in Sources */,
+				624FCCB7223A0E1400C4C749 /* GAFQuadCommand.cpp in Sources */,
 				9F72893F1A24957700EE0234 /* CCSharpenFilter.cpp in Sources */,
 				0A532A8C1E62FE19004E2B32 /* lpcap.c in Sources */,
 				9F7289631A24957700EE0234 /* HelperFunc_luabinding.cpp in Sources */,
 				9F72892C1A24957700EE0234 /* libbase64.c in Sources */,
 				9FD01B1219F8C69C005E0C49 /* ConsoleWindowController.m in Sources */,
+				624FCCD5223A0E1400C4C749 /* TagDefineSounds.cpp in Sources */,
+				624FCCB8223A0E1400C4C749 /* TagDefineAnimationFrames2.cpp in Sources */,
+				624FCCB6223A0E1400C4C749 /* TagDefineAnimationFrames.cpp in Sources */,
 				9F7289661A24957700EE0234 /* CCHTTPRequest.cpp in Sources */,
 				9F72892D1A24957700EE0234 /* CCCrypto.cpp in Sources */,
 				9FD01B2A19F8C6A3005E0C49 /* PlayerTaskServiceMac.mm in Sources */,
 				9F7289321A24957700EE0234 /* CCContrastFilter.cpp in Sources */,
+				624FCCDC223A0E1400C4C749 /* GAFMovieClip.cpp in Sources */,
 				0A532A2E1E62B2F8004E2B32 /* sproto.c in Sources */,
+				624FCCB3223A0E1400C4C749 /* TagDefineTimeline.cpp in Sources */,
 				9F7289941A24957700EE0234 /* ProjectConfig.cpp in Sources */,
 				49C655C41A35403D00603AF5 /* NVGDrawNode.cpp in Sources */,
 				9F7289931A24957700EE0234 /* lua_zlib.c in Sources */,
+				624FCCC5223A0E1400C4C749 /* GAFShaderManager.cpp in Sources */,
 				9FD0192F19F8C4D4005E0C49 /* PlayerLuaCoreManual.cpp in Sources */,
+				624FCCB4223A0E1400C4C749 /* GAFCachedTexture.cpp in Sources */,
+				624FCCDB223A0E1400C4C749 /* GAFAnimationFrame.cpp in Sources */,
+				624FCCCD223A0E1400C4C749 /* GAFFilterManager.cpp in Sources */,
 				9F72897C1A24957700EE0234 /* CCNativeMac.mm in Sources */,
 				9F7289411A24957700EE0234 /* CCFilteredSprite.cpp in Sources */,
 				0A532A8F1E62FE19004E2B32 /* lptree.c in Sources */,
+				624FCCC7223A0E1400C4C749 /* TagDefineSequences.cpp in Sources */,
+				624FCCD9223A0E1400C4C749 /* TagDefineStage.cpp in Sources */,
 				9FD01B2719F8C6A3005E0C49 /* PlayerMac.mm in Sources */,
 				9F7289401A24957700EE0234 /* CCTestFilter.cpp in Sources */,
 				0A532A901E62FE19004E2B32 /* lpvm.c in Sources */,
+				624FCCD6223A0E1400C4C749 /* TagDefineAtlas.cpp in Sources */,
+				624FCCCC223A0E1400C4C749 /* GAFSubobjectState.cpp in Sources */,
 				9F7289591A24957700EE0234 /* FilterShaders.cpp in Sources */,
+				624FCCBD223A0E1400C4C749 /* GAFTextData.cpp in Sources */,
 				9F7289671A24957700EE0234 /* CCNetwork.cpp in Sources */,
+				624FCCD8223A0E1400C4C749 /* GAFTextureAtlas.cpp in Sources */,
+				624FCCC8223A0E1400C4C749 /* GAFAsset.cpp in Sources */,
 				9F7289331A24957700EE0234 /* CCCustomFilter.cpp in Sources */,
 				0A532A8E1E62FE19004E2B32 /* lpprint.c in Sources */,
 				9FD01B2619F8C6A3005E0C49 /* PlayerFileDialogServiceMac.mm in Sources */,
 				9F7289891A24957700EE0234 /* fpconv.c in Sources */,
 				9F72898F1A24957700EE0234 /* lpack.c in Sources */,
+				624FCCD0223A0E1400C4C749 /* GAFSoundInfo.cpp in Sources */,
+				624FCCB5223A0E1400C4C749 /* GAFMask.cpp in Sources */,
 				4940478A1A31C0EF004CECA6 /* NVGNode.cpp in Sources */,
+				624FCCBA223A0E1400C4C749 /* GAFLoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
