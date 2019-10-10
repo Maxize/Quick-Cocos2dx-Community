@@ -1927,6 +1927,10 @@
 		6246424C2021D20500F2FF07 /* CCAsyncTaskPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 624642492021D20500F2FF07 /* CCAsyncTaskPool.h */; };
 		6246424D2021D20500F2FF07 /* CCAsyncTaskPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6246424A2021D20500F2FF07 /* CCAsyncTaskPool.cpp */; };
 		6246424E2021D20500F2FF07 /* CCAsyncTaskPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6246424A2021D20500F2FF07 /* CCAsyncTaskPool.cpp */; };
+		62EFDAC4230D259C00756D49 /* InitGlobalCurl.h in Headers */ = {isa = PBXBuildFile; fileRef = 62EFDAC3230D259C00756D49 /* InitGlobalCurl.h */; };
+		62EFDAC5230D259C00756D49 /* InitGlobalCurl.h in Headers */ = {isa = PBXBuildFile; fileRef = 62EFDAC3230D259C00756D49 /* InitGlobalCurl.h */; };
+		62EFDAC7230D3D4600756D49 /* InitGlobalCurl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62EFDAC6230D3D4600756D49 /* InitGlobalCurl.cpp */; };
+		62EFDAC8230D3D4600756D49 /* InitGlobalCurl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62EFDAC6230D3D4600756D49 /* InitGlobalCurl.cpp */; };
 		A07A4CAF1783777C0073F6A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1551A342158F2AB200E66CFE /* Foundation.framework */; };
 		B2165EEA19921124000BE3E6 /* CCPrimitiveCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B257B45E198A353E00D9A687 /* CCPrimitiveCommand.cpp */; };
 		B217703C1977ECB4009EE11B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217703B1977ECB4009EE11B /* IOKit.framework */; };
@@ -3029,6 +3033,8 @@
 		624642492021D20500F2FF07 /* CCAsyncTaskPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAsyncTaskPool.h; path = ../base/CCAsyncTaskPool.h; sourceTree = "<group>"; };
 		6246424A2021D20500F2FF07 /* CCAsyncTaskPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCAsyncTaskPool.cpp; path = ../base/CCAsyncTaskPool.cpp; sourceTree = "<group>"; };
 		62C186B620B552E9009BAD18 /* panels_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = panels_close.png; path = ../../cocos/panels_close.png; sourceTree = "<group>"; };
+		62EFDAC3230D259C00756D49 /* InitGlobalCurl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitGlobalCurl.h; sourceTree = "<group>"; };
+		62EFDAC6230D3D4600756D49 /* InitGlobalCurl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InitGlobalCurl.cpp; sourceTree = "<group>"; };
 		A07A4D641783777C0073F6A7 /* libcocos2d iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B217703B1977ECB4009EE11B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		B217703D1977ECC1009EE11B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -4504,6 +4510,8 @@
 		46A167981807AF4D005B8026 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				62EFDAC6230D3D4600756D49 /* InitGlobalCurl.cpp */,
+				62EFDAC3230D259C00756D49 /* InitGlobalCurl.h */,
 				292DB15D19B461CA00A80320 /* ExtensionDeprecated.cpp */,
 				292DB15E19B461CA00A80320 /* ExtensionDeprecated.h */,
 				46A167D21807AF4D005B8026 /* cocos-ext.h */,
@@ -5730,6 +5738,7 @@
 				50ABC00F1926664800A911A9 /* CCFileUtils.h in Headers */,
 				15AE1A3719AAD3D500C27E9E /* b2PolygonShape.h in Headers */,
 				15AE1B5419AADA9900C27E9E /* UIRichText.h in Headers */,
+				62EFDAC4230D259C00756D49 /* InitGlobalCurl.h in Headers */,
 				0A2111001D71569200002345 /* AnimationStateData.h in Headers */,
 				0A2111201D71569200002345 /* BoundingBoxAttachment.h in Headers */,
 				50ABBE3B1925AB6F00A911A9 /* CCData.h in Headers */,
@@ -6000,6 +6009,7 @@
 				15AE1AA619AAD40300C27E9E /* b2Fixture.h in Headers */,
 				15AE1BBA19AADFF000C27E9E /* HttpClient.h in Headers */,
 				0A2111771D71569200002345 /* Skin.h in Headers */,
+				62EFDAC5230D259C00756D49 /* InitGlobalCurl.h in Headers */,
 				292DB14619B4574100A80320 /* UIEditBoxImpl-android.h in Headers */,
 				15AE1B9419AADA9A00C27E9E /* GUIDefine.h in Headers */,
 				15AE183B19AAD2F700C27E9E /* CCRay.h in Headers */,
@@ -6386,6 +6396,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 1551A334158F2AB200E66CFE;
@@ -6494,6 +6505,7 @@
 				1A570075180BC5A10088DEC7 /* CCActionGrid3D.cpp in Sources */,
 				382383F81A258FA7002C4610 /* idl_gen_general.cpp in Sources */,
 				15AE1C1319AAE2C600C27E9E /* CCPhysicsSprite.cpp in Sources */,
+				62EFDAC7230D3D4600756D49 /* InitGlobalCurl.cpp in Sources */,
 				0A2111501D71569200002345 /* RegionAttachment.c in Sources */,
 				B375107A1823AC9F00B3BA6A /* CCPhysicsWorldInfo_chipmunk.cpp in Sources */,
 				382384131A259092002C4610 /* NodeReaderProtocol.cpp in Sources */,
@@ -6962,6 +6974,7 @@
 				15AE1BF519AAE01E00C27E9E /* CCControlSlider.cpp in Sources */,
 				15AE181719AAD2F700C27E9E /* CCAttachNode.cpp in Sources */,
 				15AE18B719AAD33D00C27E9E /* CCBSequenceProperty.cpp in Sources */,
+				62EFDAC8230D3D4600756D49 /* InitGlobalCurl.cpp in Sources */,
 				15AE18B919AAD33D00C27E9E /* CCControlButtonLoader.cpp in Sources */,
 				50ABBE761925AB6F00A911A9 /* CCEventListenerTouch.cpp in Sources */,
 				15AE1AD219AAD40300C27E9E /* b2RopeJoint.cpp in Sources */,
@@ -7426,7 +7439,7 @@
 					"\"$(SRCROOT)/../external/curl/prebuilt/mac\"",
 				);
 				MACH_O_TYPE = staticlib;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external/curl/include/mac/curl";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external/curl/include/mac";
 			};
 			name = Debug;
 		};
@@ -7461,7 +7474,7 @@
 					"\"$(SRCROOT)/../external/curl/prebuilt/mac\"",
 				);
 				MACH_O_TYPE = staticlib;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external/curl/include/mac/curl";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../external/curl/include/mac";
 			};
 			name = Release;
 		};

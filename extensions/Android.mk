@@ -33,6 +33,7 @@ assets-manager/Manifest.cpp \
 assets-manager/AssetsManagerEx.cpp \
 assets-manager/CCEventAssetsManagerEx.cpp \
 assets-manager/CCEventListenerAssetsManagerEx.cpp \
+InitGlobalCurl.cpp \
 
 LOCAL_STATIC_LIBRARIES += cocos_curl_static
 endif
@@ -48,6 +49,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/. \
                            $(LOCAL_PATH)/.. \
                            $(LOCAL_PATH)/GUI/CCControlExtension \
-                           $(LOCAL_PATH)/GUI/CCScrollView 
-                    
+                           $(LOCAL_PATH)/GUI/CCScrollView
+
 include $(BUILD_STATIC_LIBRARY)

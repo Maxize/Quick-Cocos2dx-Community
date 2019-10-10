@@ -181,7 +181,9 @@ end
 
 function SocketTCP:_disconnect()
 	self.isConnected = false
-	self.tcp:shutdown()
+	if (self.tcp) then
+		self.tcp:shutdown()
+	end
 	self:dispatchEvent({name=SocketTCP.EVENT_CLOSED})
 end
 

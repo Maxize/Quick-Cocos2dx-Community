@@ -2200,10 +2200,12 @@ static int tolua_cocos2d_Node_getPosition(lua_State* tolua_S)
         float x = (float)  tolua_tonumber(tolua_S,2,0);
         float y = (float)  tolua_tonumber(tolua_S,3,0);
         
-        self->getPosition(&x,&y);
-        
-        tolua_pushnumber(tolua_S,(lua_Number)x);
-        tolua_pushnumber(tolua_S,(lua_Number)y);
+        if (nullptr != self)//1.1.6±ÀÀ£#18304
+        {
+			self->getPosition(&x,&y);
+		}
+		tolua_pushnumber(tolua_S,(lua_Number)x);
+		tolua_pushnumber(tolua_S,(lua_Number)y);
         
         return 2;
     }

@@ -100,6 +100,7 @@ public:
     DictMaker()
         : _resultType(SAX_RESULT_NONE)
         , _state(SAX_NONE)
+		, _curDict(nullptr)
     {
     }
 
@@ -263,7 +264,7 @@ public:
             {
                 _curArray->push_back(Value(true));
             }
-            else if (SAX_DICT == curState)
+            else if (SAX_DICT == curState && nullptr != _curDict)
             {
                 //(*_curDict)[_curKey] = Value(true);
                 ValueMap::iterator it = _curDict->find(_curKey);
@@ -283,7 +284,7 @@ public:
             {
                 _curArray->push_back(Value(false));
             }
-            else if (SAX_DICT == curState)
+            else if (SAX_DICT == curState && nullptr != _curDict)
             {
                 //(*_curDict)[_curKey] = Value(false);
                 ValueMap::iterator it = _curDict->find(_curKey);
@@ -308,7 +309,7 @@ public:
                 else
                     _curArray->push_back(Value(utils::atof(_curValue.c_str())));
             }
-            else if (SAX_DICT == curState)
+            else if (SAX_DICT == curState && nullptr != _curDict)
             {
                 ValueMap::iterator it = _curDict->find(_curKey);
                 if (sName == "string")

@@ -102,7 +102,8 @@ public:
     {
            JniMethodInfo methodInfo;
            if (! JniHelper::getStaticMethodInfo(methodInfo, "org/cocos2dx/lib/Cocos2dxBitmap", "createTextBitmapShadowStroke",
-               "(Ljava/lang/String;Ljava/lang/String;IFFFIIIZFFFFZFFFF)Z"))
+               "([BLjava/lang/String;IFFFIIIZFFFFZFFFF)Z"))
+
            {
                CCLOG("%s %d: error to get methodInfo", __FILE__, __LINE__);
                return false;
@@ -111,7 +112,7 @@ public:
            // Do a full lookup for the font path using FileUtils in case the given font name is a relative path to a font file asset,
            // or the path has been mapped to a different location in the app package:
            std::string fullPathOrFontName = FileUtils::getInstance()->fullPathForFilename(pFontName);
-            
+
            // If the path name returned includes the 'assets' dir then that needs to be removed, because the android.content.Context
            // requires this portion of the path to be omitted for assets inside the app package.
            if (fullPathOrFontName.find("assets/") == 0)
@@ -125,7 +126,10 @@ public:
             * and data.
             * use this approach to decrease the jni call number
            */
-           jstring jstrText = methodInfo.env->NewStringUTF(text);
+           int count = strlen(text);
+           jbyteArray strArray = methodInfo.env->NewByteArray(count);
+           methodInfo.env->SetByteArrayRegion(strArray, 0, count, reinterpret_cast<const jbyte*>(text));
+
            jstring jstrFont = methodInfo.env->NewStringUTF(fullPathOrFontName.c_str());
 
            if(!shadow)
@@ -142,13 +146,13 @@ public:
                strokeColorB = 0.0f;
                strokeSize = 0.0f;
            }
-           if(!methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, jstrText,
+           if(!methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, strArray,
                jstrFont, (int)fontSize, textTintR, textTintG, textTintB, eAlignMask, nWidth, nHeight, shadow, shadowDeltaX, -shadowDeltaY, shadowBlur, shadowOpacity, stroke, strokeColorR, strokeColorG, strokeColorB, strokeSize))
            {
                 return false;
            }
 
-           methodInfo.env->DeleteLocalRef(jstrText);
+           methodInfo.env->DeleteLocalRef(strArray);
            methodInfo.env->DeleteLocalRef(jstrFont);
            methodInfo.env->DeleteLocalRef(methodInfo.classID);
 
@@ -170,27 +174,27 @@ static BitmapDC& sharedBitmapDC()
 Data Device::getTextureDataForText(const char * text, const FontDefinition& textDefinition, TextAlign align, int &width, int &height, bool& hasPremultipliedAlpha)
 {
     Data ret;
-    do 
+    do
     {
         BitmapDC &dc = sharedBitmapDC();
 
-        if(! dc.getBitmapFromJavaShadowStroke(text, 
-            (int)textDefinition._dimensions.width, 
-            (int)textDefinition._dimensions.height, 
+        if(! dc.getBitmapFromJavaShadowStroke(text,
+            (int)textDefinition._dimensions.width,
+            (int)textDefinition._dimensions.height,
             align, textDefinition._fontName.c_str(),
             textDefinition._fontSize,
-            textDefinition._fontFillColor.r / 255.0f, 
-            textDefinition._fontFillColor.g / 255.0f, 
-            textDefinition._fontFillColor.b / 255.0f, 
+            textDefinition._fontFillColor.r / 255.0f,
+            textDefinition._fontFillColor.g / 255.0f,
+            textDefinition._fontFillColor.b / 255.0f,
             textDefinition._shadow._shadowEnabled,
-            textDefinition._shadow._shadowOffset.width, 
-            textDefinition._shadow._shadowOffset.height, 
-            textDefinition._shadow._shadowBlur, 
+            textDefinition._shadow._shadowOffset.width,
+            textDefinition._shadow._shadowOffset.height,
+            textDefinition._shadow._shadowBlur,
             textDefinition._shadow._shadowOpacity,
-            textDefinition._stroke._strokeEnabled, 
-            textDefinition._stroke._strokeColor.r / 255.0f, 
-            textDefinition._stroke._strokeColor.g / 255.0f, 
-            textDefinition._stroke._strokeColor.b / 255.0f, 
+            textDefinition._stroke._strokeEnabled,
+            textDefinition._stroke._strokeColor.r / 255.0f,
+            textDefinition._stroke._strokeColor.g / 255.0f,
+            textDefinition._stroke._strokeColor.b / 255.0f,
             textDefinition._stroke._strokeSize )) { break;};
 
         width = dc._width;

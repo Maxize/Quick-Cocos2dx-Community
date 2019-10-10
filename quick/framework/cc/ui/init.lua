@@ -47,7 +47,9 @@ function makeUIControl_(control)
     control:setCascadeColorEnabled(true)
     control:addNodeEventListener(c.NODE_EVENT, function(event)
         if event.name == "cleanup" then
-            control:removeAllEventListeners()
+            if control.removeAllEventListeners then
+                control:removeAllEventListeners()
+            end
         end
     end)
 end
@@ -64,7 +66,9 @@ function reAddUIComponent_(control)
     print("lua add node listener")
     control:addNodeEventListener(c.NODE_EVENT, function(event)
         if event.name == "cleanup" then
-            control:removeAllEventListeners()
+            if control.removeAllEventListeners then
+                control:removeAllEventListeners()
+            end
         end
     end)
 end

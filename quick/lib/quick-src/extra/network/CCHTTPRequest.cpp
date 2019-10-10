@@ -1,7 +1,12 @@
-#include "network/CCHTTPRequest.h"
 #include <stdio.h>
 #include <iostream>
 #include <thread>
+#include <mutex>
+#include <sstream>
+
+#include "network/CCHTTPRequest.h"
+#include "openssl/crypto.h"
+#include "InitGlobalCurl.h"
 
 #if CC_LUA_ENGINE_ENABLED > 0
 extern "C" {
@@ -9,8 +14,6 @@ extern "C" {
 }
 #include "CCLuaEngine.h"
 #endif
-#include <sstream>
-
 
 NS_CC_EXTRA_BEGIN
 
@@ -52,13 +55,16 @@ bool HTTPRequest::initWithListener(LUA_FUNCTION listener, const char *url, int m
 }
 #endif
 
+
 bool HTTPRequest::initWithUrl(const char *url, int method)
 {
     CCAssert(url, "HTTPRequest::initWithUrl() - invalid url");
+    
+	InitGlobleCurl();
     m_curl = curl_easy_init();
     curl_easy_setopt(m_curl, CURLOPT_URL, url);
     curl_easy_setopt(m_curl, CURLOPT_USERAGENT, "libcurl");
-    curl_easy_setopt(m_curl, CURLOPT_CONNECTTIMEOUT, DEFAULT_TIMEOUT);
+    curl_easy_setopt(m_curl, CURLOPT_CONNECTTIMEOUT, DEFAULT_CONNECTTIMEOUT);
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, DEFAULT_TIMEOUT);
     curl_easy_setopt(m_curl, CURLOPT_NOSIGNAL, 1L);
 
@@ -202,10 +208,9 @@ void HTTPRequest::setAcceptEncoding(int acceptEncoding)
 
 void HTTPRequest::setTimeout(int timeout)
 {
-    long to = timeout;
     CCAssert(m_state == kCCHTTPRequestStateIdle, "HTTPRequest::setTimeout() - request not idle");
-    curl_easy_setopt(m_curl, CURLOPT_CONNECTTIMEOUT, to);
-    curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, to);
+    // CURLOPT_CONNECTTIMEOUT is ok, Only change data timeout.
+    curl_easy_setopt(m_curl, CURLOPT_TIMEOUT, timeout);
 }
 
 bool HTTPRequest::start(void)
@@ -226,20 +231,8 @@ bool HTTPRequest::start(void)
     curl_easy_setopt(m_curl, CURLOPT_PROGRESSDATA, this);
     curl_easy_setopt(m_curl, CURLOPT_COOKIEFILE, "");
 
-#ifdef _WINDOWS_
-
-    CreateThread(NULL,          // default security attributes
-                 0,             // use default stack size
-                 requestCURL,   // thread function name
-                 this,          // argument to thread function
-                 0,             // use default creation flags
-                 NULL);
-
-#else
-    pthread_create(&m_thread, NULL, requestCURL, this);
-    pthread_detach(m_thread);
-#endif
-
+    std::thread th(requestCURL, this);
+    th.detach();//exit from main thread, auto exit
     
     Director::getInstance()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
     // CCLOG("HTTPRequest[0x%04x] - request start", s_id);
@@ -554,20 +547,11 @@ void HTTPRequest::cleanup(void)
 }
 
 // curl callback
-
-#ifdef _WINDOWS_
-DWORD WINAPI HTTPRequest::requestCURL(LPVOID userdata)
-{
-    static_cast<HTTPRequest*>(userdata)->onRequest();
-    return 0;
-}
-#else // _WINDOWS_
 void *HTTPRequest::requestCURL(void *userdata)
 {
     static_cast<HTTPRequest*>(userdata)->onRequest();
     return NULL;
 }
-#endif // _WINDOWS_
 
 size_t HTTPRequest::writeDataCURL(void *buffer, size_t size, size_t nmemb, void *userdata)
 {

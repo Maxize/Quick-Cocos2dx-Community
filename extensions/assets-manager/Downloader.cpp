@@ -28,6 +28,7 @@
 #include <curl/easy.h>
 #include <cstdio>
 #include <cerrno>
+#include "InitGlobalCurl.h"
 
 NS_CC_EXT_BEGIN
 
@@ -332,7 +333,9 @@ void Downloader::downloadToBufferSync(const std::string &srcUrl, unsigned char *
 
 void Downloader::downloadToBuffer(const std::string &srcUrl, const std::string &customId, const StreamData &buffer, const ProgressData &data)
 {
+	InitGlobleCurl();
     std::weak_ptr<Downloader> ptr = shared_from_this();
+
     CURL *curl = curl_easy_init();
     if (!curl)
     {
@@ -350,6 +353,7 @@ void Downloader::downloadToBuffer(const std::string &srcUrl, const std::string &
     curl_easy_setopt(curl, CURLOPT_FAILONERROR, true);
     if (_connectionTimeout) curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
     curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, LOW_SPEED_LIMIT);
     curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, LOW_SPEED_TIME);
 
@@ -402,7 +406,9 @@ void Downloader::downloadSync(const std::string &srcUrl, const std::string &stor
 
 void Downloader::download(const std::string &srcUrl, const std::string &customId, const FileDescriptor &fDesc, const ProgressData &data)
 {
+	InitGlobleCurl();
     std::weak_ptr<Downloader> ptr = shared_from_this();
+
     CURL *curl = curl_easy_init();
     if (!curl)
     {
@@ -420,6 +426,9 @@ void Downloader::download(const std::string &srcUrl, const std::string &customId
     curl_easy_setopt(curl, CURLOPT_FAILONERROR, true);
     if (_connectionTimeout) curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
+
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
     curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, LOW_SPEED_LIMIT);
     curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, LOW_SPEED_TIME);
 
@@ -467,6 +476,7 @@ void Downloader::batchDownloadSync(const DownloadUnits &units, const std::string
 
     if (units.size() != 0)
     {
+		InitGlobleCurl();
         // Test server download resuming support with the first unit
         _supportResuming = false;
         CURL *header = curl_easy_init();
@@ -544,6 +554,7 @@ void Downloader::groupBatchDownload(const DownloadUnits &units)
             curl_easy_setopt(curl, CURLOPT_FAILONERROR, true);
             if (_connectionTimeout) curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
             curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
             curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, LOW_SPEED_LIMIT);
             curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, LOW_SPEED_TIME);
             curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, true);

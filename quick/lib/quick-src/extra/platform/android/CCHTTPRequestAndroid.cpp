@@ -19,11 +19,11 @@ unsigned int HTTPRequest::s_id = 0;
 
 // jni helper function
 jobject getInstance(JNIEnv* env, jclass obj_class)
-{  
-    jmethodID construction_id = env->GetMethodID(obj_class, "<init>", "()V");  
-    jobject obj = env->NewObject(obj_class, construction_id);  
-    return obj;  
-} 
+{
+    jmethodID construction_id = env->GetMethodID(obj_class, "<init>", "()V");
+    jobject obj = env->NewObject(obj_class, construction_id);
+    return obj;
+}
 
 HTTPRequest *HTTPRequest::createWithUrl(HTTPRequestDelegate *delegate,
                                             const char *url,
@@ -215,14 +215,9 @@ bool HTTPRequest::start(void)
         addRequestHeaderJava("Cookie", m_cookies, bBoundary);
     }
 
-    // memset(&m_thread, 0, sizeof(pthread_t));
-    // memset(&m_threadAttr, 0, sizeof(pthread_attr_t));
-    // pthread_attr_init (&m_threadAttr);
-    // pthread_attr_setdetachstate (&m_threadAttr,PTHREAD_CREATE_DETACHED);
-    // pthread_create(&m_thread, &m_threadAttr, requestCURL, this);
-    pthread_create(&m_thread, NULL, requestCURL, this);
-    // pthread_detach(m_thread);
-    
+    std::thread th(requestCURL, this);
+    th.detach();//exit from main thread, auto exit
+
     Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
     // CCLOG("HTTPRequest[0x%04x] - request start", s_id);
     return true;
@@ -298,10 +293,10 @@ int HTTPRequest::getResponseDataLength(void)
 size_t HTTPRequest::saveResponseData(const char *filename)
 {
     CCAssert(m_state == kCCHTTPRequestStateCompleted, "HTTPRequest::saveResponseData() - request not completed");
-    
+
     FILE *fp = fopen(filename, "wb");
     CCAssert(fp, "HTTPRequest::saveResponseData() - open file failure");
-    
+
     size_t writedBytes = m_responseDataLength;
     if (writedBytes > 0)
     {
@@ -386,15 +381,15 @@ void HTTPRequest::update(float dt)
             case kCCHTTPRequestStateCompleted:
                 dict["name"] = LuaValue::stringValue("completed");
                 break;
-                
+
             case kCCHTTPRequestStateCancelled:
                 dict["name"] = LuaValue::stringValue("cancelled");
                 break;
-                
+
             case kCCHTTPRequestStateFailed:
                 dict["name"] = LuaValue::stringValue("failed");
                 break;
-                
+
             default:
                 dict["name"] = LuaValue::stringValue("unknown");
         }
@@ -504,10 +499,16 @@ void HTTPRequest::onRequest(void)
             }
         }
     }
-
+	
     m_errorCode = code;
     m_responseCode = code;
-    m_errorMessage = (code == 200) ? "" : getResponedErrJava();
+    //m_errorMessage = (code == 200) ? "" : getResponedErrJava();//1.1.6版本#25308，将nullptr赋值string会crash
+	m_errorMessage = "";
+	char* pErrMsg = nullptr;
+	if(200 != code && nullptr != (pErrMsg = getResponedErrJava()))
+	{
+		m_errorMessage = pErrMsg;
+	}
     m_state = (code == 200) ? kCCHTTPRequestStateCompleted : kCCHTTPRequestStateFailed;
     m_curlState = kCCHTTPRequestCURLStateClosed;
 }
@@ -530,7 +531,7 @@ size_t HTTPRequest::onWriteHeader(void *buffer, size_t bytes)
 {
     char *headerBuffer = new char[bytes + 1];
     headerBuffer[bytes] = 0;
-    memcpy(headerBuffer, buffer, bytes);    
+    memcpy(headerBuffer, buffer, bytes);
     m_responseHeaders.push_back(string(headerBuffer));
     delete []headerBuffer;
     return bytes;
@@ -581,8 +582,6 @@ void *HTTPRequest::requestCURL(void *userdata)
     if(jvm->DetachCurrentThread() != JNI_OK) {
         CCLOG("HTTPRequest - requestCURL DetachCurrentThread fail");
     }
-    // pthread_detach(pthread_self());
-    pthread_exit((void *)0);
     return NULL;
 }
 

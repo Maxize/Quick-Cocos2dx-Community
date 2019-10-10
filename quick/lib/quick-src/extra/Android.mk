@@ -39,7 +39,7 @@ LOCAL_SRC_FILES += \
     $(LOCAL_PATH)/filters/filters/CCTestFilter.cpp \
     $(LOCAL_PATH)/filters/filters/CCCustomFilter.cpp \
     $(LOCAL_PATH)/filters/nodes/CCFilteredSprite.cpp \
-    $(LOCAL_PATH)/filters/shaders/ccFilterShaders.cpp 
+    $(LOCAL_PATH)/filters/shaders/ccFilterShaders.cpp
 
 #nanovg
 LOCAL_SRC_FILES += \

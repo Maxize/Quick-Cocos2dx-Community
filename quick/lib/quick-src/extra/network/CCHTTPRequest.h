@@ -10,12 +10,6 @@
 #include "CCLuaEngine.h"
 #endif
 
-#ifdef _WINDOWS_
-#include <Windows.h>
-#else
-#include <pthread.h>
-#endif
-
 #include <stdio.h>
 #include <vector>
 #include <map>
@@ -175,7 +169,10 @@ private:
     bool initWithUrl(const char *url, int method);
 
     enum {
-        DEFAULT_TIMEOUT = 10, // 10 seconds
+        // how long to wait to make a successful connection to the server before starting to buffer the output
+        DEFAULT_CONNECTTIMEOUT = 10, // seconds
+        // how long to wait to receive a completely buffered output from the server
+        DEFAULT_TIMEOUT = 30, // seconds
         BUFFER_CHUNK_SIZE = 32768, // 32 KB
     };
 
@@ -236,19 +233,13 @@ private:
     int onProgress(double dltotal, double dlnow, double ultotal, double ulnow);
 
     // curl callback
-#ifdef _WINDOWS_
-    static DWORD WINAPI requestCURL(LPVOID userdata);
-#else
-    pthread_t m_thread;
     static void *requestCURL(void *userdata);
-#endif
     static size_t writeDataCURL(void *buffer, size_t size, size_t nmemb, void *userdata);
     static size_t writeHeaderCURL(void *buffer, size_t size, size_t nmemb, void *userdata);
     static int progressCURL(void *userdata, double dltotal, double dlnow, double ultotal, double ulnow);
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
-    pthread_attr_t m_threadAttr;
 
     bool isNeedBoundary();
 
@@ -274,7 +265,6 @@ private:
     int   getCStrFromJByteArray(jbyteArray jba, JNIEnv* env, char** ppData);
     char* getCStrFromJString(jstring jstr, JNIEnv* env);
 #endif
-
 };
 
 NS_CC_EXTRA_END

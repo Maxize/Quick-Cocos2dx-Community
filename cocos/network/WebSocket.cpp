@@ -33,6 +33,7 @@
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"
 #include "CCFileUtils.h"
+#include "openssl/crypto.h"
 
 #include <thread>
 #include <mutex>
@@ -58,6 +59,17 @@
 #else
     #define  LOGD(...)
 #endif
+
+static std::mutex **mutexArray = nullptr;
+
+static void crypto_lock_cb(int mode, int type, const char *file, int line)
+{
+    if(mode & CRYPTO_LOCK) {
+        mutexArray[type]->lock();
+    } else {
+        mutexArray[type]->unlock();
+    }
+}
 
 static void printWebSocketLog(int level, const char *line)
 {
@@ -355,7 +367,7 @@ WebSocket::~WebSocket()
             LOGD("ERROR: WebSocket instance (%p) wasn't added to the container which saves websocket instances!\n", this);
         }
     }
-    
+
     *_isDestroyed = true;
 }
 
@@ -363,6 +375,15 @@ bool WebSocket::init(const Delegate& delegate,
                      const std::string& url,
                      const std::vector<std::string>* protocols/* = nullptr*/)
 {
+    // HTTPS thead safe for OpenSSL
+    if (!CRYPTO_get_locking_callback()) {
+        mutexArray = (std::mutex **)OPENSSL_malloc(CRYPTO_num_locks() * sizeof(std::mutex *));
+        for(int i = 0; i < CRYPTO_num_locks(); i++) {
+            mutexArray[i] = new std::mutex;
+        }
+        CRYPTO_set_locking_callback(crypto_lock_cb);
+    }
+
     bool ret = false;
     bool useSSL = false;
     std::string host = url;
@@ -518,7 +539,7 @@ void WebSocket::close()
     // 'closed' state has to be set before quit websocket thread.
     _readyState = State::CLOSED;
     _readStateMutex.unlock();
-    
+
     _wsHelper->quitWebSocketThread();
     LOGD("Waiting WebSocket (%p) to exit!\n", this);
     _wsHelper->joinWebSocketThread();
@@ -526,7 +547,7 @@ void WebSocket::close()
     // onClose must be invoked at the end of this method.
     _delegate->onClose(this);
 }
-    
+
 void WebSocket::closeAsync()
 {
     _wsHelper->quitWebSocketThread();
@@ -593,7 +614,7 @@ void WebSocket::onSubThreadStarted()
 
     info.port = CONTEXT_PORT_NO_LISTEN;
     info.protocols = _wsProtocols;
-    
+
     // FIXME: Disable 'permessage-deflate' extension temporarily because of issues:
     // https://github.com/cocos2d/cocos2d-x/issues/16045, https://github.com/cocos2d/cocos2d-x/issues/15767
     // libwebsockets issue: https://github.com/warmcat/libwebsockets/issues/593
@@ -610,7 +631,7 @@ void WebSocket::onSubThreadStarted()
 
     int log_level = LLL_ERR | LLL_WARN | LLL_NOTICE/* | LLL_INFO | LLL_DEBUG | LLL_PARSER*/ | LLL_HEADER | LLL_EXT | LLL_CLIENT | LLL_LATENCY;
     lws_set_log_level(log_level, printWebSocketLog);
-    
+
     // specify CA for connection.
     std::string caPath = std::string("wssca.pem");
     std::string caFullPath = FileUtils::getInstance()->fullPathForFilename(caPath);
@@ -641,7 +662,7 @@ void WebSocket::onSubThreadStarted()
         _readStateMutex.lock();
         _readyState = State::CONNECTING;
         _readStateMutex.unlock();
-        
+
         std::string name;
         for (int i = 0; _wsProtocols[i].callback != nullptr; ++i)
         {
@@ -653,7 +674,7 @@ void WebSocket::onSubThreadStarted()
         char portStr[10];
         sprintf(portStr, "%d", _port);
         std::string ads_port = _host + ":" + portStr;
-        
+
         _wsInstance = lws_client_connect(_wsContext, _host.c_str(), _port, _SSLConnection,
                                              _path.c_str(), ads_port.c_str(), ads_port.c_str(),
                                              name.c_str(), -1);
