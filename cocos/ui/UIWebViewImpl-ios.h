@@ -24,7 +24,9 @@
 
 #ifndef __COCOS2D_UI_WEBVIEWIMPL_IOS_H_
 #define __COCOS2D_UI_WEBVIEWIMPL_IOS_H_
+/// @cond DO_NOT_SHOW
 
+#include <stdint.h>
 #include <iosfwd>
 
 @class UIWebViewWrapper;
@@ -56,6 +58,7 @@ public:
     void loadHTMLString(const std::string &string, const std::string &baseURL);
 
     void loadURL(const std::string &url);
+    void loadURL(const std::string &url, bool cleanCachedData);
 
     void loadFile(const std::string &fileName);
 
@@ -80,6 +83,12 @@ public:
     virtual void setVisible(bool visible);
 
     void setBounces(bool bounces);
+    
+    virtual void setOpacityWebView(float opacity);
+    
+    virtual float getOpacityWebView() const;
+    
+    virtual void setBackgroundTransparent();
 
 private:
     UIWebViewWrapper *_uiWebViewWrapper;
